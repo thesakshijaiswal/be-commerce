@@ -1,9 +1,12 @@
-import "./index.css";
+import { Outlet } from "react-router-dom";
+import { Footer } from "./components";
 
 const App = () => {
   return (
-    <div className="flex items-center justify-center text-3xl font-bold h-screen bg-pink-400 text-white">
-      Hello Sakshi!
+    <div className="flex font-bold min-h-screen bg-[#023047] text-white">
+      {/* <Header /> */}
+      <Outlet />
+      <Footer />
     </div>
   );
 };
