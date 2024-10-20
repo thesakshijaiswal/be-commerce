@@ -3,11 +3,11 @@ import { Footer, Header } from "./components";
 
 const App = () => {
   return (
-    <div className="flex font-bold min-h-screen bg-[#023047] text-white flex-col">
+    <div className="flex font-bold min-h-screen bg-[#023047] text-white flex-col font-ubuntu">
       <Header />
-      <div className="flex-grow">
+      <main className="flex-grow">
         <Outlet />
-      </div>
+      </main>
       <Footer />
     </div>
   );
