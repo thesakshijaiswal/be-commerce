@@ -5,7 +5,7 @@ const App = () => {
   return (
     <div className="flex min-h-screen bg-[#1C1C1E] text-white flex-col font-ubuntu">
       <Header />
-      <main className="flex-grow">
+      <main className="flex-grow min-h-screen">
         <Outlet />
       </main>
       <Footer />
