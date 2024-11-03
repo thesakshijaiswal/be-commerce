@@ -1,5 +1,4 @@
-import { TiShoppingCart } from "react-icons/ti";
-import { LuUserCircle2 } from "react-icons/lu";
+import { HiOutlineUserCircle } from "react-icons/hi2";
 import { IoCartOutline, IoSearch } from "react-icons/io5";
 import { useState } from "react";
 import { FaX } from "react-icons/fa6";
@@ -40,7 +39,7 @@ const Header = () => {
                 Cart
               </li>
               <li className="flex items-center">
-                <LuUserCircle2 className="mr-2 h-7 w-7" />
+                <HiOutlineUserCircle className="mr-2 h-8 w-8" />
                 Profile
               </li>
             </ul>
@@ -64,7 +63,7 @@ const Header = () => {
             isMenuOpen ? "block" : "hidden"
           } bg-first mt-4 rounded-md p-4 transition-all duration-500 lg:hidden`}
         >
-          <div className="flex flex-col gap-4">
+          <div className="flex justify-center items-center flex-col gap-4">
             <div className="flex items-center gap-2 md:hidden">
               <input
                 type="text"
@@ -76,11 +75,11 @@ const Header = () => {
 
             <ul className="flex flex-col gap-4">
               <li className="flex items-center">
-                <TiShoppingCart className="mr-2 h-9 w-9" />
+              <IoCartOutline className="mr-2 h-9 w-9" />
                 Cart
               </li>
               <li className="flex items-center">
-                <LuUserCircle2 className="ml-1 mr-3 h-7 w-7" />
+                <HiOutlineUserCircle className="ml-1 mr-3 h-8 w-8" />
                 Profile
               </li>
             </ul>
