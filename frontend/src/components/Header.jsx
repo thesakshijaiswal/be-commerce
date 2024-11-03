@@ -4,12 +4,18 @@ import { useState } from "react";
 import { FaX } from "react-icons/fa6";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import Button from "./Button";
+import Profile from "./Profile";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const toggleProfile = () => {
+    setIsProfileOpen(!isProfileOpen);
   };
 
   return (
@@ -38,7 +44,7 @@ const Header = () => {
                 <IoCartOutline className="mr-2 h-9 w-9" />
                 Cart
               </li>
-              <li className="flex items-center">
+              <li className="flex items-center" onClick={toggleProfile}>
                 <HiOutlineUserCircle className="mr-2 h-8 w-8" />
                 Profile
               </li>
@@ -78,7 +84,7 @@ const Header = () => {
               <IoCartOutline className="mr-2 h-9 w-9" />
                 Cart
               </li>
-              <li className="flex items-center">
+              <li className="flex items-center" onClick={toggleProfile}>
                 <HiOutlineUserCircle className="ml-1 mr-3 h-8 w-8" />
                 Profile
               </li>
@@ -86,6 +92,7 @@ const Header = () => {
             <Button btnText={"Login"} className="w-80"></Button>
           </div>
         </div>
+        {isProfileOpen && <Profile />}
       </div>
     </nav>
   );
