@@ -1,10 +1,18 @@
 import React from "react";
 
-const Button = ({ onClick = () => {}, btnIcon = "", btnText, className=""}) => {
+const Button = ({
+  onClick = () => {},
+  btnIcon: Icon = null,
+  btnText = "",
+  className = "",
+}) => {
   return (
-    <button onClick={onClick} className={`text-white bg-black px-4 py-[6px] rounded-md ml-2 text-base ${className}`}>
+    <button
+      onClick={onClick}
+      className={`ml-2 rounded-md bg-black px-4 py-[6px] text-base text-white ${className}`}
+    >
       {btnText}
-      {btnIcon}
+      {Icon && <Icon className= ""/>}
     </button>
   );
 };
