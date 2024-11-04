@@ -89,10 +89,10 @@ const Header = () => {
                 Profile
               </li>
             </ul>
-            <Button btnText={"Login"} className="w-80"></Button>
+            <Button btnText={"Login"} className="w-72"></Button>
           </div>
         </div>
-        {isProfileOpen && <Profile />}
+        {isProfileOpen && <Profile onClose={toggleProfile} />}
       </div>
     </nav>
   );
