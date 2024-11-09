@@ -61,10 +61,10 @@ const Footer = () => {
               </p>
 
               <div className="flex items-center justify-center gap-10 border-b border-gray-700 py-2 pt-5 text-4xl md:w-full md:gap-2 lg:gap-10">
-                <FaSquareFacebook className="transform cursor-pointer transition-transform duration-300 ease-in-out hover:rotate-12 hover:text-first" />
-                <FaXTwitter className="transform cursor-pointer transition-transform duration-300 ease-in-out hover:rotate-12 hover:text-first" />
-                <FaLinkedinIn className="transform cursor-pointer transition-transform duration-300 ease-in-out hover:rotate-12 hover:text-first" />
-                <FaGithub className="transform cursor-pointer transition-transform duration-300 ease-in-out hover:rotate-12 hover:text-first" />
+                <FaSquareFacebook className="hover:text-first transform cursor-pointer transition-transform duration-300 ease-in-out hover:rotate-12" />
+                <FaXTwitter className="hover:text-first transform cursor-pointer transition-transform duration-300 ease-in-out hover:rotate-12" />
+                <FaLinkedinIn className="hover:text-first transform cursor-pointer transition-transform duration-300 ease-in-out hover:rotate-12" />
+                <FaGithub className="hover:text-first transform cursor-pointer transition-transform duration-300 ease-in-out hover:rotate-12" />
               </div>
               <div className="font-playwrite mt-1 flex items-center justify-center gap-2 text-xs italic">
                 <a

@@ -69,7 +69,7 @@ const Header = () => {
             isMenuOpen ? "block" : "hidden"
           } bg-first mt-4 rounded-md p-4 transition-all duration-500 lg:hidden`}
         >
-          <div className="flex justify-center items-center flex-col gap-4">
+          <div className="flex flex-col items-center justify-center gap-4">
             <div className="flex items-center gap-2 md:hidden">
               <input
                 type="text"
@@ -81,7 +81,7 @@ const Header = () => {
 
             <ul className="flex flex-col gap-4">
               <li className="flex items-center">
-              <IoCartOutline className="mr-2 h-9 w-9" />
+                <IoCartOutline className="mr-2 h-9 w-9" />
                 Cart
               </li>
               <li className="flex items-center" onClick={toggleProfile}>
