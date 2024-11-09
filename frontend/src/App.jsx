@@ -3,9 +3,9 @@ import { Footer, Header } from "./components";
 
 const App = () => {
   return (
-    <div className="bg-second font-ubuntu flex min-h-screen flex-col text-white">
+    <div className="flex min-h-screen flex-col bg-second font-ubuntu text-white">
       <Header />
-      <main className="font-ubuntu container mx-auto min-h-screen flex-grow py-3">
+      <main className="min-h-screen">
         <Outlet />
       </main>
       <Footer />

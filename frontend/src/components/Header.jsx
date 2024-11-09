@@ -67,7 +67,7 @@ const Header = () => {
         <div
           className={`${
             isMenuOpen ? "block" : "hidden"
-          } bg-first mt-4 rounded-md p-4 transition-all duration-500 lg:hidden`}
+          } mt-4 rounded-md bg-first p-4 transition-all duration-500 lg:hidden`}
         >
           <div className="flex flex-col items-center justify-center gap-4">
             <div className="flex items-center gap-2 md:hidden">
