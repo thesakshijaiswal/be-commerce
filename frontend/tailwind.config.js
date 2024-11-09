@@ -8,6 +8,7 @@ export default {
         first: "#FFB703",
         second: "#1C1C1E",
         third: "#232325",
+        fourth: "#323235",
       },
       fontFamily: {
         ubuntu: ["Ubuntu", ...defaultTheme.fontFamily.sans],

@@ -1,4 +1,4 @@
-export const products = [
+const products = [
   {
     id: 1,
     name: "Cello Venice Exclusive Edition Plastic Water Bottle | Unbreakable and Hygienic | Perfect for staying hydrated at the school,college, work, gym and outdoor adventures | 1 Litre | Set of 5, Multicolour",
@@ -123,3 +123,4 @@ export const products = [
     numReviews: 4,
   },
 ];
+export default products;
