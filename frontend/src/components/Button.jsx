@@ -1,17 +1,21 @@
 const Button = ({
   onClick = () => {},
   btnIcon: Icon = null,
-  btnText = "",
+  children = "",
   className = "",
 }) => {
   return (
-    <button
-      onClick={onClick}
-      className={`ml-2 rounded-md bg-black px-4 py-[6px] text-base text-white ${className}`}
-    >
-      {btnText}
-      {Icon && <Icon className="" />}
-    </button>
+    <>
+      {(children || Icon) && (
+        <button
+          onClick={onClick}
+          className={`flex items-center justify-center gap-2 rounded-md bg-black px-4 py-[6px] text-base text-white ${className}`}
+        >
+          {children}
+          {Icon && <Icon className="text-xl" />}
+        </button>
+      )}
+    </>
   );
 };
 

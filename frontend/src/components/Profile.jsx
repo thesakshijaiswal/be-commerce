@@ -15,8 +15,8 @@ const Profile = ({ onClose }) => {
         <HiOutlineUserCircle className="ml-1 mr-3 h-14 w-14" />
         <h2 className="mb-4 text-xl font-bold">Profile</h2>
         <p className="mb-4 text-base">Sakshi Jaiswal</p>
-        <Button btnText={"Logout"} className="w-64 pl-1"></Button>
-        <HiOutlineLogout className="relative -top-[1.83rem] left-12 z-50 h-6 w-6 text-white" />
+        <Button className="w-64 pl-1" btnIcon={HiOutlineLogout}>Logout</Button>
+  
       </div>
     </div>
   );

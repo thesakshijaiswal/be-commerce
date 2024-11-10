@@ -5,6 +5,7 @@ import { FaX } from "react-icons/fa6";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import Button from "./Button";
 import Profile from "./Profile";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -22,12 +23,13 @@ const Header = () => {
     <nav className="bg-first p-2">
       <div>
         <div className="flex items-center justify-between">
-          <div className="flex items-center">
+          <Link
+            href="/"
+            className="flex items-center font-playwrite text-xl font-bold"
+          >
             <img src="../../logo.svg" alt="BE-commerce" className="w-14" />
-            <a href="/" className="font-playwrite text-xl font-bold">
-              BE Commerce
-            </a>
-          </div>
+            BE Commerce
+          </Link>
 
           <div className="hidden items-center md:flex">
             <input
@@ -35,21 +37,24 @@ const Header = () => {
               placeholder="Search"
               className="w-96 rounded-md p-1 pl-5 font-normal text-black outline-none"
             />
-            <Button btnIcon={IoSearch}></Button>
+            <Button className="ml-2" btnIcon={IoSearch} />
           </div>
 
           <div className="hidden gap-5 lg:flex">
             <ul className="flex gap-8">
-              <li className="flex items-center">
+              <li className="flex cursor-pointer items-center">
                 <IoCartOutline className="mr-2 h-9 w-9" />
                 Cart
               </li>
-              <li className="flex items-center" onClick={toggleProfile}>
+              <li
+                className="flex cursor-pointer items-center"
+                onClick={toggleProfile}
+              >
                 <HiOutlineUserCircle className="mr-2 h-8 w-8" />
                 Profile
               </li>
             </ul>
-            <Button btnText={"Login"}></Button>
+            <Button>Login</Button>
           </div>
 
           <div className="lg:hidden">
@@ -76,20 +81,23 @@ const Header = () => {
                 placeholder="Search"
                 className="rounded-md p-1 font-medium text-black"
               />
-              <Button btnIcon={IoSearch}></Button>
+              <Button className="ml-2" btnIcon={IoSearch} />
             </div>
 
             <ul className="flex flex-col gap-4">
-              <li className="flex items-center">
+              <li className="flex cursor-pointer items-center">
                 <IoCartOutline className="mr-2 h-9 w-9" />
                 Cart
               </li>
-              <li className="flex items-center" onClick={toggleProfile}>
+              <li
+                className="flex cursor-pointer items-center"
+                onClick={toggleProfile}
+              >
                 <HiOutlineUserCircle className="ml-1 mr-3 h-8 w-8" />
                 Profile
               </li>
             </ul>
-            <Button btnText={"Login"} className="w-72"></Button>
+            <Button className="w-72">Login</Button>
           </div>
         </div>
         {isProfileOpen && <Profile onClose={toggleProfile} />}
