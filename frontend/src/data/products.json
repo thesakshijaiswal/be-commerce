@@ -8,6 +8,7 @@
     "category": "Home & Kitchen",
     "price": 497,
     "countInStock": 20,
+    "starRating": 4.6,
     "rating": 50,
     "numReviews": 0
   },
@@ -20,6 +21,7 @@
     "category": "Electronics",
     "price": 449,
     "countInStock": 13,
+    "starRating": 4.8,
     "rating": 3000,
     "numReviews": 0
   },
@@ -32,6 +34,7 @@
     "category": "Electronics",
     "price": 59990,
     "countInStock": 26,
+    "starRating": 4.8,
     "rating": 400,
     "numReviews": 2
   },
@@ -44,6 +47,7 @@
     "category": "Electronics",
     "price": 121999,
     "countInStock": 23,
+    "starRating": 4.5,
     "rating": 200,
     "numReviews": 20
   },
@@ -56,6 +60,7 @@
     "category": "Electronics",
     "price": 5999,
     "countInStock": 23,
+    "starRating": 3.5,
     "rating": 200,
     "numReviews": 20
   },
@@ -68,6 +73,7 @@
     "category": "Electronics",
     "price": 24900,
     "countInStock": 50,
+    "starRating": 4.5,
     "rating": 1000,
     "numReviews": 450
   },
@@ -80,6 +86,7 @@
     "category": "Electronics",
     "price": 10999,
     "countInStock": 15,
+    "starRating": 4.0,
     "rating": 300,
     "numReviews": 150
   },
@@ -92,6 +99,7 @@
     "category": "Musical Instruments",
     "price": 24999,
     "countInStock": 8,
+    "starRating": 3.0,
     "rating": 40,
     "numReviews": 26
   },
@@ -104,6 +112,7 @@
     "category": "Musical Instruments",
     "price": 12999,
     "countInStock": 26,
+    "starRating": 3.8,
     "rating": 70,
     "numReviews": 45
   },
@@ -116,6 +125,7 @@
     "category": "Health & Personal Care",
     "price": 3499,
     "countInStock": 44,
+    "starRating": 4.6,
     "rating": 167,
     "numReviews": 4
   }
