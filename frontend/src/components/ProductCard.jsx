@@ -14,7 +14,7 @@ const ProductCard = ({ image, name }) => {
   const rotateY = useTransform(
     mouseXSpring,
     [-0.5, 0.5],
-    ["18.5deg", "-18.5deg"],
+    ["17.5deg", "-17.5deg"],
   );
   const handleMouseMove = (e) => {
     const rect = e.target.getBoundingClientRect();
@@ -37,17 +37,22 @@ const ProductCard = ({ image, name }) => {
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
-      className="h-96 w-80 rounded-lg bg-[#323235] p-4 duration-300 hover:scale-105"
+      className="h-96 w-80 rounded-xl bg-[#afafb177] p-4 duration-300 hover:scale-105"
     >
       <div
-        style={{ transformStyle: "preserve-3d" }}
-        className="h-56 w-full overflow-hidden rounded-md"
+        className="h-[350px] w-72 rounded-lg bg-[#252527] p-3"
+        style={{
+          transform: "translateZ(75px)",
+          transformStyle: "preserve-3d",
+        }}
       >
-        <img className="h-full w-full" src={image} alt={name} />
+        <div className="h-56 w-full overflow-hidden rounded-md">
+          <img className="h-full w-full" src={image} alt={name} />
+        </div>
+        <h2 className="mt-3 truncate text-lg font-semibold leading-tight text-white">
+          {name}
+        </h2>
       </div>
-      <h2 className="mt-3 truncate text-lg font-semibold leading-tight text-white">
-        {name}
-      </h2>
     </motion.div>
   );
 };
