@@ -6,13 +6,15 @@ import { TiArrowBackOutline } from "react-icons/ti";
 const ProductDetails = () => {
   const { id } = useParams();
   return (
-    <div>
-      Product Name:
-      <span className="text-sm text-gray-500">
+    <div className="min-h-screen flex justify-center gap-6 mt-28">
+     <div className="w-96">
+      <img className="rounded-lg" src= {products.find((product) => product?.id === Number(id)).image} alt="product-image" />
+     </div>
+      <span className="text-base text-white w-1/3 font-semibold">
         {products.find((product) => product?.id === Number(id)).name}
       </span>
       <Link to="/">
-        <Button btnIcon={TiArrowBackOutline}>Back</Button>
+        <Button className="bg-first" btnIcon={TiArrowBackOutline}>Back</Button>
       </Link>
     </div>
   );
