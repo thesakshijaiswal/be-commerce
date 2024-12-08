@@ -20,7 +20,7 @@
     "brand": "boAt",
     "category": "Electronics",
     "price": 449,
-    "countInStock": 13,
+    "countInStock": 0,
     "starRating": 4.8,
     "rating": 3000,
     "numReviews": 0
@@ -86,7 +86,7 @@
     "category": "Electronics",
     "price": 10999,
     "countInStock": 15,
-    "starRating": 4.0,
+    "starRating": 4.1,
     "rating": 300,
     "numReviews": 150
   },
@@ -98,8 +98,8 @@
     "brand": "Enya",
     "category": "Musical Instruments",
     "price": 24999,
-    "countInStock": 8,
-    "starRating": 3.0,
+    "countInStock": 0,
+    "starRating": 3.2,
     "rating": 40,
     "numReviews": 26
   },
