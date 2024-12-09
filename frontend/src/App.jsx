@@ -3,7 +3,7 @@ import { Footer, Header } from "./components";
 
 const App = () => {
   return (
-    <div className="flex min-h-screen flex-col bg-second font-ubuntu text-white">
+    <div className="flex min-h-screen flex-col bg-white font-ubuntu text-white">
       <Header />
       <main className="min-h-screen">
         <Outlet />

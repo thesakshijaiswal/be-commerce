@@ -5,10 +5,9 @@ export default {
   theme: {
     extend: {
       colors: {
-        first: "#FFB703",
-        second: "#1C1C1E",
-        third: "#232325",
-        fourth: "#323235",
+        primary: "#146EF5",
+        secondary: "#222222",
+        tertiary: "#080808",
       },
       fontFamily: {
         ubuntu: ["Ubuntu", ...defaultTheme.fontFamily.sans],

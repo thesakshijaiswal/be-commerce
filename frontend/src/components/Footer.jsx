@@ -7,7 +7,7 @@ import {
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   return (
-    <footer className="flex min-h-64 flex-col items-center overflow-hidden bg-third">
+    <footer className="bg-tertiary flex min-h-64 flex-col items-center overflow-hidden">
       <div className="flex w-full flex-grow flex-col p-2 text-center font-ubuntu md:flex-row md:gap-5 lg:gap-10 lg:p-5">
         <div className="flex flex-col items-center border-b border-gray-700 pb-10 font-playwrite text-2xl sm:text-3xl md:text-4xl">
           <img
@@ -61,7 +61,7 @@ const Footer = () => {
               </p>
 
               <div className="flex items-center justify-center gap-10 border-b border-gray-700 py-2 pt-5 text-4xl md:w-full md:gap-2 lg:gap-10">
-                <FaSquareFacebook className="transform cursor-pointer transition-transform duration-300 ease-in-out hover:rotate-12 hover:text-first" />
+                <FaSquareFacebook className="transform cursor-pointer transition-transform duration-300 ease-in-out hover:rotate-12 hover:text-primary" />
                 <FaXTwitter className="transform cursor-pointer transition-transform duration-300 ease-in-out hover:rotate-12 hover:text-first" />
                 <FaLinkedinIn className="transform cursor-pointer transition-transform duration-300 ease-in-out hover:rotate-12 hover:text-first" />
                 <FaGithub className="transform cursor-pointer transition-transform duration-300 ease-in-out hover:rotate-12 hover:text-first" />

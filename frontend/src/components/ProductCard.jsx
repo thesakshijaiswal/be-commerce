@@ -51,10 +51,10 @@ const ProductCard = ({
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
-      className="h-96 w-80 rounded-xl bg-[#c4c3c141] p-2 duration-300 hover:scale-105"
+      className="bg-secondary/20 h-96 w-80 rounded-xl p-2 duration-300 hover:scale-105"
     >
       <div
-        className="h-[370px] w-[305px] space-y-3 rounded-lg bg-[#312a0c] p-3"
+        className="h-[370px] w-[305px] space-y-3 rounded-lg bg-white p-3"
         style={{
           transform: "translateZ(75px)",
           transformStyle: "preserve-3d",
@@ -63,13 +63,13 @@ const ProductCard = ({
         <div className="h-56 w-full overflow-hidden rounded-md">
           <img className="h-full w-full" src={image} alt={name} />
         </div>
-        <h2 className="mt-3 truncate text-lg font-semibold leading-tight text-white">
+        <h2 className="mt-3 truncate text-lg font-semibold leading-tight">
           {name}
         </h2>
         <div className="flex items-center justify-between">
           <div className="flex items-center">
-            <IoIosStar className="absolute left-4 text-first" />
-            <div className="w-1/5 rounded-md bg-[#585555a8] px-7 py-1">
+            <IoIosStar className="absolute left-4 text-primary" />
+            <div className="w-1/5 rounded-md bg-white/30 px-7 py-1">
               {starRating}
             </div>
             <span>, ({rating})</span>
@@ -81,9 +81,7 @@ const ProductCard = ({
         </div>
         <div className="flex items-center justify-between">
           {countInStock > 1 ? (
-            <Button className="bg-[#78fc0d46] text-[#79fc0d]">
-              Available
-            </Button>
+            <Button className="bg-[#78fc0d46] text-[#79fc0d]">Available</Button>
           ) : (
             <Button className="bg-[#ff4c4c46] text-[#ff4c4c]">
               Unavailable
