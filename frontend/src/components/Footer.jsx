@@ -7,7 +7,7 @@ import {
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   return (
-    <footer className="bg-tertiary flex min-h-64 flex-col items-center overflow-hidden">
+    <footer className="flex min-h-64 flex-col items-center overflow-hidden bg-tertiary">
       <div className="flex w-full flex-grow flex-col p-2 text-center font-ubuntu md:flex-row md:gap-5 lg:gap-10 lg:p-5">
         <div className="flex flex-col items-center border-b border-gray-700 pb-10 font-playwrite text-2xl sm:text-3xl md:text-4xl">
           <img
@@ -62,16 +62,16 @@ const Footer = () => {
 
               <div className="flex items-center justify-center gap-10 border-b border-gray-700 py-2 pt-5 text-4xl md:w-full md:gap-2 lg:gap-10">
                 <FaSquareFacebook className="transform cursor-pointer transition-transform duration-300 ease-in-out hover:rotate-12 hover:text-primary" />
-                <FaXTwitter className="transform cursor-pointer transition-transform duration-300 ease-in-out hover:rotate-12 hover:text-first" />
-                <FaLinkedinIn className="transform cursor-pointer transition-transform duration-300 ease-in-out hover:rotate-12 hover:text-first" />
-                <FaGithub className="transform cursor-pointer transition-transform duration-300 ease-in-out hover:rotate-12 hover:text-first" />
+                <FaXTwitter className="hover:text-first transform cursor-pointer transition-transform duration-300 ease-in-out hover:rotate-12 hover:text-primary" />
+                <FaLinkedinIn className="hover:text-first transform cursor-pointer transition-transform duration-300 ease-in-out hover:rotate-12 hover:text-primary" />
+                <FaGithub className="hover:text-first transform cursor-pointer transition-transform duration-300 ease-in-out hover:rotate-12 hover:text-primary" />
               </div>
               <div className="mt-1 flex items-center justify-center gap-2 font-playwrite text-xs italic">
                 <a
                   href="https://www.linkedin.com/in/thesakshijaiswal"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="transition-all duration-300 hover:translate-y-1 hover:text-first"
+                  className="hover:text-first transition-all duration-300 hover:translate-y-1"
                 >
                   @theSakshiJaiswal
                 </a>
@@ -80,7 +80,7 @@ const Footer = () => {
                   href="https://www.linkedin.com/in/thekiranmahajan"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="transition-all duration-300 hover:translate-y-1 hover:text-first"
+                  className="hover:text-first transition-all duration-300 hover:translate-y-1"
                 >
                   @theKiranMahajan
                 </a>
@@ -97,7 +97,7 @@ const Footer = () => {
           Made with ❤️
         </span>
       </div>
-      <div className="h-[5px] w-full bg-first"></div>
+      <div className="bg-first h-[5px] w-full"></div>
     </footer>
   );
 };

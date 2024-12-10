@@ -51,7 +51,7 @@ const ProductCard = ({
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
-      className="bg-secondary/20 h-96 w-80 rounded-xl p-2 duration-300 hover:scale-105"
+      className="h-96 w-80 rounded-xl bg-secondary/10 p-2 text-black duration-300 hover:scale-105"
     >
       <div
         className="h-[370px] w-[305px] space-y-3 rounded-lg bg-white p-3"
@@ -68,11 +68,11 @@ const ProductCard = ({
         </h2>
         <div className="flex items-center justify-between">
           <div className="flex items-center">
-            <IoIosStar className="absolute left-4 text-primary" />
-            <div className="w-1/5 rounded-md bg-white/30 px-7 py-1">
+            <IoIosStar className="absolute left-4 text-[#ffb703]" />
+            <div className="w-1/5 rounded-md bg-black/5 px-7 py-1">
               {starRating}
             </div>
-            <span>, ({rating})</span>
+            <span> , ({rating})</span>
           </div>
           <div className="flex items-center font-medium">
             <BsCurrencyRupee />
@@ -81,13 +81,11 @@ const ProductCard = ({
         </div>
         <div className="flex items-center justify-between">
           {countInStock > 1 ? (
-            <Button className="bg-[#78fc0d46] text-[#79fc0d]">Available</Button>
+            <Button>Available</Button>
           ) : (
-            <Button className="bg-[#ff4c4c46] text-[#ff4c4c]">
-              Unavailable
-            </Button>
+            <Button>Unavailable</Button>
           )}
-          <Button className="flex items-center gap-2 bg-[#585555a8] font-medium">
+          <Button className="flex items-center gap-2 font-medium">
             Add To Cart <BsCartPlus className="text-xl" />
           </Button>
         </div>
