@@ -4,16 +4,14 @@
 
 @layer utilities {
   ::-webkit-scrollbar {
-    width: 5px;
-    height: 5px;
+    @apply h-[5px] w-[5px];
   }
 
   ::-webkit-scrollbar-track {
-    background-color: #1c1c1e;
+    @apply bg-secondary;
   }
 
   ::-webkit-scrollbar-thumb {
-    background-color: #146ef5;
-    border-radius: 100vh;
+    @apply rounded-full bg-primary;
   }
 }
