@@ -46,6 +46,11 @@ const ProductCard = ({
     y.set(0);
   };
 
+  const handleAddToCartClick = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
+
   return (
     <motion.div
       onMouseMove={handleMouseMove}
@@ -81,11 +86,14 @@ const ProductCard = ({
         </div>
         <div className="flex items-center justify-between">
           {countInStock > 1 ? (
-            <Button className="bg-transparent text-green-600">Available</Button>
+            <p className="bg-transparent text-green-600">Available</p>
           ) : (
-            <Button className="bg-transparent text-red-600">Unavailable</Button>
+            <p className="bg-transparent text-red-600">Unavailable</p>
           )}
-          <Button className="flex items-center gap-2 font-medium">
+          <Button
+            className="flex items-center gap-2 font-medium"
+            onClick={handleAddToCartClick}
+          >
             Add To Cart <BsCartPlus className="text-xl" />
           </Button>
         </div>
