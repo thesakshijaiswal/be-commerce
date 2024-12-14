@@ -81,9 +81,9 @@ const ProductCard = ({
         </div>
         <div className="flex items-center justify-between">
           {countInStock > 1 ? (
-            <Button>Available</Button>
+            <Button className="bg-transparent text-green-600">Available</Button>
           ) : (
-            <Button>Unavailable</Button>
+            <Button className="bg-transparent text-red-600">Unavailable</Button>
           )}
           <Button className="flex items-center gap-2 font-medium">
             Add To Cart <BsCartPlus className="text-xl" />
