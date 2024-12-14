@@ -1,0 +1,33 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Backend of our e-commerce application be-commerce",
+  "contributors": [
+    {
+      "name": "Kiran Mahajan",
+      "email": "thekiranmahajan@outlook.com"
+    },
+    {
+      "name": "Sakshi Jaiswal",
+      "email": "thesakshijaiswal@outlook.com"
+    }
+  ],
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "express",
+    "mongodb",
+    "mongoose",
+    "dotenv",
+    "etc"
+  ],
+  "author": "Kiran Mahajan & Sakshi Jaiswal",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mongoose": "^8.9.0"
+  }
+}
