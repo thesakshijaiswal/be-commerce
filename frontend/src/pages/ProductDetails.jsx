@@ -1,12 +1,20 @@
 import { Link, useParams } from "react-router-dom";
-import products from "../data/products";
 import Button from "../components/Button";
 import { TiArrowBackOutline } from "react-icons/ti";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 const ProductDetails = () => {
+  const [product, setProduct] = useState({});
   const { id } = useParams();
-  const product = products.find((product) => product?.id === Number(id));
+  useEffect(() => {
+    const fetchProduct = async () => {
+      const { data } = await axios.get(`/api/products/${id}`);
+      setProduct(data);
+    };
+    fetchProduct();
+  }, [id]);
+
   const [isExpanded, setIsExpanded] = useState(false);
   const toggleRead = () => setIsExpanded((prevState) => !prevState);
   return (
@@ -19,7 +27,7 @@ const ProductDetails = () => {
         <p>
           {isExpanded
             ? product.description
-            : `${product.description.slice(0, 200)}... `}
+            : `${product.description?.slice(0, 200)}... `}
           <span
             onClick={toggleRead}
             className="cursor-pointer font-semibold text-primary"
