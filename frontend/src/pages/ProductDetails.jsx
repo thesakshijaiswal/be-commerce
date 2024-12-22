@@ -4,6 +4,7 @@ import { TiArrowBackOutline } from "react-icons/ti";
 import { BsCurrencyRupee } from "react-icons/bs";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { StarRating } from "../components";
 
 const ProductDetails = () => {
   const [product, setProduct] = useState({});
@@ -33,13 +34,15 @@ const ProductDetails = () => {
         </div>
         <div className="flex w-full flex-col space-y-4 text-black lg:w-1/2">
           <h1 className="text-lg font-semibold sm:text-xl">{product.name}</h1>
+          <p className="font-semibold text-base text-primary">Manufactured by {product.brand}</p>
+          <div><StarRating starRating={product.starRating} /></div>
           <p className="text-base">
             {isExpanded
               ? product.description
               : `${product.description?.slice(0, 200)}... `}
             <span
               onClick={toggleRead}
-              className="cursor-pointer font-semibold text-primary"
+              className="cursor-pointer font-semibold text-primary/75"
             >
               {isExpanded ? "Read Less" : "Read More"}
             </span>

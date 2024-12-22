@@ -73,7 +73,7 @@ const ProductCard = ({
         </h2>
         <div className="flex items-center justify-between">
           <div className="flex items-center">
-            <IoIosStar className="absolute left-4 text-[#ffb703]" />
+            <IoIosStar className="absolute left-4 text-rating" />
             <div className="w-1/5 rounded-md bg-black/5 px-7 py-1">
               {starRating}
             </div>

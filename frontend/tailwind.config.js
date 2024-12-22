@@ -8,6 +8,7 @@ export default {
         primary: "#146EF5",
         secondary: "#222222",
         tertiary: "#080808",
+        rating: "#ffb703",
       },
       fontFamily: {
         ubuntu: ["Ubuntu", ...defaultTheme.fontFamily.sans],
