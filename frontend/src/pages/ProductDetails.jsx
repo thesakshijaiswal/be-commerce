@@ -5,10 +5,9 @@ import { BsCurrencyRupee, BsCartPlus } from "react-icons/bs";
 import { GrMoney } from "react-icons/gr";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { StarRating } from "../components";
+import { StarRating, StockCounter } from "../components";
 
 const ProductDetails = () => {
-  const [quantity, setQuantity] = useState(1);
   const [product, setProduct] = useState({});
   const { id } = useParams();
   useEffect(() => {
@@ -34,15 +33,19 @@ const ProductDetails = () => {
             />
           </div>
         </div>
+
         <div className="flex w-full flex-col space-y-4 text-black lg:w-1/2">
           <h1 className="text-lg font-semibold sm:text-xl">{product.name}</h1>
+
           <p className="text-base font-semibold text-primary">
             Manufactured by {product.brand}
           </p>
+
           <div className="flex items-center gap-2">
             <StarRating starRating={product.starRating} />|
             <p className="font-medium text-primary">{product.rating} ratings</p>
           </div>
+
           <p className="text-base">
             {isExpanded
               ? product.description
@@ -54,6 +57,7 @@ const ProductDetails = () => {
               {isExpanded ? "Read Less" : "Read More"}
             </span>
           </p>
+
           <div className="text-lg">
             {product.countInStock > 1 ? (
               <p className="text-green-600">In Stock</p>
@@ -61,39 +65,17 @@ const ProductDetails = () => {
               <p className="text-red-600">Out of Stock</p>
             )}
           </div>
+
           <div className="flex items-center text-xl font-bold">
             <BsCurrencyRupee />
             <h3>{product.price}</h3>
           </div>
-          <div className="flex gap-2">
-            <Button
-              onClick={() => setQuantity((prev) => Math.max(1, prev - 1))}
-              disabled={quantity <= 1}
-            >
-              -
-            </Button>
-            <input
-              className="w-20 rounded-md bg-secondary/10 text-center"
-              id="quantity"
-              type="number"
-              value={quantity}
-              min="1"
-              max={product.countInStock}
-              onChange={(e) =>
-                setQuantity(
-                  Math.min(product.countInStock, Math.max(1, +e.target.value)),
-                )
-              }
-            />
-            <Button
-              onClick={() =>
-                setQuantity((prev) => Math.min(product.countInStock, prev + 1))
-              }
-              disabled={quantity >= product.countInStock}
-            >
-              +
-            </Button>
-          </div>
+
+          <StockCounter
+            countInStock={product.countInStock}
+            initialQuantity={1}
+          />
+
           <div className="flex gap-4 pt-3">
             <Button className="w-52 whitespace-nowrap">
               Add to Cart <BsCartPlus className="text-xl" />
@@ -103,6 +85,7 @@ const ProductDetails = () => {
             </Button>
           </div>
         </div>
+
         <Link to="/">
           <Button btnIcon={TiArrowBackOutline}>Back</Button>
         </Link>

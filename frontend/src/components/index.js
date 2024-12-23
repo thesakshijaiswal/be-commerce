@@ -5,3 +5,4 @@ export { default as Profile } from "./Profile";
 export { default as ProductCard } from "./ProductCard";
 export { default as ProductCardContainer } from "./ProductCardContainer";
 export { default as StarRating } from "./StarRating";
+export { default as StockCounter } from "./StockCounter";
