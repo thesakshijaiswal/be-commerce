@@ -35,7 +35,7 @@ const StockCounter = ({
         -
       </Button>
       <input
-        className="w-20 rounded-md bg-secondary/10 text-center"
+        className="no-arrows w-20 appearance-none rounded-md bg-secondary/10 text-center"
         id="quantity"
         type="number"
         value={countInStock === 0 ? 0 : quantity}

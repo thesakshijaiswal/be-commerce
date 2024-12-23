@@ -24,6 +24,13 @@ const ProductDetails = () => {
   return (
     <div className="mt-16 flex min-h-screen flex-col items-center p-4 sm:px-10 md:px-3 lg:px-16">
       <div className="flex w-full max-w-6xl flex-col gap-6 md:flex-row lg:items-start">
+        
+        <div className="relative z-10 md:left-auto md:top-auto">
+          <Link to="/">
+            <Button btnIcon={TiArrowBackOutline}>Back</Button>
+          </Link>
+        </div>
+
         <div className="flex w-full items-center justify-center lg:w-1/2">
           <div className="w-80 rounded-lg bg-white p-2 shadow-md lg:w-96">
             <img
@@ -77,18 +84,14 @@ const ProductDetails = () => {
           />
 
           <div className="flex gap-4 pt-3">
-            <Button className="w-52 whitespace-nowrap">
+            <Button className="w-2/4 whitespace-nowrap">
               Add to Cart <BsCartPlus className="text-xl" />
             </Button>
-            <Button className="w-52 whitespace-nowrap">
+            <Button className="w-2/4 whitespace-nowrap">
               Buy Now <GrMoney className="text-xl" />
             </Button>
           </div>
         </div>
-
-        <Link to="/">
-          <Button btnIcon={TiArrowBackOutline}>Back</Button>
-        </Link>
       </div>
     </div>
   );
