@@ -16,7 +16,9 @@
   "type": "module",
   "scripts": {
     "dev": "node --watch --env-file=.env src/index.js",
-    "start": "node --env-file=.env src/index.js"
+    "start": "node --env-file=.env src/index.js",
+    "data:import": "node --env-file=.env src/seeder.js",
+    "data:destroy": "node --env-file=.env src/seeder.js -d"
   },
   "keywords": [
     "express",
@@ -27,6 +29,7 @@
   "author": "Kiran Mahajan & Sakshi Jaiswal",
   "license": "MIT",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "express": "^4.21.2",
     "mongoose": "^8.9.0"
