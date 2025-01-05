@@ -1,4 +1,3 @@
-import mongoose from "mongoose";
 import users from "./data/users.js";
 import products from "./data/products.js";
 import Products from "./models/productModel.js";
@@ -17,7 +16,7 @@ const importData = async () => {
     const createdUsers = await User.insertMany(users);
     const adminUser = createdUsers[2]._id;
     const sampleProducts = products.map((product) => {
-      return { ...product, user: adminUser }; // Corrected field name to 'user'
+      return { ...product, user: adminUser };
     });
 
     await Products.insertMany(sampleProducts);
@@ -32,8 +31,8 @@ const importData = async () => {
 const destroyData = async () => {
   try {
     await Order.deleteMany();
-    await User.deleteMany();
     await Products.deleteMany();
+    await User.deleteMany();
     console.log("Data destroyed successfully!");
     process.exit();
   } catch (error) {
