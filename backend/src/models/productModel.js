@@ -46,7 +46,7 @@ const productSchema = new mongoose.Schema(
       required: true,
     },
     reviews: [reviewSchema],
-    ratings: {
+    rating: {
       type: Number,
       required: true,
       default: 0,
@@ -62,6 +62,11 @@ const productSchema = new mongoose.Schema(
       default: 0,
     },
     countInStock: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
+    starRating: {
       type: Number,
       required: true,
       default: 0,
