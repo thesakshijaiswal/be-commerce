@@ -10,12 +10,7 @@ router.get(
   "/",
   asyncHandler(async (req, res) => {
     const products = await Products.find({});
-    if (products) {
-      res.json(products);
-    } else {
-      res.status(404);
-      throw new Error("Resource not found");
-    }
+    res.json(products);
   })
 );
 
