@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import ProductCard from "./ProductCard";
 import { useGetProductsQuery } from "../features/productsApiSlice";
+import { HomeShimmerUI } from "../shimmers";
 
 const ProductCardContainer = () => {
   const { data: products, isLoading, error } = useGetProductsQuery();
@@ -9,7 +10,7 @@ const ProductCardContainer = () => {
   return (
     <>
       {isLoading ? (
-        <div>Loading...</div>
+        <HomeShimmerUI />
       ) : error ? (
         <div>{error?.data?.message || error?.error}</div>
       ) : (
