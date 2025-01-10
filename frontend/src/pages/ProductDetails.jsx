@@ -6,6 +6,7 @@ import { GrMoney } from "react-icons/gr";
 import { useState } from "react";
 import { StarRating, StockCounter } from "../components";
 import { useGetProductDetailsQuery } from "../features/productsApiSlice";
+import { ProductDetailsShimmer } from "../shimmers";
 
 const ProductDetails = () => {
   const { id: productId } = useParams();
@@ -20,7 +21,7 @@ const ProductDetails = () => {
   return (
     <>
       {isLoading ? (
-        <div>Loading...</div>
+        <ProductDetailsShimmer />
       ) : error ? (
         <div>{error?.data?.message || error?.error}</div>
       ) : (
