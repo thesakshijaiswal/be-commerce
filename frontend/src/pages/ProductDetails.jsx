@@ -20,7 +20,7 @@ const ProductDetails = () => {
 
   return (
     <>
-      {!isLoading ? (
+      {isLoading ? (
         <ProductDetailsShimmer />
       ) : error ? (
         <div>{error?.data?.message || error?.error}</div>
