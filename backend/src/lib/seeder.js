@@ -1,9 +1,9 @@
-import users from "./data/users.js";
-import products from "./data/products.js";
-import Products from "./models/productModel.js";
-import User from "./models/userModel.js";
-import Order from "./models/orderModel.js";
-import { connectDB } from "./lib/db.js";
+import users from "../data/users.js";
+import products from "../data/products.js";
+import Products from "../models/product.model.js";
+import User from "../models/user.model.js";
+import Order from "../models/order.model.js";
+import { connectDB } from "./db.js";
 
 connectDB();
 
@@ -41,7 +41,7 @@ const destroyData = async () => {
   }
 };
 
-if (process.argv[2] === '-d') {
+if (process.argv[2] === "-d") {
   destroyData();
 } else {
   importData();

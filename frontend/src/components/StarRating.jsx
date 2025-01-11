@@ -20,7 +20,7 @@ const StarRating = ({ starRating }) => {
   return (
     <div className="flex items-center gap-2 font-medium">
       {starRating}
-      <div className="text-rating flex text-lg">{getStars()}</div>
+      <div className="flex text-lg text-rating">{getStars()}</div>
     </div>
   );
 };

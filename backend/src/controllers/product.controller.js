@@ -1,4 +1,4 @@
-import Products from "../models/productModel.js";
+import Products from "../models/product.model.js";
 const asyncHandler = (fn) => (req, res, next) => {
   Promise.resolve(fn(req, res, next)).catch(next);
 };

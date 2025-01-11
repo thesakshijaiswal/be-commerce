@@ -17,8 +17,8 @@
   "scripts": {
     "dev": "node --watch --env-file=.env src/index.js",
     "start": "node --env-file=.env src/index.js",
-    "data:import": "node --env-file=.env src/seeder.js",
-    "data:destroy": "node --env-file=.env src/seeder.js -d"
+    "data:import": "node --env-file=.env src/lib/seeder.js",
+    "data:destroy": "node --env-file=.env src/lib/seeder.js -d"
   },
   "keywords": [
     "express",
