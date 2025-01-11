@@ -1,4 +1,3 @@
-import React from "react";
 import { IoIosStar, IoIosStarHalf, IoIosStarOutline } from "react-icons/io";
 
 const StarRating = ({ starRating }) => {

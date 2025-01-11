@@ -20,12 +20,12 @@ const ProductDetails = () => {
 
   return (
     <>
-      {isLoading ? (
+      {!isLoading ? (
         <ProductDetailsShimmer />
       ) : error ? (
         <div>{error?.data?.message || error?.error}</div>
       ) : (
-        <div className="mt-16 flex min-h-screen flex-col items-center p-4 sm:px-10 md:px-3 lg:px-16">
+        <div className="my-5 flex min-h-screen flex-col items-center p-4 sm:px-10 md:px-3 lg:px-16">
           <div className="flex w-full max-w-6xl flex-col gap-6 md:flex-row lg:items-start">
             <div className="relative z-10 md:left-auto md:top-auto">
               <Link to="/">

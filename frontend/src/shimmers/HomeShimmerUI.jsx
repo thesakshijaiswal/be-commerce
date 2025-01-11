@@ -1,4 +1,3 @@
-import React from "react";
 import ProductCardShimmer from "./ProductCardShimmer";
 const HomeShimmerUI = () => {
   const shimmerCards = Array(10).fill(0);
