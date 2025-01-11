@@ -12,7 +12,9 @@ const ProductCardContainer = () => {
       {isLoading ? (
         <HomeShimmerUI />
       ) : error ? (
-        <div>{error?.data?.message || error?.error}</div>
+        <div className="text-blue-700">
+          {error?.data?.message || error?.error}
+        </div>
       ) : (
         <div className="flex flex-wrap justify-center gap-x-5 gap-y-8">
           {products.map((product) => (
