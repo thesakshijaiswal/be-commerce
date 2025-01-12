@@ -7,8 +7,7 @@ import { useState } from "react";
 import { StarRating, StockCounter } from "../components";
 import { useGetProductDetailsQuery } from "../features/productsApiSlice";
 import { ProductDetailsShimmer } from "../shimmers";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import toast from "react-hot-toast";
 
 const ProductDetails = () => {
   const { id: productId } = useParams();
@@ -25,7 +24,11 @@ const ProductDetails = () => {
       {isLoading ? (
         <ProductDetailsShimmer />
       ) : error ? (
-        toast.error(error?.data?.message || error?.error)
+        toast.error(
+          <div className="w-52 md:w-64">
+            {error?.data?.message || error?.error}
+          </div>,
+        )
       ) : (
         <div className="my-5 flex min-h-screen flex-col items-center p-4 sm:px-10 md:px-3 lg:px-16">
           <div className="flex w-full max-w-6xl flex-col gap-6 md:flex-row lg:items-start">
