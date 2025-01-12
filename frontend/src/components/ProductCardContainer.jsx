@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import ProductCard from "./ProductCard";
 import { useGetProductsQuery } from "../features/productsApiSlice";
 import { HomeShimmerUI } from "../shimmers";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ProductCardContainer = () => {
   const { data: products, isLoading, error } = useGetProductsQuery();
@@ -11,9 +13,7 @@ const ProductCardContainer = () => {
       {isLoading ? (
         <HomeShimmerUI />
       ) : error ? (
-        <div className="text-blue-700">
-          {error?.data?.message || error?.error}
-        </div>
+        toast.error(error?.data?.message || error?.error)
       ) : (
         <div className="flex flex-wrap justify-center gap-x-5 gap-y-8">
           {products.map((product) => (
