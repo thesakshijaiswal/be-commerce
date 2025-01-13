@@ -9,15 +9,19 @@ const shoppingCartSlice = createSlice({
   reducers: {
     addToCart: (state, action) => {
       const item = action.payload;
-      const existingCartItem = state.cartItems.map((i) => {
+      const isItemExist = state.cartItems.map((i) => {
         i._id === item._id;
-        if (existingCartItem) {
+        if (isItemExist) {
           state.cartItems = state.cartItems.map((i) => {
-            i_id === existingCartItem._id ? item : i;
+            i_id === isItemExist._id ? item : i;
           });
         } else {
           state.cartItems = [...state.cartItems, item];
         }
+        state.itemsPrice = state.cartItems.reduce((acc, item) => {
+          return acc + item.price * item.quantity;
+        }, 0);
+        state.shippingPrice = state.itemsPrice > 100 ? 0 : 10;
       });
     },
   },
