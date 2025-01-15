@@ -9,7 +9,7 @@ const App = () => {
         <Outlet />
         <Toaster
           containerStyle={{
-            position: "relative",
+            position: "top-right",
           }}
         />
       </main>
