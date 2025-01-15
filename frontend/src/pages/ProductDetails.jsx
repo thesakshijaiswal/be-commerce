@@ -8,16 +8,31 @@ import { StarRating, StockCounter } from "../components";
 import { useGetProductDetailsQuery } from "../features/productsApiSlice";
 import { ProductDetailsShimmer } from "../shimmers";
 import toast from "react-hot-toast";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { addToCart } from "../features/shoppingCartSlice";
 
 const ProductDetails = () => {
   const { id: productId } = useParams();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const {
     data: product,
     isLoading,
     error,
   } = useGetProductDetailsQuery(productId);
+  const [quantity, setQuantity] = useState(1);
   const [isExpanded, setIsExpanded] = useState(false);
   const toggleRead = () => setIsExpanded((prevState) => !prevState);
+
+  const addTocartHandler = () => {
+    if (product.countInStock > 0) {
+      dispatch(addToCart({ ...product, quantity }));
+      navigate("/cart");
+    } else {
+      toast.error("Product is out of stock!");
+    }
+  };
 
   return (
     <>
@@ -92,10 +107,14 @@ const ProductDetails = () => {
               <StockCounter
                 countInStock={product.countInStock}
                 initialQuantity={1}
+                onQuantityChange={setQuantity}
               />
 
               <div className="flex gap-4 pt-3">
-                <Button className="w-2/4 whitespace-nowrap">
+                <Button
+                  className="w-2/4 whitespace-nowrap"
+                  onClick={addTocartHandler}
+                >
                   Add to Cart <BsCartPlus className="text-xl" />
                 </Button>
                 <Button className="w-2/4 whitespace-nowrap">
