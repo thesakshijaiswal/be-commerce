@@ -8,9 +8,12 @@ const App = () => {
       <main className="min-h-screen">
         <Outlet />
         <Toaster
-          containerStyle={{
-            position: "top-right",
+          toastOptions={{
+            style: {
+              marginTop: "4rem",
+            },
           }}
+          position="top-center"
         />
       </main>
       <Footer />

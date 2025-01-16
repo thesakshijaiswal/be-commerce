@@ -30,7 +30,7 @@ const ProductDetails = () => {
       dispatch(addToCart({ ...product, quantity }));
       navigate("/cart");
     } else {
-      toast.error(<div>"Product is out of stock!"</div>);
+      toast.error(<div className="w-52 md:w-64">Product is out of stock!</div>);
     }
   };
 
