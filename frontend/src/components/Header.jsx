@@ -65,6 +65,9 @@ const Header = () => {
           <ul className="flex gap-8">
             <li>
               <NavItem to="/cart" icon={IoCartOutline} label="Cart" />
+              <span className="ml-4 absolute top-2 rounded-full bg-red-400 px-2 text-white">
+                {2}
+              </span>
             </li>
             <li>
               <NavItem
@@ -108,6 +111,9 @@ const Header = () => {
           <ul className="flex flex-col gap-4">
             <li>
               <NavItem to="/cart" icon={IoCartOutline} label="Cart" />
+              <span className="ml-4 rounded-full bg-red-400 px-2 text-white absolute md:top-[85px] top-[132px]">
+                {2}
+              </span>
             </li>
             <li>
               <NavItem
