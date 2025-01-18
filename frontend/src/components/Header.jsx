@@ -41,6 +41,7 @@ const Header = () => {
       {label}
     </Link>
   );
+  const totalQuantity = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
     <nav className="bg-primary p-2">
@@ -67,7 +68,7 @@ const Header = () => {
             <li>
               <NavItem to="/cart" icon={IoCartOutline} label="Cart" />
               <span className="absolute top-2 ml-4 rounded-full bg-red-500 px-2 text-white">
-                {cartItems.length}
+                {totalQuantity}
               </span>
             </li>
             <li>
@@ -113,7 +114,7 @@ const Header = () => {
             <li>
               <NavItem to="/cart" icon={IoCartOutline} label="Cart" />
               <span className="absolute top-[132px] ml-4 rounded-full bg-red-500 px-2 text-white md:top-[85px]">
-                {cartItems.length}
+                {totalQuantity}
               </span>
             </li>
             <li>
