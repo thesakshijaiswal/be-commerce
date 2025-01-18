@@ -1,5 +1,5 @@
 import { ProductCardContainer } from "../components";
-const Home = () => {
+const HomePage = () => {
   return (
     <div className="px-10 pb-20 pt-10">
       <ProductCardContainer />
@@ -7,4 +7,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomePage;

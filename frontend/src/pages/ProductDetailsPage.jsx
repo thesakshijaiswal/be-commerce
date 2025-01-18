@@ -11,7 +11,7 @@ import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { addToCart } from "../features/shoppingCartSlice";
-const ProductDetails = () => {
+const ProductDetailsPage = () => {
   const { id: productId } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -128,4 +128,4 @@ const ProductDetails = () => {
   );
 };
 
-export default ProductDetails;
+export default ProductDetailsPage;
