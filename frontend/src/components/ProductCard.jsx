@@ -2,8 +2,13 @@ import { IoIosStar } from "react-icons/io";
 import { BsCurrencyRupee, BsCartPlus } from "react-icons/bs";
 import { Button } from "../components";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { addToCart } from "../features/shoppingCartSlice";
+import toast from "react-hot-toast";
 
 const ProductCard = ({
+  id,
   image,
   name,
   starRating,
@@ -11,6 +16,9 @@ const ProductCard = ({
   price,
   countInStock,
 }) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
@@ -49,6 +57,16 @@ const ProductCard = ({
   const handleAddToCartClick = (e) => {
     e.preventDefault();
     e.stopPropagation();
+
+    if (countInStock > 0) {
+      dispatch(
+        addToCart({ id, name, price, image, countInStock, quantity: 1 }),
+      );
+      navigate("/cart");
+      toast.success("Product added to cart!");
+    } else {
+      toast.error("Product is out of stock!");
+    }
   };
 
   return (

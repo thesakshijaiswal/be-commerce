@@ -28,6 +28,7 @@ const ProductDetailsPage = () => {
     if (product.countInStock > 0) {
       dispatch(addToCart({ ...product, quantity }));
       navigate("/cart");
+      toast.success("Product added to cart!");
     } else {
       toast.error(<div className="w-52 md:w-64">Product is out of stock!</div>);
     }
