@@ -11,7 +11,6 @@ import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { addToCart } from "../features/shoppingCartSlice";
-
 const ProductDetails = () => {
   const { id: productId } = useParams();
   const dispatch = useDispatch();

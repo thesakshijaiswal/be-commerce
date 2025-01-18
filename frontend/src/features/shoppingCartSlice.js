@@ -26,7 +26,7 @@ const shoppingCartSlice = createSlice({
       } else {
         state.cartItems.push(newItem);
       }
-      return updateCart(state)
+      return updateCart(state);
     },
   },
 });

@@ -6,10 +6,11 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import Button from "./Button";
 import Profile from "./Profile";
 import { Link } from "react-router-dom";
-
+import { useSelector } from "react-redux";
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const { cartItems } = useSelector((state) => state.cart);
 
   useEffect(() => {
     const handleResize = () => {
@@ -65,8 +66,8 @@ const Header = () => {
           <ul className="flex gap-8">
             <li>
               <NavItem to="/cart" icon={IoCartOutline} label="Cart" />
-              <span className="ml-4 absolute top-2 rounded-full bg-red-400 px-2 text-white">
-                {2}
+              <span className="absolute top-2 ml-4 rounded-full bg-red-500 px-2 text-white">
+                {cartItems.length}
               </span>
             </li>
             <li>
@@ -111,8 +112,8 @@ const Header = () => {
           <ul className="flex flex-col gap-4">
             <li>
               <NavItem to="/cart" icon={IoCartOutline} label="Cart" />
-              <span className="ml-4 rounded-full bg-red-400 px-2 text-white absolute md:top-[85px] top-[132px]">
-                {2}
+              <span className="absolute top-[132px] ml-4 rounded-full bg-red-500 px-2 text-white md:top-[85px]">
+                {cartItems.length}
               </span>
             </li>
             <li>
