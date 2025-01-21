@@ -64,8 +64,12 @@ const CartPage = () => {
                       <h3 className="text-base font-semibold">{item.name}</h3>
                       <div className="flex items-center font-medium">
                         <BsCurrencyRupee />
-                        <p className="font-medium text-gray-600">
+                        <p className="font-medium text-tertiary">
                           {item.price.toFixed(2)}
+                        </p>{" "}
+                        <span className="mx-1 h-5 w-0.5 bg-gray-600"></span>
+                        <p className="whitespace-nowrap text-tertiary">
+                          Quantity: {item.quantity}
                         </p>
                       </div>
                       <Button
