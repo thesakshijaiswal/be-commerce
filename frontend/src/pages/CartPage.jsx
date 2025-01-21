@@ -4,6 +4,8 @@ import { BsCurrencyRupee } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import EmptyCartSVG from "../assets/cart.svg";
 import { FaLocationArrow } from "react-icons/fa6";
+import { removeFromCart } from "../features/shoppingCartSlice";
+import { useDispatch } from "react-redux";
 const CartPage = () => {
   const { cartItems, taxPrice, shippingPrice, totalPrice } = useSelector(
     (state) => {
@@ -12,7 +14,10 @@ const CartPage = () => {
   );
   const navigate = useNavigate();
   const totalQuantity = cartItems.reduce((sum, item) => sum + item.quantity, 0);
-  const handleRemoveItem = () => {};
+  const dispatch = useDispatch();
+  const handleRemoveItem = (id) => {
+    dispatch(removeFromCart(id));
+  };
   const handleCheckOut = () => {
     navigate("/checkout");
   };
@@ -74,7 +79,7 @@ const CartPage = () => {
                       </div>
                       <Button
                         className="sm:w-52 md:w-36"
-                        onClick={handleRemoveItem}
+                        onClick={() => handleRemoveItem(item._id)}
                       >
                         Remove
                       </Button>
