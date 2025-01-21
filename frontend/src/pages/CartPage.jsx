@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { BsCurrencyRupee } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import EmptyCartSVG from "../assets/cart.svg";
+import { FaLocationArrow } from "react-icons/fa6";
 const CartPage = () => {
   const { cartItems, taxPrice, shippingPrice, totalPrice } = useSelector(
     (state) => {
@@ -15,16 +16,31 @@ const CartPage = () => {
   const handleCheckOut = () => {
     navigate("/checkout");
   };
+  const handleExploreCollection = () => {
+    navigate("/");
+  };
   return (
     <div className="flex flex-col items-center justify-center text-black">
       {totalQuantity === 0 ? (
         <div className="flex h-screen flex-col items-center justify-center space-y-6 text-center">
-          <img src={EmptyCartSVG} className="h-56 md:h-80" alt="Empty cart" />
-          <h3 className="text-2xl font-bold">Your cart is empty</h3>
-          <p className="text-gray-500">
+          <div className="absolute h-full w-1/2 rounded-full bg-primary/5 blur-2xl"></div>
+          <img
+            src={EmptyCartSVG}
+            className="z-50 h-56 md:h-80"
+            alt="Empty cart"
+          />
+          <h3 className="z-50 text-2xl font-bold">Your cart is empty</h3>
+          <p className="z-50 text-gray-500">
             Looks like you have not added anything to your cart. Go ahead &
             explore top categories.
           </p>
+          <Button
+            className="z-50 whitespace-nowrap"
+            onClick={handleExploreCollection}
+          >
+            Explore our Collection
+            <FaLocationArrow />
+          </Button>
         </div>
       ) : (
         <div className="flex flex-col items-start justify-center md:flex-row">
