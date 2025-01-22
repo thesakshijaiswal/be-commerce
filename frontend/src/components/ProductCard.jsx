@@ -63,7 +63,7 @@ const ProductCard = ({
         addToCart({ id, name, price, image, countInStock, quantity: 1 }),
       );
       navigate("/cart");
-      toast.success("Product added to cart!");
+      toast.success(`${name},Product added to cart!`);
     } else {
       toast.error("Product is out of stock!");
     }

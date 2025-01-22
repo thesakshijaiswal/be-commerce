@@ -2,10 +2,11 @@ import Button from "../components/Button";
 import { useSelector } from "react-redux";
 import { BsCurrencyRupee } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
-import EmptyCartSVG from "../assets/cart.svg";
+import emptyCartSVG from "../assets/cart.svg";
 import { FaLocationArrow } from "react-icons/fa6";
 import { removeFromCart } from "../features/shoppingCartSlice";
 import { useDispatch } from "react-redux";
+import toast from "react-hot-toast";
 const CartPage = () => {
   const { cartItems, taxPrice, shippingPrice, totalPrice } = useSelector(
     (state) => {
@@ -17,6 +18,7 @@ const CartPage = () => {
   const dispatch = useDispatch();
   const handleRemoveItem = (id) => {
     dispatch(removeFromCart(id));
+    toast.success("Item removed from cart!");
   };
   const handleCheckOut = () => {
     navigate("/checkout");
@@ -30,7 +32,7 @@ const CartPage = () => {
         <div className="flex h-screen flex-col items-center justify-center space-y-6 text-center">
           <div className="absolute h-full w-1/2 rounded-full bg-primary/5 blur-2xl"></div>
           <img
-            src={EmptyCartSVG}
+            src={emptyCartSVG}
             className="z-50 h-56 md:h-80"
             alt="Empty cart"
           />
