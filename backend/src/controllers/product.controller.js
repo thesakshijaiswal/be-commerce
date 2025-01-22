@@ -1,7 +1,5 @@
 import Products from "../models/product.model.js";
-const asyncHandler = (fn) => (req, res, next) => {
-  Promise.resolve(fn(req, res, next)).catch(next);
-};
+import asyncHandler from "../utils/helper.js";
 
 const getProducts = asyncHandler(async (req, res) => {
   const products = await Products.find({});
