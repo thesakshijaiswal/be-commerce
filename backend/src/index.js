@@ -6,6 +6,7 @@ import {
   errorHandler,
   pathNotFound,
 } from "./middlewares/errorHandler.middleware.js";
+import userRoutes from "./routes/user.route.js";
 connectDB();
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -17,6 +18,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/products", productRoute);
+app.use("/api/users", userRoutes);
 
 app.use(pathNotFound);
 app.use(errorHandler);
