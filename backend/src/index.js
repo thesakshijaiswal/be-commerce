@@ -7,6 +7,7 @@ import {
   pathNotFound,
 } from "./middlewares/errorHandler.middleware.js";
 import userRoutes from "./routes/user.route.js";
+import cookieParser from "cookie-parser";
 connectDB();
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -14,6 +15,7 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 app.get("/", (req, res) => {
   res.send("api is running...");
