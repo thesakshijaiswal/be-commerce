@@ -18,18 +18,16 @@ const CartPage = () => {
     navigate("/checkout");
   };
   return (
-    <div className="flex flex-col items-center justify-center text-black">
+    <div className="flex flex-col items-center justify-center pb-20 text-black">
+      <h2 className="my-4 text-2xl font-semibold">Shopping Cart</h2>
       {totalQuantity === 0 ? (
         <EmptyCart />
       ) : (
-        <div className="flex flex-col items-start justify-center md:flex-row">
-          <div className="p-4 md:w-2/3">
-            <h2 className="mb-4 text-2xl font-semibold">Shopping Cart</h2>
-            <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-              {cartItems.map((item) => {
-                return <CartItem key={item._id} {...item} />;
-              })}
-            </div>
+        <div className="flex flex-col items-start justify-center md:flex-row gap-20">
+          <div className="flex flex-col gap-4">
+            {cartItems.map((item) => {
+              return <CartItem key={item._id} {...item} />;
+            })}
           </div>
           <div className="w-full rounded-md bg-secondary/5 p-4 md:mt-16 md:w-1/3">
             <h2 className="text-lg font-semibold">Subtotal</h2>

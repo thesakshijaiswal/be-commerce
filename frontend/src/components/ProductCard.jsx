@@ -8,7 +8,7 @@ import { addToCart } from "../features/shoppingCartSlice";
 import toast from "react-hot-toast";
 
 const ProductCard = ({
-  _id, 
+  _id,
   image,
   name,
   starRating,
@@ -60,10 +60,10 @@ const ProductCard = ({
 
     if (countInStock > 0) {
       dispatch(
-        addToCart({ _id, name, price, image, countInStock, quantity: 1 }), 
+        addToCart({ _id, name, price, image, countInStock, quantity: 1 }),
       );
       navigate("/cart");
-      toast.success(`${name},Product added to cart!`);
+      toast.success(`Product added to cart!`);
     } else {
       toast.error("Product is out of stock!");
     }

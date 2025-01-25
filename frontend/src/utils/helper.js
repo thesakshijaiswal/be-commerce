@@ -1,5 +1,4 @@
 export const updateCart = (state) => {
-  // Recalculate prices after adding the item
   state.itemsPrice = state.cartItems.reduce(
     (acc, item) => acc + item.price * item.quantity,
     0,
@@ -12,7 +11,13 @@ export const updateCart = (state) => {
     Number(state.taxPrice)
   ).toFixed(2);
 
-  //add the updated items to localStorage
   localStorage.setItem("cart", JSON.stringify(state));
   return state;
+};
+
+export const truncateProductName = (name, maxLength) => {
+  if (name.length > maxLength) {
+    return name.substring(0, maxLength) + "...";
+  }
+  return name;
 };
