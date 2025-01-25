@@ -6,3 +6,5 @@ export { default as ProductCard } from "./ProductCard";
 export { default as ProductCardContainer } from "./ProductCardContainer";
 export { default as StarRating } from "./StarRating";
 export { default as StockCounter } from "./StockCounter";
+export { default as CartItem } from "./CartItem";
+export { default as EmptyCart } from "./EmptyCart";

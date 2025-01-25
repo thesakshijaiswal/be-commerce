@@ -8,7 +8,7 @@ import { addToCart } from "../features/shoppingCartSlice";
 import toast from "react-hot-toast";
 
 const ProductCard = ({
-  _id, // changed from id to _id
+  _id, 
   image,
   name,
   starRating,
