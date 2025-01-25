@@ -8,7 +8,7 @@ import { addToCart } from "../features/shoppingCartSlice";
 import toast from "react-hot-toast";
 
 const ProductCard = ({
-  id,
+  _id, // changed from id to _id
   image,
   name,
   starRating,
@@ -60,7 +60,7 @@ const ProductCard = ({
 
     if (countInStock > 0) {
       dispatch(
-        addToCart({ id, name, price, image, countInStock, quantity: 1 }),
+        addToCart({ _id, name, price, image, countInStock, quantity: 1 }), 
       );
       navigate("/cart");
       toast.success(`${name},Product added to cart!`);
