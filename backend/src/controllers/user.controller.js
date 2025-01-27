@@ -61,4 +61,14 @@ const updateUserProfile = asyncHandler(async (req, res, next) => {
   }
 });
 
-export { userLogin, userSignUp, updateUserProfile };
+const userLogout = asyncHandler(async (req, res) => {
+  res.cookie("jwt", "", {
+    httpOnly: true,
+    expires: new Date(0),
+  });
+  res.status(200).json({
+    message: "Logged out successfully!",
+  });
+});
+
+export { userLogin, userSignUp, updateUserProfile, userLogout };
