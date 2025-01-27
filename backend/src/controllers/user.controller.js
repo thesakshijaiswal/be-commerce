@@ -71,4 +71,20 @@ const userLogout = asyncHandler(async (req, res) => {
   });
 });
 
-export { userLogin, userSignUp, updateUserProfile, userLogout };
+const forgotPassword = asyncHandler(async (req, res) => {
+  const { email } = req.body;
+  const user = await User.findOne({ email });
+  if (!user) {
+    res.status(404);
+    throw new Error("User not found!");
+  }
+  const resetToken = user.createPasswordResetToken();
+  user.save();
+  const resetUrl = `${req.protocol}://${req.get(
+    "host"
+  )}/reset-password/${resetToken}`;
+
+  const message = `Hi <br/> We got a request to reset your Becommerce password. Please click the link below to reset your password. <br/> <a href=${resetUrl} clicktracking=off>${resetUrl}</a>`;
+});
+
+export { userLogin, userSignUp, updateUserProfile, userLogout, forgotPassword };
