@@ -28,6 +28,7 @@ const userSignUp = asyncHandler(async (req, res) => {
   const user = await User.create({ name, email, password });
   if (user) {
     tokenGenerator(res, user._id);
+    res.status(201);
     res.json({
       _id: user._id,
       name: user.name,
@@ -40,4 +41,24 @@ const userSignUp = asyncHandler(async (req, res) => {
   }
 });
 
-export { userLogin, userSignUp };
+const updateUserProfile = asyncHandler(async (req, res, next) => {
+  const user = await User.findById(req.body._id);
+  if (user) {
+    user.name = req.body.name || user.name;
+    user.email = req.body.email || user.email;
+    if (req.body.password) {
+      user.password = req.body.password;
+    }
+    await user.save();
+    res.status(200).json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+    });
+  } else {
+    res.status(404);
+    throw new Error("User not found!");
+  }
+});
+
+export { userLogin, userSignUp, updateUserProfile };
