@@ -2,6 +2,8 @@ import User from "../models/user.model.js";
 import asyncHandler from "../utils/helper.js";
 import sendEmail from "../utils/sendEmail.js";
 import tokenGenerator from "../utils/tokenGenerator.js";
+import crypto from "crypto";
+
 const userLogin = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email });
@@ -83,7 +85,7 @@ const forgotPassword = asyncHandler(async (req, res) => {
   user.save();
   const resetUrl = `${req.protocol}://${req.get(
     "host"
-  )}/reset-password/${resetToken}`;
+  )}/api/users/reset-password/${resetToken}`;
 
   const message = `
   <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 20px auto; padding: 20px;">
@@ -119,11 +121,39 @@ const forgotPassword = asyncHandler(async (req, res) => {
   }
 });
 
+const resetPassword = asyncHandler(async (req, res) => {
+  const hashedToken = crypto
+    .createHash("sha256")
+    .update(req.params.resetToken)
+    .digest("hex");
+  const user = await User.findOne({
+    passwordResetToken: hashedToken,
+    passwordResetExpires: { $gt: Date.now() },
+  });
+  if (!user) {
+    res.status(400).json({
+      status: "Failed",
+      message: "Token is invalid or has expired!",
+    });
+  }
+  user.password = req.body.password;
+  user.passwordResetToken = undefined;
+  user.passwordResetExpires = undefined;
+  user.save();
 
+  tokenGenerator(res, user._id);
+  res.json({
+    _id: user._id,
+    name: user.name,
+    email: user.email,
+    isAdmin: user.isAdmin,
+  });
+});
 export {
   userLogin,
   userSignUp,
   updateUserProfile,
   userLogout,
   forgotPassword,
+  resetPassword,
 };
