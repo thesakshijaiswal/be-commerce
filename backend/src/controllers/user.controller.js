@@ -1,5 +1,6 @@
 import User from "../models/user.model.js";
 import asyncHandler from "../utils/helper.js";
+import sendEmail from "../utils/sendEmail.js";
 import tokenGenerator from "../utils/tokenGenerator.js";
 const userLogin = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
@@ -84,7 +85,45 @@ const forgotPassword = asyncHandler(async (req, res) => {
     "host"
   )}/reset-password/${resetToken}`;
 
-  const message = `Hi <br/> We got a request to reset your Becommerce password. Please click the link below to reset your password. <br/> <a href=${resetUrl} clicktracking=off>${resetUrl}</a>`;
+  const message = `
+  <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 20px auto; padding: 20px;">
+  <p>Hi,</p>
+  <p>We got a request to reset your Becommerce password. Please click the button below to reset your password.</p>
+  <a href="${resetUrl}" clicktracking=off>
+    <button style="color: white; background-color: #146EF5; padding: 10px 16px; border: none; border-radius: 5px; text-decoration: none; font-size: 14px; margin-bottom: 15px;">
+      Reset Password
+    </button>
+  </a>
+  <p style="font-size: 14px;">If you ignore this message, your password won't be changed. If you didn't request a password reset, let us know.</p>
+  </div>
+`;
+
+  try {
+    await sendEmail({
+      email: user.email,
+      subject: "Becommerce Password Reset token (valid for 10mins)",
+      message,
+    });
+    res.status(200).json({
+      message: "Token sent to email!",
+    });
+  } catch (error) {
+    user.passwordResetToken = undefined;
+    user.passwordResetExpires = undefined;
+    user.save();
+    console.log(error);
+    res.status(500).json({
+      status: "error",
+      message: "There was an error sending the email. Try again later!",
+    });
+  }
 });
 
-export { userLogin, userSignUp, updateUserProfile, userLogout, forgotPassword };
+
+export {
+  userLogin,
+  userSignUp,
+  updateUserProfile,
+  userLogout,
+  forgotPassword,
+};
