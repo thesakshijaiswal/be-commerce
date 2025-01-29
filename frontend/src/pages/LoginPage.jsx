@@ -1,13 +1,12 @@
 import { Button } from "../components";
 import login from "../assets/login.svg";
-import logo from "../../public/logo.svg";
 const LoginPage = () => {
   return (
     <div className="flex max-h-screen items-center justify-center font-ubuntu">
       <div className="md:w-1/2">
         <div className="mx-auto flex flex-col items-center justify-center px-2 py-8 md:h-screen lg:rounded-e-full lg:bg-primary/10 lg:py-0">
           <h2 className="mb-6 flex items-center gap-3 text-2xl font-semibold text-gray-900">
-            <img src={logo} alt="logo" className="w-12" />
+            <img src="../../logo.svg" alt="logo" className="w-12" />
             <h3 className="font-playwrite">BE-Commerce</h3>
           </h2>
           <div className="w-full rounded-lg sm:max-w-md md:mt-0 xl:p-0">
