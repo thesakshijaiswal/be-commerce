@@ -1,11 +1,11 @@
 import { Button } from "../components";
-import emptyCartSVG from "../assets/cart.svg";
+import login from "../assets/login.svg";
 import logo from "../../public/logo.svg";
 const LoginPage = () => {
   return (
     <div className="flex max-h-screen items-center justify-center font-ubuntu">
       <div className="md:w-1/2">
-        <div className="mx-auto flex flex-col items-center justify-center lg:bg-primary/10 lg:rounded-e-full px-2 py-8 md:h-screen lg:py-0">
+        <div className="mx-auto flex flex-col items-center justify-center px-2 py-8 md:h-screen lg:rounded-e-full lg:bg-primary/10 lg:py-0">
           <h2 className="mb-6 flex items-center gap-3 text-2xl font-semibold text-gray-900">
             <img src={logo} alt="logo" className="w-12" />
             <h3 className="font-playwrite">BE-Commerce</h3>
@@ -82,7 +82,7 @@ const LoginPage = () => {
         </div>
       </div>
       <div className="hidden w-full items-center justify-center md:flex md:w-1/2">
-        <img src={emptyCartSVG} className="md:h-80 lg:h-96" alt="Empty cart" />
+        <img src={login} className="lg:h-[40rem]" alt="Empty cart" />
       </div>
     </div>
   );
