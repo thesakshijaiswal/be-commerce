@@ -24,8 +24,14 @@ const LoginPage = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+
+    if (!email.trim() || !password.trim()) {
+      toast.error("Please enter both email and password.");
+      return;
+    }
+
     try {
-      const res = await login({ email, password });
+      const res = await login({ email, password }).unwrap();
       dispatch(setCredentials({ ...res }));
       navigate("/");
       toast.success("Logged in successfully");
