@@ -118,7 +118,9 @@ const LoginPage = () => {
                       />
                     </div>
                     <div className="ml-3 text-sm">
-                      <label className="text-gray-500" htmlFor="remember">Remember me</label>
+                      <label className="text-gray-500" htmlFor="remember">
+                        Remember me
+                      </label>
                     </div>
                   </div>
                   <a

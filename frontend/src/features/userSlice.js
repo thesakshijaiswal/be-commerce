@@ -13,7 +13,7 @@ const userSlice = createSlice({
     setCredentials: (state, action) => {
       state.userInfo = action.payload;
       localStorage.setItem("userInfo", JSON.stringify(action.payload));
-      const expirationDate = new Date() + 20 * 24 * 60 * 60 * 1000; // 20 days
+      const expirationDate = Date.now() + 20 * 24 * 60 * 60 * 1000; // 20 days
       localStorage.setItem("expirationDate", expirationDate);
     },
   },
