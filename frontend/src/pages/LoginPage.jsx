@@ -100,12 +100,12 @@ const LoginPage = () => {
                     required
                   />
                   {showPassword ? (
-                    <AiOutlineEyeInvisible
+                    <AiOutlineEye
                       className="absolute right-3 top-[70%] -translate-y-1/2 cursor-pointer text-xl text-gray-500"
                       onClick={() => setShowPassword(false)}
                     />
                   ) : (
-                    <AiOutlineEye
+                    <AiOutlineEyeInvisible
                       className="absolute right-3 top-[70%] -translate-y-1/2 cursor-pointer text-xl text-gray-500"
                       onClick={() => setShowPassword(true)}
                     />
