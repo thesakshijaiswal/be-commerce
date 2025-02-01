@@ -2,13 +2,8 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useLoginMutation } from "../features/userApiSlice";
 import { Button } from "../components";
-<<<<<<< HEAD
 import loginBanner from "../assets/login-banner.svg";
-import googleLogo from "../assets/google_signIn.png";
-=======
-import loginBanner from "../assets/login.svg";
-import googleLogo from "../assets/google.svg";
->>>>>>> 120d6e33f4981d640f262c127414c84bc772884f
+import googleLogo from "../assets/google_signIn.svg";
 import {
   AiOutlineMail,
   AiOutlineEye,
