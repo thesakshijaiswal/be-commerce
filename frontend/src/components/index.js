@@ -8,3 +8,4 @@ export { default as StarRating } from "./StarRating";
 export { default as StockCounter } from "./StockCounter";
 export { default as CartItem } from "./CartItem";
 export { default as EmptyCart } from "./EmptyCart";
+export { default as InputField } from "./InputField";

@@ -1,22 +1,20 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useLoginMutation } from "../features/userApiSlice";
-import { Button } from "../components";
+import { Button, InputField } from "../components";
 import loginBanner from "../assets/login-banner.svg";
 import googleLogo from "../assets/google_signIn.svg";
-import {
-  AiOutlineMail,
-  AiOutlineEye,
-  AiOutlineEyeInvisible,
-} from "react-icons/ai";
+import { AiOutlineMail, AiOutlineLock } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "../features/userSlice";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
 const LoginPage = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
   const [login, { isLoading }] = useLoginMutation();
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
@@ -25,13 +23,13 @@ const LoginPage = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    if (!email.trim() || !password.trim()) {
-      toast.error("Please enter both email and password.");
+    if (!formData.email.trim() || !formData.password.trim()) {
+      toast.error("All fields are required");
       return;
     }
 
     try {
-      const res = await login({ email, password }).unwrap();
+      const res = await login(formData).unwrap();
       dispatch(setCredentials({ ...res }));
       navigate("/");
       toast.success("Logged in successfully");
@@ -58,59 +56,26 @@ const LoginPage = () => {
                 action="#"
                 onSubmit={handleLogin}
               >
-                <div className="relative">
-                  <label
-                    htmlFor="email"
-                    className="mb-2 block text-sm font-medium text-gray-900"
-                  >
-                    Your email
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    id="email"
-                    value={email}
-                    onChange={(e) => {
-                      setEmail(e.target.value);
-                    }}
-                    className="focus:ring-primary-600 focus:border-primary-600 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 pr-10 text-gray-900"
-                    placeholder="name@be-commerce.com"
-                    required
-                  />
-                  <AiOutlineMail className="absolute right-3 top-[70%] -translate-y-1/2 text-lg text-gray-500" />
-                </div>
-
-                <div className="relative">
-                  <label
-                    htmlFor="password"
-                    className="mb-2 block text-sm font-medium text-gray-900"
-                  >
-                    Password
-                  </label>
-                  <input
-                    type={showPassword ? "text" : "password"}
-                    name="password"
-                    id="password"
-                    value={password}
-                    onChange={(e) => {
-                      setPassword(e.target.value);
-                    }}
-                    placeholder="••••••••"
-                    className="focus:ring-primary-600 focus:border-primary-600 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 pr-10 text-gray-900"
-                    required
-                  />
-                  {showPassword ? (
-                    <AiOutlineEye
-                      className="absolute right-3 top-[70%] -translate-y-1/2 cursor-pointer text-xl text-gray-500"
-                      onClick={() => setShowPassword(false)}
-                    />
-                  ) : (
-                    <AiOutlineEyeInvisible
-                      className="absolute right-3 top-[70%] -translate-y-1/2 cursor-pointer text-xl text-gray-500"
-                      onClick={() => setShowPassword(true)}
-                    />
-                  )}
-                </div>
+                <InputField
+                  type="text"
+                  fieldName="email"
+                  placeholder="sakshi@example.com"
+                  label="Email"
+                  icon={AiOutlineMail}
+                  formData={formData}
+                  setFormData={setFormData}
+                />
+                <InputField
+                  type={showPassword ? "text" : "password"}
+                  fieldName="password"
+                  placeholder="••••••••"
+                  label="Password"
+                  icon={AiOutlineLock}
+                  formData={formData}
+                  setFormData={setFormData}
+                  showPassword={showPassword}
+                  setShowPassword={setShowPassword}
+                />
 
                 <div className="flex items-center justify-between">
                   <div className="flex items-start">
@@ -120,7 +85,6 @@ const LoginPage = () => {
                         aria-describedby="remember"
                         type="checkbox"
                         className="focus:ring-3 focus:ring-primary-300 h-4 w-4 rounded border border-gray-300 bg-gray-50"
-                        required
                       />
                     </div>
                     <div className="ml-3 text-sm">
