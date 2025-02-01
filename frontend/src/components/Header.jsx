@@ -7,6 +7,7 @@ import Button from "./Button";
 import Profile from "./Profile";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import Branding from "./Branding";
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
@@ -50,8 +51,9 @@ const Header = () => {
           to="/"
           className="flex items-center font-playwrite text-xl font-bold"
         >
-          <img src="../../logo.svg" alt="BE-commerce" className="w-14" />
-          BE Commerce
+          {/* <img src="../../logo.svg" alt="BE-commerce" className="w-14" />
+          BE Commerce */}
+          <Branding />
         </Link>
 
         <div className="hidden items-center md:flex">
