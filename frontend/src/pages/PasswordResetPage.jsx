@@ -1,6 +1,7 @@
 import { Button } from "../components";
 import { useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import resetPasswordBanner from "../assets/reset-password-banner.svg";
 const PasswordResetPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   return (
@@ -74,7 +75,11 @@ const PasswordResetPage = () => {
         </div>
       </div>
       <div className="hidden w-full items-center justify-center md:flex md:w-1/2">
-        <img src="" className="lg:h-[40rem]" alt="Empty cart" />
+        <img
+          src={resetPasswordBanner}
+          className="lg:h-[40rem]"
+          alt="resetPasswordBanner"
+        />
       </div>
     </div>
   );

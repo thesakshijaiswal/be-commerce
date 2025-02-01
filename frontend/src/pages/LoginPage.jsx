@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useLoginMutation } from "../features/userApiSlice";
 import { Button } from "../components";
-import loginBanner from "../assets/login.svg";
+import loginBanner from "../assets/login-banner.svg";
 import googleLogo from "../assets/google_signIn.png";
 import {
   AiOutlineMail,
@@ -174,7 +174,7 @@ const LoginPage = () => {
         </div>
       </div>
       <div className="hidden w-full items-center justify-center md:flex md:w-1/2">
-        <img src={loginBanner} className="lg:h-[40rem]" alt="Empty cart" />
+        <img src={loginBanner} className="lg:h-[40rem]" alt="loginBanner" />
       </div>
     </div>
   );
