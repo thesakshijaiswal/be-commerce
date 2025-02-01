@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useLoginMutation } from "../features/userApiSlice";
 import { Button } from "../components";
 import loginBanner from "../assets/login.svg";
-import googleLogo from "../assets/google_signIn.png";
+import googleLogo from "../assets/google.svg";
 import {
   AiOutlineMail,
   AiOutlineEye,
