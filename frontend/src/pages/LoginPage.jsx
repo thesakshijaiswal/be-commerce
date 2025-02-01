@@ -9,16 +9,19 @@ import { useDispatch } from "react-redux";
 import { setCredentials } from "../features/userSlice";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import { useForgotPasswordMutation } from "../features/userApiSlice";
 
 const LoginPage = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
   const [login, { isLoading }] = useLoginMutation();
   const [showPassword, setShowPassword] = useState(false);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const [forgotPassword, { isLoading: isLoadingPassword }] =
+    useForgotPasswordMutation();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -34,10 +37,24 @@ const LoginPage = () => {
       navigate("/");
       toast.success("Logged in successfully");
     } catch (error) {
-      toast.error(error?.data?.message || error?.message);
+      toast.error(error?.data?.message || error?.error);
     }
   };
 
+  const handleForgotPassword = async () => {
+    if (!formData.email.trim()) {
+      toast.error("Please enter your email");
+      return;
+    }
+
+    try {
+      const res = await forgotPassword({ email: formData.email }).unwrap();
+      toast.success(res.message);
+    } catch (error) {
+      toast.error(error?.data?.message || error?.error);
+    }
+  };
+  
   return (
     <div className="flex max-h-screen items-center justify-center font-ubuntu">
       <div className="w-full md:w-1/2">
@@ -90,12 +107,12 @@ const LoginPage = () => {
                       </label>
                     </div>
                   </div>
-                  <Link
-                    to="/reset-password"
-                    className="whitespace-nowrap text-sm font-medium text-secondary/60 hover:underline"
+                  <p
+                    className="cursor-pointer whitespace-nowrap text-sm font-medium text-secondary/60 hover:underline"
+                    onClick={handleForgotPassword}
                   >
                     Forgot password?
-                  </Link>
+                  </p>
                 </div>
                 <Button
                   className="w-full text-sm font-medium"
