@@ -83,9 +83,7 @@ const forgotPassword = asyncHandler(async (req, res) => {
   }
   const resetToken = user.createPasswordResetToken();
   user.save();
-  const resetUrl = `${req.protocol}://${req.get(
-    "host"
-  )}/api/users/reset-password/${resetToken}`;
+  const resetUrl = `${req.protocol}://localhost:3000/reset-password/${resetToken}`;
 
   const message = `
   <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 20px auto; padding: 20px;">

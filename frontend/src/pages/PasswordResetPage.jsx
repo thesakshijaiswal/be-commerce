@@ -2,10 +2,30 @@ import { Branding, Button, InputField } from "../components";
 import { useState } from "react";
 import { AiOutlineLock } from "react-icons/ai";
 import resetPasswordBanner from "../assets/reset-password-banner.svg";
+import { useParams, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useResetPasswordMutation } from "../features/userApiSlice";
+import toast from "react-hot-toast";
+
 const PasswordResetPage = () => {
+  const { resetToken } = useParams();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [resetPassword] = useResetPasswordMutation();
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  const handleResetPassword = async () => {
+    if (password !== showConfirmPassword) {
+      toast.error("Passwords do not match");
+      return;
+    } else {
+      dispatch(resetPassword({ password, resetToken }));
+      toast.success("Password reset successfully");
+      navigate("/");
+    }
+  };
   return (
     <div className="flex max-h-screen items-center justify-center font-ubuntu">
       <div className="w-full md:w-1/2">
@@ -40,7 +60,11 @@ const PasswordResetPage = () => {
                   setShowPassword={setShowConfirmPassword}
                 />
 
-                <Button className="w-full text-sm font-medium" type="submit">
+                <Button
+                  className="w-full text-sm font-medium"
+                  type="submit"
+                  onClick={handleResetPassword}
+                >
                   Reset Password
                 </Button>
               </form>
