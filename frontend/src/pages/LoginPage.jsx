@@ -12,6 +12,7 @@ import toast from "react-hot-toast";
 import { useForgotPasswordMutation } from "../features/userApiSlice";
 
 const LoginPage = () => {
+  const [isForgotPasswordClicked, setIsForgotPasswordClicked] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -47,14 +48,20 @@ const LoginPage = () => {
       return;
     }
 
+    if (isForgotPasswordClicked) return; // Debounce Forget password clicks
+
+    setIsForgotPasswordClicked(true);
+
     try {
       const res = await forgotPassword({ email: formData.email }).unwrap();
       toast.success(res.message);
     } catch (error) {
       toast.error(error?.data?.message || error?.error);
+    } finally {
+      setTimeout(() => setIsForgotPasswordClicked(false), 5000); // Re-enable after 5 sec
     }
   };
-  
+
   return (
     <div className="flex max-h-screen items-center justify-center font-ubuntu">
       <div className="w-full md:w-1/2">

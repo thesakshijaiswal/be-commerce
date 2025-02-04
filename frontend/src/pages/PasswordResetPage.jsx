@@ -16,12 +16,12 @@ const PasswordResetPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const handleResetPassword = async () => {
+  const handleResetPassword = async (e) => {
+    e.preventDefault();
     if (password !== showConfirmPassword) {
       toast.error("Passwords do not match");
-      return;
     } else {
-      dispatch(resetPassword({ password, resetToken }));
+      await resetPassword({ password, resetToken }).unwrap();
       toast.success("Password reset successfully");
       navigate("/");
     }
@@ -36,7 +36,10 @@ const PasswordResetPage = () => {
               <h1 className="text-center text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
                 Reset your Password
               </h1>
-              <form className="space-y-4 md:space-y-6" action="#">
+              <form
+                className="space-y-4 md:space-y-6"
+                onSubmit={handleResetPassword}
+              >
                 <InputField
                   type={showPassword ? "text" : "password"}
                   fieldName="password"
