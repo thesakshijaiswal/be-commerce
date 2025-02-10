@@ -12,13 +12,12 @@ import toast from "react-hot-toast";
 import { useForgotPasswordMutation } from "../features/userApiSlice";
 
 const LoginPage = () => {
+  
   const [isForgotPasswordClicked, setIsForgotPasswordClicked] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [login, { isLoading }] = useLoginMutation();
   const [showPassword, setShowPassword] = useState(false);
   const [forgotPassword, { isLoading: isLoadingPassword }] =
@@ -27,13 +26,13 @@ const LoginPage = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    if (!formData.email.trim() || !formData.password.trim()) {
+    if (!email.trim() || !password.trim()) {
       toast.error("All fields are required");
       return;
     }
 
     try {
-      const res = await login(formData).unwrap();
+      const res = await login({ email, password }).unwrap();
       dispatch(setCredentials({ ...res }));
       navigate("/");
       toast.success("Logged in successfully");
@@ -43,7 +42,7 @@ const LoginPage = () => {
   };
 
   const handleForgotPassword = async () => {
-    if (!formData.email.trim()) {
+    if (!email.trim()) {
       toast.error("Please enter your email");
       return;
     }
@@ -53,7 +52,7 @@ const LoginPage = () => {
     setIsForgotPasswordClicked(true);
 
     try {
-      const res = await forgotPassword({ email: formData.email }).unwrap();
+      const res = await forgotPassword({ email }).unwrap();
       toast.success(res.message);
     } catch (error) {
       toast.error(error?.data?.message || error?.error);
@@ -83,17 +82,18 @@ const LoginPage = () => {
                   placeholder="sakshi@example.com"
                   label="Email"
                   icon={AiOutlineMail}
-                  formData={formData}
-                  setFormData={setFormData}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
+
                 <InputField
                   type={showPassword ? "text" : "password"}
                   fieldName="password"
                   placeholder="••••••••"
                   label="Password"
                   icon={AiOutlineLock}
-                  formData={formData}
-                  setFormData={setFormData}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   showPassword={showPassword}
                   setShowPassword={setShowPassword}
                 />
@@ -121,14 +121,15 @@ const LoginPage = () => {
                     Forgot password?
                   </p>
                 </div>
+
                 <Button
                   className="w-full text-sm font-medium"
                   type="submit"
-                  onClick={handleLogin}
                   disabled={isLoading}
                 >
                   Sign In
                 </Button>
+
                 <div className="flex items-center justify-center gap-6">
                   <div className="h-0.5 w-1/2 bg-secondary/15"></div>
                   <span className="text-lg font-medium text-secondary/25">
@@ -136,6 +137,7 @@ const LoginPage = () => {
                   </span>
                   <div className="h-0.5 w-1/2 bg-secondary/15"></div>
                 </div>
+
                 <Button className="w-full text-sm font-medium">
                   <img
                     src={googleLogo}
@@ -144,6 +146,7 @@ const LoginPage = () => {
                   />
                   Continue with Google
                 </Button>
+
                 <p className="text-sm font-light text-gray-500">
                   Don’t have an account yet?{" "}
                   <Link

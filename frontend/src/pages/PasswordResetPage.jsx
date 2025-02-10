@@ -3,25 +3,24 @@ import { useState } from "react";
 import { AiOutlineLock } from "react-icons/ai";
 import resetPasswordBanner from "../assets/reset-password-banner.svg";
 import { useParams, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import { useResetPasswordMutation } from "../features/userApiSlice";
 import toast from "react-hot-toast";
 
 const PasswordResetPage = () => {
   const { resetToken } = useParams();
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const [resetPassword] = useResetPasswordMutation();
   const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [showPassword, setShowPassword] = useState();
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const handleResetPassword = async (e) => {
     e.preventDefault();
-    if (password !== showConfirmPassword) {
+    if (password !== confirmPassword) {
       toast.error("Passwords do not match");
     } else {
-      await resetPassword({ password, resetToken }).unwrap();
+      await resetPassword({ resetToken, password }).unwrap();
       toast.success("Password reset successfully");
       navigate("/");
     }
@@ -46,19 +45,19 @@ const PasswordResetPage = () => {
                   placeholder="••••••••"
                   label="Password"
                   icon={AiOutlineLock}
-                  formData={password}
-                  setFormData={setPassword}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   showPassword={showPassword}
                   setShowPassword={setShowPassword}
                 />
                 <InputField
                   type={showConfirmPassword ? "text" : "password"}
-                  fieldName="confirm-password"
+                  fieldName="confirmPassword"
                   placeholder="••••••••"
                   label="Confirm Password"
                   icon={AiOutlineLock}
-                  formData={password}
-                  setFormData={setPassword}
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
                   showPassword={showConfirmPassword}
                   setShowPassword={setShowConfirmPassword}
                 />

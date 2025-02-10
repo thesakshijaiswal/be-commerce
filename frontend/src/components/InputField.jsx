@@ -6,8 +6,8 @@ const InputField = ({
   placeholder,
   label,
   icon: Icon,
-  formData,
-  setFormData,
+  value,
+  onChange,
   showPassword,
   setShowPassword,
 }) => {
@@ -26,15 +26,14 @@ const InputField = ({
         <input
           type={type}
           id={fieldName}
-          onChange={(e) =>
-            setFormData({ ...formData, [fieldName]: e.target.value })
-          }
+          value={value}
+          onChange={onChange}
           placeholder={placeholder}
           className="focus:ring-primary-600 focus:border-primary-600 h-12 w-full flex-shrink rounded-lg border border-gray-300 bg-gray-50 p-2.5 px-4 pl-10 text-sm text-gray-900"
           required
           autoCapitalize={fieldName === "email" ? "none" : undefined}
         />
-        {(label == "Password" || label == "Confirm Password") && (
+        {(label === "Password" || label === "Confirm Password") && (
           <button
             type="button"
             className="absolute inset-y-0 right-0 flex items-center p-3 text-gray-500"
