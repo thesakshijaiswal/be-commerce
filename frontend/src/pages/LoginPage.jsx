@@ -12,7 +12,6 @@ import toast from "react-hot-toast";
 import { useForgotPasswordMutation } from "../features/userApiSlice";
 
 const LoginPage = () => {
-  
   const [isForgotPasswordClicked, setIsForgotPasswordClicked] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();

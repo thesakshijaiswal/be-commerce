@@ -12,19 +12,26 @@ const PasswordResetPage = () => {
   const [resetPassword] = useResetPasswordMutation();
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [showPassword, setShowPassword] = useState();
+  const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const handleResetPassword = async (e) => {
     e.preventDefault();
+
     if (password !== confirmPassword) {
       toast.error("Passwords do not match");
-    } else {
+      return;
+    }
+
+    try {
       await resetPassword({ resetToken, password }).unwrap();
       toast.success("Password reset successfully");
       navigate("/");
+    } catch (error) {
+      toast.error(error?.data?.message || "Failed to reset password");
     }
   };
+
   return (
     <div className="flex max-h-screen items-center justify-center font-ubuntu">
       <div className="w-full md:w-1/2">
@@ -62,11 +69,7 @@ const PasswordResetPage = () => {
                   setShowPassword={setShowConfirmPassword}
                 />
 
-                <Button
-                  className="w-full text-sm font-medium"
-                  type="submit"
-                  onClick={handleResetPassword}
-                >
+                <Button className="w-full text-sm font-medium" type="submit">
                   Reset Password
                 </Button>
               </form>
