@@ -18,6 +18,11 @@ const PasswordResetPage = () => {
   const handleResetPassword = async (e) => {
     e.preventDefault();
 
+    if (!password || !confirmPassword) {
+      toast.error("Please fill in both fields");
+      return;
+    }
+
     if (password !== confirmPassword) {
       toast.error("Passwords do not match");
       return;
