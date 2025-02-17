@@ -62,7 +62,7 @@ const LoginPage = () => {
 
   return (
     <div className="flex max-h-screen items-center justify-center font-ubuntu">
-      <div className="w-full md:w-1/2">
+      <div className="w-full md:w-3/5">
         <div className="mx-auto flex flex-col items-center justify-center px-2 py-8 md:h-screen lg:rounded-e-full lg:bg-primary/10 lg:py-0">
           <Branding className="text-2xl font-semibold text-gray-900" />
           <div className="w-full rounded-lg sm:max-w-md md:mt-0 xl:p-0">
@@ -70,11 +70,7 @@ const LoginPage = () => {
               <h1 className="text-center text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
                 Sign into your Account
               </h1>
-              <form
-                className="space-y-4 md:space-y-6"
-                action="#"
-                onSubmit={handleLogin}
-              >
+              <form action="#" onSubmit={handleLogin}>
                 <InputField
                   type="text"
                   fieldName="email"
@@ -96,8 +92,7 @@ const LoginPage = () => {
                   showPassword={showPassword}
                   setShowPassword={setShowPassword}
                 />
-
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between py-4">
                   <div className="flex items-start">
                     <div className="flex h-5 items-center">
                       <input
@@ -121,46 +116,48 @@ const LoginPage = () => {
                   </p>
                 </div>
 
-                <Button
-                  className="w-full text-sm font-medium"
-                  type="submit"
-                  disabled={isLoading}
-                >
-                  Sign In
-                </Button>
-
-                <div className="flex items-center justify-center gap-6">
-                  <div className="h-0.5 w-1/2 bg-secondary/15"></div>
-                  <span className="text-lg font-medium text-secondary/25">
-                    or
-                  </span>
-                  <div className="h-0.5 w-1/2 bg-secondary/15"></div>
-                </div>
-
-                <Button className="w-full text-sm font-medium">
-                  <img
-                    src={googleLogo}
-                    alt="Google Logo"
-                    className="mr-2 w-5"
-                  />
-                  Continue with Google
-                </Button>
-
-                <p className="text-sm font-light text-gray-500">
-                  Don’t have an account yet?{" "}
-                  <Link
-                    to="/signUp"
-                    className="text-primary-600 font-medium hover:underline"
+                <div className="space-y-3">
+                  <Button
+                    className="w-full text-sm font-medium"
+                    type="submit"
+                    disabled={isLoading}
                   >
-                    Sign up
-                  </Link>
-                </p>
+                    Sign In
+                  </Button>
+
+                  <div className="flex items-center justify-center gap-6">
+                    <div className="h-0.5 w-1/2 bg-secondary/15"></div>
+                    <span className="text-lg font-medium text-secondary/25">
+                      or
+                    </span>
+                    <div className="h-0.5 w-1/2 bg-secondary/15"></div>
+                  </div>
+
+                  <Button className="w-full text-sm font-medium">
+                    <img
+                      src={googleLogo}
+                      alt="Google Logo"
+                      className="mr-2 w-5"
+                    />
+                    Continue with Google
+                  </Button>
+
+                  <p className="text-sm font-light text-gray-500">
+                    Don’t have an account yet?{" "}
+                    <Link
+                      to="/signUp"
+                      className="text-primary-600 font-medium hover:underline"
+                    >
+                      Sign up
+                    </Link>
+                  </p>
+                </div>
               </form>
             </div>
           </div>
         </div>
       </div>
-      <div className="hidden w-full items-center justify-center md:flex md:w-1/2">
+      <div className="hidden w-full items-center justify-center md:flex md:w-2/5">
         <img src={SignInBanner} className="lg:h-[40rem]" alt="SignInBanner" />
       </div>
     </div>
