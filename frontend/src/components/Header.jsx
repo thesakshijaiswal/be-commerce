@@ -44,6 +44,17 @@ const Header = () => {
   );
   const totalQuantity = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
+  const renderProfile = () => {
+    return (
+      <NavItem
+        to="#"
+        icon={HiOutlineUserCircle}
+        label={userInfo?.name}
+        onClick={toggleProfile}
+      />
+    );
+  };
+
   return (
     <nav className="bg-primary p-2">
       <div className="flex items-center justify-between">
@@ -73,14 +84,7 @@ const Header = () => {
                 {totalQuantity}
               </span>
             </li>
-            <li>
-              <NavItem
-                to="#"
-                icon={HiOutlineUserCircle}
-                label={userInfo ? userInfo.name : "Profile"}
-                onClick={toggleProfile}
-              />
-            </li>
+            {userInfo && <li>{renderProfile()}</li>}
           </ul>
           <Button>Login</Button>
         </div>
@@ -119,14 +123,7 @@ const Header = () => {
                 {totalQuantity}
               </span>
             </li>
-            <li>
-              <NavItem
-                to="#"
-                icon={HiOutlineUserCircle}
-                label={userInfo ? userInfo.name : "Profile"}
-                onClick={toggleProfile}
-              />
-            </li>
+            {userInfo && <li>{renderProfile()}</li>}
           </ul>
           <Button className="w-72">Login</Button>
         </div>
