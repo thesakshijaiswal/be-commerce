@@ -12,7 +12,7 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const { cartItems } = useSelector((state) => state.cart);
-
+  const { userInfo } = useSelector((state) => state.user);
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 1024) {
@@ -77,7 +77,7 @@ const Header = () => {
               <NavItem
                 to="#"
                 icon={HiOutlineUserCircle}
-                label="Profile"
+                label={userInfo ? userInfo.name : "Profile"}
                 onClick={toggleProfile}
               />
             </li>
@@ -123,7 +123,7 @@ const Header = () => {
               <NavItem
                 to="#"
                 icon={HiOutlineUserCircle}
-                label="Profile"
+                label={userInfo ? userInfo.name : "Profile"}
                 onClick={toggleProfile}
               />
             </li>
