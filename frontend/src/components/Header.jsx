@@ -55,6 +55,10 @@ const Header = () => {
     );
   };
 
+  const renderLoginButton = () => {
+    return <Button className="md:w-full sm:w-72">Login</Button>;
+  };
+
   return (
     <nav className="bg-primary p-2">
       <div className="flex items-center justify-between">
@@ -86,7 +90,7 @@ const Header = () => {
             </li>
             {userInfo && <li>{renderProfile()}</li>}
           </ul>
-          <Button>Login</Button>
+          {!userInfo && renderLoginButton()}
         </div>
 
         <div className="lg:hidden">
@@ -125,7 +129,7 @@ const Header = () => {
             </li>
             {userInfo && <li>{renderProfile()}</li>}
           </ul>
-          <Button className="w-72">Login</Button>
+          {!userInfo && renderLoginButton()}
         </div>
       </div>
       {isProfileOpen && <Profile onClose={toggleProfile} />}
