@@ -10,3 +10,4 @@ export { default as CartItem } from "./CartItem";
 export { default as EmptyCart } from "./EmptyCart";
 export { default as InputField } from "./InputField";
 export { default as Branding } from "./Branding";
+export { default as AuthForm } from "./AuthForm";
