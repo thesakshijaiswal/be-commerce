@@ -8,6 +8,7 @@ import {
 } from "./middlewares/errorHandler.middleware.js";
 import userRoutes from "./routes/user.route.js";
 import cookieParser from "cookie-parser";
+import passport from "./utils/passport.js";
 connectDB();
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -16,6 +17,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+passport(app);
 
 app.get("/", (req, res) => {
   res.send("api is running...");
