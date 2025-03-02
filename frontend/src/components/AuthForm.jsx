@@ -31,6 +31,15 @@ const AuthForm = ({
   showGoogleOption,
   showConfirmPasswordField,
 }) => {
+
+  const handleGoogleAuth = () => {
+    try {
+      window.location.href = `${BACKEND_URL}/auth/google/callback`;
+    } catch (error) {
+      toast.error(error?.data?.message || error?.error);
+    }
+  };
+
   return (
     <div className="w-full md:w-3/5">
       <div className="mx-auto flex flex-col items-center justify-center px-2 py-8 md:h-screen lg:rounded-e-full lg:bg-primary/10 lg:py-0">
@@ -139,6 +148,7 @@ const AuthForm = ({
                         src={googleLogo}
                         alt="Google Logo"
                         className="mr-2 w-5"
+                        onClick={handleGoogleAuth}
                       />
                       Continue with Google
                     </Button>

@@ -9,11 +9,23 @@ import {
 import userRoutes from "./routes/user.route.js";
 import cookieParser from "cookie-parser";
 import passport from "./utils/passport.js";
+import authRoutes from "./routes/auth.route.js";
 connectDB();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-app.use(cors());
+app.use((req, res, next) => {
+  res.header("Access-Control_Allow-Origin", "http://localhost:3000");
+  next();
+});
+
+app.use(
+  cors({
+    origin: ["http:127.0.0.1:3000", "http://localhost:3000"],
+    methods: "GET, POST, PATCH, DELETE, PUT",
+    credentials: true,
+  })
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -25,6 +37,7 @@ app.get("/", (req, res) => {
 
 app.use("/api/products", productRoute);
 app.use("/api/users", userRoutes);
+app.use("/auth", authRoutes);
 
 app.use(pathNotFound);
 app.use(errorHandler);

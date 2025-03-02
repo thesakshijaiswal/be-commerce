@@ -2,7 +2,7 @@ import session from "express-session";
 import passport from "passport";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 
-const passport = (app) => {
+const configurePassport = (app) => {
   app.use(
     session({
       secret: process.env.SESSION_SECRET,
@@ -30,11 +30,11 @@ const passport = (app) => {
     )
   );
   passport.serializeUser((user, done) => {
-    done(null, user)
-  })
+    done(null, user);
+  });
   passport.deserializeUser((user, done) => {
-    done(null, user)
-  })
+    done(null, user);
+  });
 };
 
-export default passport;
+export default configurePassport;
