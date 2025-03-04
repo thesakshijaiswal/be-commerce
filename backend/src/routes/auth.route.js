@@ -50,9 +50,9 @@ router.get("/login/success", async (req, res) => {
     res.status(200).json({
       user: {
         ...req.user,
-        isAdmin: isUserExists.isAdmin,
+        isAdmin: isUserExists ? isUserExists.isAdmin : false,
         message: "Successfully Logged In",
-        _id: isUserExists._id,
+        _id: isUserExists ? isUserExists._id : newUser._id,
       },
     });
   } else {

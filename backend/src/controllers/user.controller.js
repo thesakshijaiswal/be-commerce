@@ -7,8 +7,8 @@ import crypto from "crypto";
 const userLogin = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email });
-  tokenGenerator(res, user._id);
   if (user && (await user.matchPassword(password))) {
+    tokenGenerator(res, user._id);
     res.json({
       _id: user._id,
       name: user.name,
@@ -20,6 +20,7 @@ const userLogin = asyncHandler(async (req, res) => {
     throw new Error("Invalid email or password");
   }
 });
+
 const userSignUp = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
   const isUserExist = await User.findOne({ email });
@@ -31,8 +32,7 @@ const userSignUp = asyncHandler(async (req, res) => {
   const user = await User.create({ name, email, password });
   if (user) {
     tokenGenerator(res, user._id);
-    res.status(201);
-    res.json({
+    res.status(201).json({
       _id: user._id,
       name: user.name,
       email: user.email,
@@ -44,7 +44,7 @@ const userSignUp = asyncHandler(async (req, res) => {
   }
 });
 
-const updateUserProfile = asyncHandler(async (req, res, next) => {
+const updateUserProfile = asyncHandler(async (req, res) => {
   const user = await User.findById(req.body._id);
   if (user) {
     user.name = req.body.name || user.name;
@@ -69,6 +69,10 @@ const userLogout = asyncHandler(async (req, res) => {
     httpOnly: true,
     expires: new Date(0),
   });
+  res.cookie("connect.sid", "", {
+    httpOnly: true,
+    expires: new Date(0),
+  });
   res.status(200).json({
     message: "Logged out successfully!",
   });
@@ -82,7 +86,7 @@ const forgotPassword = asyncHandler(async (req, res) => {
     throw new Error("User not found!");
   }
   const resetToken = user.createPasswordResetToken();
-  user.save();
+  await user.save();
   const resetUrl = `${req.protocol}://localhost:3000/reset-password/${resetToken}`;
 
   const message = `
@@ -110,7 +114,7 @@ const forgotPassword = asyncHandler(async (req, res) => {
   } catch (error) {
     user.passwordResetToken = undefined;
     user.passwordResetExpires = undefined;
-    user.save();
+    await user.save();
     console.log(error);
     res.status(500).json({
       status: "error",
@@ -133,11 +137,12 @@ const resetPassword = asyncHandler(async (req, res) => {
       status: "Failed",
       message: "Token is invalid or has expired!",
     });
+    return;
   }
   user.password = req.body.password;
   user.passwordResetToken = undefined;
   user.passwordResetExpires = undefined;
-  user.save();
+  await user.save();
 
   tokenGenerator(res, user._id);
   res.json({
@@ -147,6 +152,7 @@ const resetPassword = asyncHandler(async (req, res) => {
     isAdmin: user.isAdmin,
   });
 });
+
 export {
   userLogin,
   userSignUp,

@@ -19,16 +19,19 @@ const ProductCardContainer = () => {
       const res = await axios.get(`${BACKEND_URL}/auth/login/success`, {
         withCredentials: true,
       });
-      console.log(res.data);
-      dispatch(
-        setCredentials({
-          ...res.data.user._json,
-          _id: res.data._id,
-          isAdmin: res.data.user.isAdmin,
-        }),
-      );
+      if (res.data.user) {
+        dispatch(
+          setCredentials({
+            ...res.data.user._json,
+            _id: res.data._id,
+            isAdmin: res.data.user.isAdmin,
+          })
+        );
+      } else {
+        throw new Error("User not authenticated");
+      }
     } catch (error) {
-      toast.error(error?.data?.message || error?.error);
+      toast.error(error?.response?.data?.message || error.message);
     }
   };
 
@@ -44,7 +47,7 @@ const ProductCardContainer = () => {
         toast.error(
           <div className="w-52 md:w-64">
             {error?.data?.message || error?.error}
-          </div>,
+          </div>
         )
       ) : (
         <div className="flex flex-wrap justify-center gap-x-5 gap-y-8">

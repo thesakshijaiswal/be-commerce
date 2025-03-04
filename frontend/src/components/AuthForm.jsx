@@ -2,6 +2,8 @@ import { Branding, Button, InputField } from "../components";
 import googleLogo from "../assets/google_signIn.svg";
 import { AiOutlineMail, AiOutlineLock } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
+import { BACKEND_URL } from "../utils/constants";
 
 const AuthForm = ({
   title,
@@ -31,7 +33,6 @@ const AuthForm = ({
   showGoogleOption,
   showConfirmPasswordField,
 }) => {
-
   const handleGoogleAuth = () => {
     try {
       window.location.href = `${BACKEND_URL}/auth/google/callback`;
@@ -143,12 +144,14 @@ const AuthForm = ({
                       <div className="h-0.5 w-1/2 bg-secondary/15"></div>
                     </div>
 
-                    <Button className="mt-2 w-full text-sm font-medium">
+                    <Button
+                      className="mt-2 w-full text-sm font-medium"
+                      onClick={handleGoogleAuth}
+                    >
                       <img
                         src={googleLogo}
                         alt="Google Logo"
                         className="mr-2 w-5"
-                        onClick={handleGoogleAuth}
                       />
                       Continue with Google
                     </Button>

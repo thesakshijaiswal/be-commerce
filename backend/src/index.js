@@ -8,20 +8,21 @@ import {
 } from "./middlewares/errorHandler.middleware.js";
 import userRoutes from "./routes/user.route.js";
 import cookieParser from "cookie-parser";
-import passport from "./utils/passport.js";
+import configurePassport from "./utils/passport.js";
 import authRoutes from "./routes/auth.route.js";
+
 connectDB();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use((req, res, next) => {
-  res.header("Access-Control_Allow-Origin", "http://localhost:3000");
+  res.header("Access-Control-Allow-Origin", "http://localhost:3000");
   next();
 });
 
 app.use(
   cors({
-    origin: ["http:127.0.0.1:3000", "http://localhost:3000"],
+    origin: ["http://127.0.0.1:3000", "http://localhost:3000"],
     methods: "GET, POST, PATCH, DELETE, PUT",
     credentials: true,
   })
@@ -29,10 +30,10 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-passport(app);
+configurePassport(app);
 
 app.get("/", (req, res) => {
-  res.send("api is running...");
+  res.send("API is running...");
 });
 
 app.use("/api/products", productRoute);

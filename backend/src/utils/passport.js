@@ -24,7 +24,7 @@ const configurePassport = (app) => {
         callbackURL: "/auth/google/callback",
         scope: ["profile", "email"],
       },
-      (accessToken, refreshToken, profile, callback) => {
+      async (accessToken, refreshToken, profile, callback) => {
         callback(null, profile);
       }
     )
