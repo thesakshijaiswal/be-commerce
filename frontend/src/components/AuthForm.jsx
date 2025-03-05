@@ -33,7 +33,8 @@ const AuthForm = ({
   showGoogleOption,
   showConfirmPasswordField,
 }) => {
-  const handleGoogleAuth = () => {
+  const handleGoogleAuth = (e) => {
+    e.preventDefault();
     try {
       window.location.href = `${BACKEND_URL}/auth/google/callback`;
     } catch (error) {
