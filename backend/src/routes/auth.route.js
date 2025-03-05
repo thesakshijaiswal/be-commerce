@@ -36,17 +36,16 @@ router.get("/google", async (req, res) => {
 router.get("/login/success", async (req, res) => {
   if (req.user) {
     const isUserExists = await User.findOne({ email: req.user._json.email });
-    if (isUserExists) {
-      tokenGenerator(res, isUserExists._id);
-    } else {
-      const newUser = new User({
+    let newUser;
+    if (!isUserExists) {
+      newUser = new User({
         name: req.user._json.name,
         email: req.user._json.email,
-        password: Date.now(), //dummy password
+        password: Date.now(),
       });
-      tokenGenerator(res, newUser._id);
       await newUser.save();
     }
+    tokenGenerator(res, isUserExists ? isUserExists._id : newUser._id);
     res.status(200).json({
       user: {
         ...req.user,
@@ -73,8 +72,15 @@ router.get("/logout", (req, res) => {
   req.logout((err) => {
     if (err) {
       console.log(err);
+      return res.status(500).json({ error: "Failed to log out" });
     }
-    res.redirect("/");
+    req.session.destroy((err) => {
+      if (err) {
+        console.log(err);
+        return res.status(500).json({ error: "Failed to destroy session" });
+      }
+      res.redirect("/");
+    });
   });
 });
 
