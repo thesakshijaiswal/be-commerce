@@ -6,13 +6,12 @@ import toast from "react-hot-toast";
 import { useEffect } from "react";
 import axios from "axios";
 import { BACKEND_URL } from "../utils/constants";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setCredentials } from "../features/userSlice";
 
 const ProductCardContainer = () => {
   const { data: products, isLoading, error } = useGetProductsQuery();
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user);
 
   const getUser = async () => {
     try {
@@ -25,23 +24,19 @@ const ProductCardContainer = () => {
             ...res.data.user._json,
             _id: res.data._id,
             isAdmin: res.data.user.isAdmin,
-          })
+          }),
         );
       } else {
         throw new Error("User not authenticated");
       }
     } catch (error) {
-      if (error.response?.status !== 403) {
-        toast.error(error?.response?.data?.message || error.message);
-      }
+      toast.error(error?.response?.data?.message || error.message);
     }
   };
 
   useEffect(() => {
-    if (!user || !user._id) {
-      getUser();
-    }
-  }, [user]);
+    getUser();
+  }, []);
 
   return (
     <>
@@ -51,7 +46,7 @@ const ProductCardContainer = () => {
         toast.error(
           <div className="w-52 md:w-64">
             {error?.data?.message || error?.error}
-          </div>
+          </div>,
         )
       ) : (
         <div className="flex flex-wrap justify-center gap-x-5 gap-y-8">
