@@ -5,7 +5,7 @@ import { FaX } from "react-icons/fa6";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import Button from "./Button";
 import Profile from "./Profile";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Branding from "./Branding";
 const Header = () => {
@@ -13,6 +13,7 @@ const Header = () => {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const { cartItems } = useSelector((state) => state.cart);
   const { userInfo } = useSelector((state) => state.user);
+  const navigate = useNavigate();
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 1024) {
@@ -56,7 +57,16 @@ const Header = () => {
   };
 
   const renderLoginButton = () => {
-    return <Button className="md:w-full sm:w-72">Login</Button>;
+    return (
+      <Button
+        className="sm:w-72 md:w-full"
+        onClick={() => {
+          navigate("/login");
+        }}
+      >
+        Login
+      </Button>
+    );
   };
 
   return (
