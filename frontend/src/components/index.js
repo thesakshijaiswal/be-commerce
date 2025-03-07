@@ -11,3 +11,4 @@ export { default as EmptyCart } from "./EmptyCart";
 export { default as InputField } from "./InputField";
 export { default as Branding } from "./Branding";
 export { default as AuthForm } from "./AuthForm";
+export { default as AuthLayout } from "./AuthLayout";
