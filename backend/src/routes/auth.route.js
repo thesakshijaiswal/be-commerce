@@ -34,7 +34,13 @@ router.get("/google", async (req, res) => {
 
 //register or login user to database
 router.get("/login/success", async (req, res) => {
+  console.log("Login Success Route Called: log from auth route");
+  console.log("req.session.passport:", req.session.passport);
+  console.log("req.user:", req.user);
+  console.log("req.session:", req.session);
+  console.log("req.cookies:", req.cookies);
   if (req.user) {
+    console.log(req.user);
     const isUserExists = await User.findOne({ email: req.user._json.email });
     let newUser;
     if (!isUserExists) {
