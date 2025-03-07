@@ -23,7 +23,7 @@ const CartPage = () => {
       {totalQuantity === 0 ? (
         <EmptyCart />
       ) : (
-        <div className="flex flex-col items-start justify-center gap-20 md:flex-row">
+        <div className="flex flex-col items-start justify-center gap-20 md:flex-row p-2">
           <div className="flex flex-col gap-4">
             {cartItems.map((item) => {
               return <CartItem key={item._id} {...item} />;
@@ -49,7 +49,7 @@ const CartPage = () => {
               <BsCurrencyRupee />
               {totalPrice}
             </p>
-            <Button className="mt-5" onClick={handleCheckOut}>
+            <Button className="mt-5 whitespace-nowrap" onClick={handleCheckOut}>
               Proceed to Checkout
             </Button>
           </div>

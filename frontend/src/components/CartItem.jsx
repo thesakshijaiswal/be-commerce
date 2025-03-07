@@ -14,7 +14,7 @@ const CartItem = ({ _id, image, name, price, quantity }) => {
   };
   return (
     <div className="space-4 flex max-w-screen-md items-center justify-between gap-5 rounded-lg bg-primary/5 p-4">
-      <div className="h-full w-28">
+      <div className="h-36 w-full md:w-28">
         <img
           src={image}
           alt={name}
@@ -23,7 +23,7 @@ const CartItem = ({ _id, image, name, price, quantity }) => {
       </div>
       <div className="flex flex-col overflow-hidden">
         <h3 className="text-base">{truncateProductName(name, 50)}</h3>
-        <div className="flex items-center pt-2 text-sm font-medium">
+        <div className="flex items-center pt-2 text-sm font-medium flex-wrap">
           <BsCurrencyRupee />
           <p className="font-medium text-tertiary">{price.toFixed(2)}</p>{" "}
           <span className="mx-1 h-5 w-0.5 bg-gray-600"></span>
