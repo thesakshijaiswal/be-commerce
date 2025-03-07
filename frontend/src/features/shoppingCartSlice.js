@@ -4,6 +4,7 @@ const initialState = localStorage.getItem("cart")
   ? JSON.parse(localStorage.getItem("cart"))
   : {
       cartItems: [],
+      shippingAddress: {},
     };
 
 const shoppingCartSlice = createSlice({
@@ -32,6 +33,10 @@ const shoppingCartSlice = createSlice({
       const id = action.payload;
       state.cartItems = state.cartItems.filter((item) => item._id !== id);
       return updateCart(state);
+    },
+    saveShippingAddress: (state, action) => {
+      state.shippingAddress = action.payload;
+      localStorage.setItem("cart", JSON.stringify(state));
     },
   },
 });
