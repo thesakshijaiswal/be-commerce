@@ -21,7 +21,11 @@
     "type": "git",
     "url": "git+https://github.com/thesakshijaiswal/be-commerce.git"
   },
-  "keywords": ["E-Commerce","MERN","FullstackApp"],
+  "keywords": [
+    "E-Commerce",
+    "MERN",
+    "FullstackApp"
+  ],
   "author": "Kiran Mahajan & Sakshi Jaiswal",
   "license": "MIT",
   "bugs": {
