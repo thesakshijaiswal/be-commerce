@@ -6,12 +6,13 @@ import toast from "react-hot-toast";
 import { useEffect } from "react";
 import axios from "axios";
 import { BACKEND_URL } from "../utils/constants";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setCredentials } from "../features/userSlice";
 
 const ProductCardContainer = () => {
   const { data: products, isLoading, error } = useGetProductsQuery();
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
 
   const getUser = async () => {
     try {
@@ -35,8 +36,10 @@ const ProductCardContainer = () => {
   };
 
   useEffect(() => {
-    getUser();
-  }, []);
+    if (!user) {
+      getUser();
+    }
+  }, [user]);
 
   return (
     <>

@@ -1,4 +1,4 @@
-import { Branding, Button, InputField, AuthLayout } from "../components";
+import { Button, InputField, AuthLayout } from "../components";
 import googleLogo from "../assets/google_signIn.svg";
 import { AiOutlineMail, AiOutlineLock } from "react-icons/ai";
 import { Link } from "react-router-dom";
