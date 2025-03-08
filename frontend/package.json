@@ -20,7 +20,8 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "postinstall": "npm install"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.5.0",

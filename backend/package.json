@@ -17,6 +17,7 @@
   "scripts": {
     "dev": "node --watch --env-file=.env src/index.js",
     "start": "node src/index.js",
+    "build": "echo 'No build step for backend'",
     "data:import": "node --env-file=.env src/lib/seeder.js",
     "data:destroy": "node --env-file=.env src/lib/seeder.js -d"
   },
