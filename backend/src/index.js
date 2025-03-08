@@ -10,10 +10,12 @@ import userRoutes from "./routes/user.route.js";
 import cookieParser from "cookie-parser";
 import configurePassport from "./utils/passport.js";
 import authRoutes from "./routes/auth.route.js";
+import path from "path";
 
 connectDB();
 const app = express();
 const PORT = process.env.PORT || 5000;
+const __dirname = path.resolve();
 
 app.use((req, res, next) => {
   console.log("Request: log from index.js", req.method, req.url);
@@ -47,6 +49,16 @@ app.use("/auth", authRoutes);
 
 app.use(pathNotFound);
 app.use(errorHandler);
+
+/*********PRODUCTION CODE**********/
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.resolve(__dirname, "../frontend/dist")));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "../frontend", "dist", "index.html"));
+  });
+}
+/*********PRODUCTION CODE**********/
 
 app.listen(PORT, () => {
   console.log("Server is running on " + PORT);
