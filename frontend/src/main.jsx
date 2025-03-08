@@ -15,7 +15,7 @@ import CartPage from "./pages/CartPage.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
 import PasswordResetPage from "./pages/PasswordResetPage.jsx";
 import SignUpPage from "./pages/SignUpPage.jsx";
-import ShippingPage from "./pages/shippingPage.jsx";
+import ShippingPage from "./pages/ShippingPage.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
