@@ -28,14 +28,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 configurePassport(app);
 
-app.get("/", (req, res) => {
-  res.send("Server is up and running 😌");
-});
-
-app.use("/api/products", productRoute);
-app.use("/api/users", userRoutes);
-app.use("/auth", authRoutes);
-
 /*********PRODUCTION CODE**********/
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../frontend/dist")));
@@ -46,6 +38,13 @@ if (process.env.NODE_ENV === "production") {
 }
 /*********PRODUCTION CODE**********/
 
+app.get("/", (req, res) => {
+  res.send("Server is up and running 😌");
+});
+
+app.use("/api/products", productRoute);
+app.use("/api/users", userRoutes);
+app.use("/auth", authRoutes);
 
 app.use(pathNotFound);
 app.use(errorHandler);
