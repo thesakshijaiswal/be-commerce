@@ -4,15 +4,26 @@ import { FaRegAddressCard } from "react-icons/fa";
 import { PiCityDuotone, PiMailbox } from "react-icons/pi";
 import { SlLocationPin } from "react-icons/sl";
 import checkoutBanner from "../assets/checkout-Banner.svg";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { saveShippingAddress } from "../features/shoppingCartSlice";
 
 const ShippingPage = () => {
-  const [address, setAddress] = useState("");
-  const [postalCode, setPostalCode] = useState("");
-  const [city, setCity] = useState("");
-  const [country, setCountry] = useState("");
+  const cart = useSelector((state) => state.cart);
+  const { shippingAddress } = cart;
+  const [address, setAddress] = useState(shippingAddress?.address || "");
+  const [city, setCity] = useState(shippingAddress?.city || "");
+  const [postalCode, setPostalCode] = useState(
+    shippingAddress?.postalCode || "",
+  );
+  const [country, setCountry] = useState(shippingAddress?.country || "");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    dispatch(saveShippingAddress({ address, city, postalCode, country }));
+    // navigate("/payment")
   };
 
   return (
@@ -59,7 +70,11 @@ const ShippingPage = () => {
           onChange={(e) => setCountry(e.target.value)}
         />
         <div className="pt-4">
-          <Button className="mb-2 w-full text-sm font-medium" type="submit">
+          <Button
+            className="mb-2 w-full text-sm font-medium"
+            type="submit"
+            onClick={handleSubmit}
+          >
             Continue To Payment
           </Button>
         </div>

@@ -15,7 +15,7 @@ const CartPage = () => {
   const totalQuantity = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
   const handleCheckOut = () => {
-    navigate("/checkout");
+    navigate("/login?redirect=/checkout");
   };
   return (
     <div className="flex flex-col items-center justify-center pb-20 text-black">
@@ -23,7 +23,7 @@ const CartPage = () => {
       {totalQuantity === 0 ? (
         <EmptyCart />
       ) : (
-        <div className="flex flex-col items-start justify-center gap-20 md:flex-row p-2">
+        <div className="flex flex-col items-start justify-center gap-20 p-2 md:flex-row">
           <div className="flex flex-col gap-4">
             {cartItems.map((item) => {
               return <CartItem key={item._id} {...item} />;

@@ -1,14 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   useLoginMutation,
   useForgotPasswordMutation,
 } from "../features/userApiSlice";
 import SignInBanner from "../assets/SignIn-banner.svg";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setCredentials } from "../features/userSlice";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { AuthForm } from "../components";
+import { useLocation } from "react-router-dom";
 
 const LoginPage = () => {
   const [isForgotPasswordClicked, setIsForgotPasswordClicked] = useState(false);
@@ -21,6 +22,16 @@ const LoginPage = () => {
   const [forgotPassword, { isLoading: isLoadingPassword }] =
     useForgotPasswordMutation();
 
+  const { userInfo } = useSelector((state) => state.user);
+  const { search } = useLocation();
+  const searchParam = new URLSearchParams(search);
+  const redirect = searchParam.get("redirect") || "/";
+
+  useEffect(() => {
+    if (userInfo) {
+      navigate(redirect);
+    }
+  }, [navigate, userInfo, redirect]);
   const handleLogin = async (e) => {
     e.preventDefault();
 
