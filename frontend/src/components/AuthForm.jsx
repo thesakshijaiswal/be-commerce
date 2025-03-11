@@ -32,6 +32,8 @@ const AuthForm = ({
   setShowConfirmPassword,
   showGoogleOption,
   showConfirmPasswordField,
+  banner,
+  bannerAlt,
 }) => {
   const handleGoogleAuth = (e) => {
     e.preventDefault();
@@ -43,7 +45,7 @@ const AuthForm = ({
   };
 
   return (
-    <AuthLayout title={title}>
+    <AuthLayout title={title} banner={banner} bannerAlt={bannerAlt}>
       <form action="#" onSubmit={onSubmit}>
         {showNameField && (
           <InputField

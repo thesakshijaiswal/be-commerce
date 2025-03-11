@@ -8,14 +8,16 @@ import {
 import { Provider } from "react-redux";
 import App from "./App.jsx";
 import "./index.css";
-import HomePage from "./pages/HomePage.jsx";
-import ProductDetailsPage from "./pages/ProductDetailsPage.jsx";
 import store from "./store.js";
-import CartPage from "./pages/CartPage.jsx";
-import LoginPage from "./pages/LoginPage.jsx";
-import PasswordResetPage from "./pages/PasswordResetPage.jsx";
-import SignUpPage from "./pages/SignUpPage.jsx";
-import ShippingPage from "./pages/ShippingPage.jsx";
+import {
+  HomePage,
+  ProductDetailsPage,
+  CartPage,
+  LoginPage,
+  SignUpPage,
+  ShippingPage,
+  PasswordResetPage,
+} from "./pages";
 
 const router = createBrowserRouter(
   createRoutesFromElements(

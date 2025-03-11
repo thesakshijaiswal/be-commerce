@@ -37,33 +37,26 @@ const PasswordResetPage = () => {
   };
 
   return (
-    <div className="flex max-h-screen items-center justify-center font-ubuntu">
-      <AuthForm
-        title="Reset your Password"
-        submitButtonText="Reset Password"
-        onSubmit={handleResetPassword}
-        isLoading={false}
-        password={password}
-        setPassword={setPassword}
-        showPassword={showPassword}
-        setShowPassword={setShowPassword}
-        confirmPassword={confirmPassword}
-        setConfirmPassword={setConfirmPassword}
-        showConfirmPassword={showConfirmPassword}
-        setShowConfirmPassword={setShowConfirmPassword}
-        showConfirmPasswordField={true}
-        showForgotPassword={false}
-        showGoogleOption={false}
-        showEmailField={false}
-      />
-      <div className="hidden w-full items-center justify-center md:flex md:w-2/5">
-        <img
-          src={resetPasswordBanner}
-          className="lg:h-[40rem]"
-          alt="resetPasswordBanner"
-        />
-      </div>
-    </div>
+    <AuthForm
+      title="Reset your Password"
+      submitButtonText="Reset Password"
+      onSubmit={handleResetPassword}
+      isLoading={false}
+      password={password}
+      setPassword={setPassword}
+      showPassword={showPassword}
+      setShowPassword={setShowPassword}
+      confirmPassword={confirmPassword}
+      setConfirmPassword={setConfirmPassword}
+      showConfirmPassword={showConfirmPassword}
+      setShowConfirmPassword={setShowConfirmPassword}
+      showConfirmPasswordField={true}
+      showForgotPassword={false}
+      showGoogleOption={false}
+      showEmailField={false}
+      banner={resetPasswordBanner}
+      bannerAlt="resetPasswordBanner"
+    />
   );
 };
 

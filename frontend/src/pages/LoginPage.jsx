@@ -60,33 +60,30 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="flex max-h-screen items-center justify-center font-ubuntu">
-      <AuthForm
-        title="Sign into your Account"
-        submitButtonText="Sign In"
-        altText="Don’t have an account yet?"
-        altLink="/signUp"
-        altLinkText="Sign up"
-        onSubmit={handleLogin}
-        isLoading={isLoading}
-        email={email}
-        setEmail={setEmail}
-        showEmailField={true}
-        password={password}
-        setPassword={setPassword}
-        showPassword={showPassword}
-        setShowPassword={setShowPassword}
-        showConfirmPasswordField={false}
-        showForgotPassword={true}
-        handleForgotPassword={handleForgotPassword}
-        isForgotPasswordClicked={isForgotPasswordClicked}
-        showGoogleOption={true}
-        showNameField={false}
-      />
-      <div className="hidden w-full items-center justify-center md:flex md:w-2/5">
-        <img src={SignInBanner} className="lg:h-[40rem]" alt="SignInBanner" />
-      </div>
-    </div>
+    <AuthForm
+      title="Sign into your Account"
+      submitButtonText="Sign In"
+      altText="Don’t have an account yet?"
+      altLink="/signUp"
+      altLinkText="Sign up"
+      onSubmit={handleLogin}
+      isLoading={isLoading}
+      email={email}
+      setEmail={setEmail}
+      showEmailField={true}
+      password={password}
+      setPassword={setPassword}
+      showPassword={showPassword}
+      setShowPassword={setShowPassword}
+      showConfirmPasswordField={false}
+      showForgotPassword={true}
+      handleForgotPassword={handleForgotPassword}
+      isForgotPasswordClicked={isForgotPasswordClicked}
+      showGoogleOption={true}
+      showNameField={false}
+      banner={SignInBanner}
+      bannerAlt="SignInBanner"
+    />
   );
 };
 

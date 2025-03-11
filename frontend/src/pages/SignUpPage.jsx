@@ -29,33 +29,30 @@ const SignUpPage = () => {
   };
 
   return (
-    <div className="flex max-h-screen items-center justify-center font-ubuntu">
-      <AuthForm
-        title="Create an Account"
-        submitButtonText="Sign Up"
-        altText="Already have an account?"
-        altLink="/login"
-        altLinkText="Sign In"
-        onSubmit={handleSignUp}
-        isLoading={isLoading}
-        name={name}
-        setName={setName}
-        email={email}
-        setEmail={setEmail}
-        showEmailField={true}
-        password={password}
-        setPassword={setPassword}
-        showPassword={showPassword}
-        setShowPassword={setShowPassword}
-        showConfirmPasswordField={false}
-        showForgotPassword={false}
-        showNameField={true}
-        showGoogleOption={true}
-      />
-      <div className="hidden w-full items-center justify-center md:flex md:w-2/5">
-        <img src={SignUpBanner} className="lg:h-[40rem]" alt="SignUpBanner" />
-      </div>
-    </div>
+    <AuthForm
+      title="Create an Account"
+      submitButtonText="Sign Up"
+      altText="Already have an account?"
+      altLink="/login"
+      altLinkText="Sign In"
+      onSubmit={handleSignUp}
+      isLoading={isLoading}
+      name={name}
+      setName={setName}
+      email={email}
+      setEmail={setEmail}
+      showEmailField={true}
+      password={password}
+      setPassword={setPassword}
+      showPassword={showPassword}
+      setShowPassword={setShowPassword}
+      showConfirmPasswordField={false}
+      showForgotPassword={false}
+      showNameField={true}
+      showGoogleOption={true}
+      banner={SignUpBanner}
+      bannerAlt="SignUpBanner"
+    />
   );
 };
 
