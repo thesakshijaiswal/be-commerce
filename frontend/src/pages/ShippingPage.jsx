@@ -23,7 +23,7 @@ const ShippingPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(saveShippingAddress({ address, city, postalCode, country }));
-    // navigate("/payment")
+    navigate("/payment")
   };
 
   return (

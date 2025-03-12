@@ -17,6 +17,7 @@ import {
   SignUpPage,
   ShippingPage,
   PasswordResetPage,
+  PaymentPage
 } from "./pages";
 
 const router = createBrowserRouter(
@@ -28,6 +29,7 @@ const router = createBrowserRouter(
       <Route path="/checkout" element={<ShippingPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signUp" element={<SignUpPage />} />
+      <Route path="/payment" element={<PaymentPage />} />
       <Route
         path="/reset-password/:resetToken"
         element={<PasswordResetPage />}
