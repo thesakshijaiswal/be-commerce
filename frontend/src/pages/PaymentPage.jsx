@@ -1,11 +1,56 @@
+import { useSelector } from "react-redux";
+import { BsCurrencyRupee } from "react-icons/bs";
 
 const PaymentPage = () => {
+  const { cartItems, taxPrice, shippingPrice, totalPrice } = useSelector(
+    (state) => {
+      return state.cart;
+    },
+  );
+  const totalQuantity = cartItems.reduce((sum, item) => sum + item.quantity, 0);
   return (
-    <div className="flex justify-center items-center min-h-screen gap-10">
-        <div className="bg-slate-300 w-96 h-40"></div>
-        <div className="bg-slate-300 w-96 h-40"></div>
+    <div className="flex min-h-screen flex-col items-center justify-center px-3 sm:px-7 md:px-2">
+      <h1 className="mb-6 ml-4 text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
+        Choose Your Payment Option
+      </h1>
+      <div className="flex h-full w-full flex-col items-center justify-center gap-10 md:flex-row">
+        <form action="#" className="flex h-96 w-full flex-col gap-10 lg:w-2/5">
+          <div className="flex h-1/2 w-full items-center gap-2 rounded-md bg-secondary/5 pl-12 shadow-md md:pl-24">
+            <input type="radio" name="payment" checked />
+            <label className="text-base font-semibold text-secondary md:text-lg">
+              Pay with Stripe
+            </label>
+          </div>
+          <div className="flex h-1/2 w-full items-center gap-2 rounded-md bg-secondary/5 pl-12 shadow-md md:pl-24">
+            <input type="radio" name="payment" />
+            <label className="text-base font-semibold text-secondary md:text-lg">
+              Pay with Credit Card
+            </label>
+          </div>
+        </form>
+        <div className="flex h-56 w-full flex-col justify-center rounded-md bg-primary/5 pl-12 shadow-md lg:w-2/5">
+          <h2 className="text-lg font-semibold text-secondary">Subtotal</h2>
+          <p className="text-gray-600">
+            <span className="font-medium">Total Items: </span> {totalQuantity}
+          </p>
+          <p className="flex items-center text-gray-600">
+            <span className="font-medium">Total tax: </span> <BsCurrencyRupee />
+            {taxPrice}
+          </p>
+          <p className="flex items-center text-gray-600">
+            <span className="font-medium">Shipping charges: </span>
+            <BsCurrencyRupee />
+            {shippingPrice}
+          </p>
+          <p className="flex items-center text-gray-600">
+            <span className="font-medium">Total Price: </span>{" "}
+            <BsCurrencyRupee />
+            {totalPrice}
+          </p>
+        </div>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default PaymentPage
+export default PaymentPage;
