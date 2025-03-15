@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import { BsCurrencyRupee } from "react-icons/bs";
 import { FaStripe, FaRegCreditCard } from "react-icons/fa6";
 import "../index.css";
+import { Button } from "../components";
 
 const PaymentPage = () => {
   const { cartItems, taxPrice, shippingPrice, totalPrice } = useSelector(
@@ -64,6 +65,7 @@ const PaymentPage = () => {
             <BsCurrencyRupee />
             {totalPrice}
           </p>
+          <Button className="mt-4 w-3/4 lg:w-1/2">Pay Now</Button>
         </div>
       </div>
     </div>
