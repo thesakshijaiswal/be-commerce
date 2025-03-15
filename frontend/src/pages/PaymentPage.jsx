@@ -1,14 +1,28 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { BsCurrencyRupee } from "react-icons/bs";
 import { FaStripe, FaRegCreditCard } from "react-icons/fa6";
 import "../index.css";
 import { Button } from "../components";
+import { savePaymentMethod } from "../features/shoppingCartSlice";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const PaymentPage = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [selectedPayment, setSelectedPayment] = useState("Stripe");
   const { cartItems, taxPrice, shippingPrice, totalPrice } = useSelector(
     (state) => state.cart,
   );
   const totalQuantity = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+
+  const handleContinue = () => {
+    dispatch(savePaymentMethod(selectedPayment));
+    //navigate("/placeOrder")
+  };
+  const handlePaymentChange = (e) => {
+    setSelectedPayment(e.target.value);
+  };
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center px-3 sm:px-7 md:px-2">
@@ -20,7 +34,13 @@ const PaymentPage = () => {
           <div className="flex h-1/2 w-full items-center justify-around gap-2 rounded-md bg-secondary/5 shadow-md">
             <div>
               <label className="custom-radio">
-                <input type="radio" name="payment" defaultChecked />
+                <input
+                  type="radio"
+                  name="payment"
+                  value="Stripe"
+                  onChange={handlePaymentChange}
+                  checked={selectedPayment === "Stripe"}
+                />
                 <span className="checkmark"></span>
               </label>
               <label className="text-base font-semibold text-secondary md:text-lg">
@@ -34,7 +54,13 @@ const PaymentPage = () => {
           <div className="flex h-1/2 w-full items-center justify-around gap-2 rounded-md bg-secondary/5 shadow-md">
             <div>
               <label className="custom-radio">
-                <input type="radio" name="payment" />
+                <input
+                  type="radio"
+                  name="payment"
+                  value="Credit Card"
+                  onChange={handlePaymentChange}
+                  checked={selectedPayment === "Credit Card"}
+                />
                 <span className="checkmark"></span>
               </label>
               <label className="text-base font-semibold text-secondary md:text-lg">
@@ -65,7 +91,9 @@ const PaymentPage = () => {
             <BsCurrencyRupee />
             {totalPrice}
           </p>
-          <Button className="mt-4 w-3/4 lg:w-1/2">Pay Now</Button>
+          <Button className="mt-4 w-3/4 lg:w-1/2" onClick={handleContinue}>
+            Continue
+          </Button>
         </div>
       </div>
     </div>
