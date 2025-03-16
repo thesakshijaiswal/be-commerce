@@ -10,6 +10,7 @@ import userRoutes from "./routes/user.route.js";
 import cookieParser from "cookie-parser";
 import configurePassport from "./utils/passport.js";
 import authRoutes from "./routes/auth.route.js";
+import orderRoutes from "./routes/order.route.js";
 import path from "path";
 
 connectDB();
@@ -31,6 +32,7 @@ configurePassport(app);
 app.use("/api/products", productRoute);
 app.use("/api/users", userRoutes);
 app.use("/auth", authRoutes);
+app.use("/api/orders", orderRoutes);
 
 /*********PRODUCTION CODE**********/
 if (process.env.NODE_ENV === "production") {
