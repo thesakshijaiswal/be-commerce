@@ -1,5 +1,6 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
+import { BASE_BACKEND_URL } from "./src/utils/constants";
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -7,7 +8,7 @@ export default defineConfig({
   server: {
     port: 3000,
     proxy: {
-      "/api": "https://be-commerce-q7nw.onrender.com",
+      "/api": BASE_BACKEND_URL,
     },
   },
 });

@@ -5,7 +5,7 @@ import { HomeShimmerUI } from "../shimmers";
 import toast from "react-hot-toast";
 import { useEffect } from "react";
 import axios from "axios";
-import { BACKEND_URL } from "../utils/constants";
+import { BASE_BACKEND_URL } from "../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { setCredentials } from "../features/userSlice";
 
@@ -16,7 +16,7 @@ const ProductCardContainer = () => {
 
   const getUser = async () => {
     try {
-      const res = await axios.get(`${BACKEND_URL}/auth/login/success`, {
+      const res = await axios.get(`${BASE_BACKEND_URL}/auth/login/success`, {
         withCredentials: true,
       });
       if (res.data.user) {

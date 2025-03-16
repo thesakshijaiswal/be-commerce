@@ -3,7 +3,7 @@ import googleLogo from "../assets/google_signIn.svg";
 import { AiOutlineMail, AiOutlineLock } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
-import { BACKEND_URL } from "../utils/constants";
+import { BASE_BACKEND_URL } from "../utils/constants";
 
 const AuthForm = ({
   title,
@@ -38,7 +38,7 @@ const AuthForm = ({
   const handleGoogleAuth = (e) => {
     e.preventDefault();
     try {
-      window.location.href = `${BACKEND_URL}/auth/google/callback`;
+      window.location.href = `${BASE_BACKEND_URL}/auth/google/callback`;
     } catch (error) {
       toast.error(error?.data?.message || error?.error);
     }

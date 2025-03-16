@@ -1,7 +1,7 @@
 import { fetchBaseQuery, createApi } from "@reduxjs/toolkit/query/react";
-import { BASE_URL } from "../utils/constants";
+import { BASE_BACKEND_URL } from "../utils/constants";
 
-const baseQuery = fetchBaseQuery({ baseUrl: BASE_URL });
+const baseQuery = fetchBaseQuery({ baseUrl: BASE_BACKEND_URL });
 
 export const apiSlice = createApi({
   baseQuery,
