@@ -18,7 +18,7 @@ const PaymentPage = () => {
 
   const handleContinue = () => {
     dispatch(savePaymentMethod(selectedPayment));
-    //navigate("/placeOrder")
+    navigate("/place-order");
   };
   const handlePaymentChange = (e) => {
     setSelectedPayment(e.target.value);

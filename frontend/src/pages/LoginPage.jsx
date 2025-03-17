@@ -75,7 +75,7 @@ const LoginPage = () => {
       title="Sign into your Account"
       submitButtonText="Sign In"
       altText="Don’t have an account yet?"
-      altLink="/signUp"
+      altLink="/sign-up"
       altLinkText="Sign up"
       onSubmit={handleLogin}
       isLoading={isLoading}

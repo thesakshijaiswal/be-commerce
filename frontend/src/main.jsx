@@ -18,6 +18,7 @@ import {
   ShippingPage,
   PasswordResetPage,
   PaymentPage,
+  OrderSummaryPage,
 } from "./pages";
 import { SecuredRoutes } from "./components";
 
@@ -28,7 +29,7 @@ const router = createBrowserRouter(
       <Route path="/product-details/:id" element={<ProductDetailsPage />} />
       <Route path="/cart" element={<CartPage />} />
       <Route path="/login" element={<LoginPage />} />
-      <Route path="/signUp" element={<SignUpPage />} />
+      <Route path="/sign-up" element={<SignUpPage />} />
       <Route
         path="/reset-password/:resetToken"
         element={<PasswordResetPage />}
@@ -36,6 +37,7 @@ const router = createBrowserRouter(
       <Route path="" element={<SecuredRoutes />}>
         <Route path="/payment" element={<PaymentPage />} />,
         <Route path="/checkout" element={<ShippingPage />} />
+        <Route path="/place-order" element={<OrderSummaryPage />} />
       </Route>
       ,
     </Route>,

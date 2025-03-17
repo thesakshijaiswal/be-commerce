@@ -6,3 +6,4 @@ export { default as PasswordResetPage } from "./PasswordResetPage";
 export { default as ShippingPage } from "./ShippingPage";
 export { default as SignUpPage } from "./SignUpPage";
 export { default as PaymentPage } from "./PaymentPage";
+export { default as OrderSummaryPage } from "./OrderSummaryPage";

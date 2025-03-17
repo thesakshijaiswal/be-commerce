@@ -1,4 +1,4 @@
-import asyncHandler from "../utils/helper";
+import asyncHandler from "../utils/helper.js";
 import Order from "../models/order.model.js";
 
 const addOrderItems = asyncHandler(async (req, res) => {
