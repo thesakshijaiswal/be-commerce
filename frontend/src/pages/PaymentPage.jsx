@@ -72,7 +72,7 @@ const PaymentPage = () => {
             </span>
           </div>
         </form>
-        <div className="flex h-56 w-full flex-col justify-center rounded-md bg-primary/5 pl-12 shadow-md lg:w-2/5">
+        <div className="flex h-56 w-full flex-col justify-center rounded-md bg-primary/5 pl-12 shadow-md md:h-96 lg:w-2/5">
           <h2 className="text-lg font-semibold text-secondary">Subtotal</h2>
           <p className="text-gray-600">
             <span className="font-medium">Total Items: </span> {totalQuantity}
