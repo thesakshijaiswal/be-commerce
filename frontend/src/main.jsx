@@ -35,7 +35,7 @@ const router = createBrowserRouter(
         element={<PasswordResetPage />}
       />
       <Route path="" element={<SecuredRoutes />}>
-        <Route path="/payment" element={<PaymentPage />} />,
+        <Route path="/payment" element={<PaymentPage />} />
         <Route path="/checkout" element={<ShippingPage />} />
         <Route path="/place-order" element={<OrderSummaryPage />} />
       </Route>
