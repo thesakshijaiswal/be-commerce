@@ -12,13 +12,12 @@ const protectRoute = asyncHandler(async (req, res, next) => {
       req.user = await User.findById(decodedToken.userId).select("-password");
       next();
     } catch (error) {
-      console.error(error);
       res.status(401);
       throw new Error("User not authorized, token failed!");
     }
   } else {
     res.status(401);
-    throw new Error("User not Authorized, token not found!");
+    throw new Error("User not authorized, token not found!");
   }
 });
 

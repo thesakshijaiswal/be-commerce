@@ -35,8 +35,7 @@ const OrderSummaryPage = () => {
         taxPrice,
         totalPrice,
       }).unwrap();
-
-      navigate(`/order/${res._id}`);
+      // navigate(`/order/${response._id}`);
     } catch (error) {
       toast.error(error?.data?.message || error?.error);
     }
