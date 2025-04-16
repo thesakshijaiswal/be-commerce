@@ -8,6 +8,7 @@ export const userApiSlice = apiSlice.injectEndpoints({
         url: `${BASE_BACKEND_URL}${USERS_URL}/login`,
         method: "POST",
         body: data,
+        credentials: "include"
       }),
     }),
     logout: builder.mutation({

@@ -20,13 +20,15 @@ const OrderSummaryPage = () => {
 
   const { userInfo } = useSelector((state) => state.user);
 
+  console.log(userInfo);
+
   const [createOrder, { isLoading }] = useCreateOrderMutation();
 
   const handlePlaceOrder = async () => {
     try {
       const response = await createOrder({
         orderItems: cartItems,
-        shippingAddress: address,
+        shippingAddress: { address, city, postalCode, country },
         paymentMethod,
         itemsPrice,
         shippingPrice,
