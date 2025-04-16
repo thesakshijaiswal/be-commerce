@@ -14,32 +14,41 @@ const ProductCardContainer = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
 
-  const getUser = async () => {
-    try {
-      const res = await axios.get(`${BASE_BACKEND_URL}/auth/login/success`, {
-        withCredentials: true,
-      });
-      if (res.data.user) {
-        dispatch(
-          setCredentials({
-            ...res.data.user._json,
-            _id: res.data._id,
-            isAdmin: res.data.user.isAdmin,
-          }),
-        );
-      } else {
-        throw new Error("User not authenticated");
-      }
-    } catch (error) {
-      toast.error(error?.response?.data?.message || error.message);
-    }
-  };
-
   useEffect(() => {
-    if (!user) {
+    const getUser = async () => {
+      try {
+        const res = await axios.get(`${BASE_BACKEND_URL}/auth/login/success`, {
+          withCredentials: true,
+        });
+        if (res.data.user) {
+          console.log("User authenticated:", res.data.user);
+          dispatch(
+            setCredentials({
+              ...res.data.user._json,
+              _id: res.data._id,
+              isAdmin: res.data.user.isAdmin,
+            }),
+          );
+        } else {
+          console.log("User not authenticated");
+        }
+      } catch (error) {
+        if (error.response?.status === 403 || error.response?.status === 401) {
+          console.log(
+            "User is not logged in. This is expected for unauthenticated users.",
+          );
+        } else {
+          console.error("Unexpected error fetching user:", error);
+        }
+      }
+    };
+    if (!user.userInfo) {
+      console.log("Attempting to fetch user info...");
       getUser();
+    } else {
+      console.log("User already logged in:", user.userInfo);
     }
-  }, [user]);
+  }, [user.userInfo, dispatch]);
 
   return (
     <>
