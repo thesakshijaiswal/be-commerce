@@ -4,6 +4,8 @@ import { useCreateOrderMutation } from "../features/orderApiSlice";
 import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import { BsCurrencyRupee } from "react-icons/bs";
+import { clearCartItems } from "../features/shoppingCartSlice";
+import { useDispatch } from "react-redux";
 
 const OrderSummaryPage = () => {
   const navigate = useNavigate();
@@ -19,8 +21,7 @@ const OrderSummaryPage = () => {
   } = cart;
 
   const { userInfo } = useSelector((state) => state.user);
-
-  console.log(userInfo);
+  const dispatch = useDispatch();
 
   const [createOrder, { isLoading }] = useCreateOrderMutation();
 
@@ -35,6 +36,8 @@ const OrderSummaryPage = () => {
         taxPrice,
         totalPrice,
       }).unwrap();
+      toast.success("Order Placed Successfully!");
+      dispatch(clearCartItems());
       navigate(`/order/${response._id}`);
     } catch (error) {
       toast.error(error?.data?.message || error?.error);
