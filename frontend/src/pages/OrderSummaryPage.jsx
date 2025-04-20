@@ -1,11 +1,12 @@
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-hot-toast";
+import { BsCurrencyRupee } from "react-icons/bs";
+import { MdOutlineEdit } from "react-icons/md";
+
 import { Button } from "../components";
 import { useCreateOrderMutation } from "../features/orderApiSlice";
-import { useSelector } from "react-redux";
-import toast from "react-hot-toast";
-import { BsCurrencyRupee } from "react-icons/bs";
 import { clearCartItems } from "../features/shoppingCartSlice";
-import { useDispatch } from "react-redux";
 
 const OrderSummaryPage = () => {
   const navigate = useNavigate();
@@ -44,6 +45,16 @@ const OrderSummaryPage = () => {
     }
   };
 
+  const EditButton = ({ onClick }) => (
+    <p
+      className="absolute right-4 top-3 flex cursor-pointer items-center gap-1 font-medium text-primary"
+      onClick={onClick}
+    >
+      <MdOutlineEdit className="text-lg" />
+      <span>Edit</span>
+    </p>
+  );
+
   return (
     <div className="flex min-h-screen flex-col items-center justify-center p-4 text-secondary">
       <h1 className="mb-6 ml-4 text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
@@ -52,7 +63,7 @@ const OrderSummaryPage = () => {
       <div className="w-full max-w-6xl rounded-lg">
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           <div className="space-y-6">
-            <div className="h-40 rounded-lg bg-primary/5 p-4 capitalize shadow-md">
+            <div className="relative h-40 rounded-lg bg-primary/5 p-4 capitalize shadow-md">
               <h3 className="text-lg font-semibold">Shipping Address</h3>
               <p className="mt-4 text-base text-gray-600">{userInfo?.name}</p>
               <p className="text-base text-gray-600">
@@ -61,11 +72,13 @@ const OrderSummaryPage = () => {
               <p className="text-base text-gray-600">
                 Postal Code: {postalCode}
               </p>
+              <EditButton onClick={() => navigate("/checkout")} />
             </div>
-            <div className="rounded-lg bg-primary/5 p-4 shadow-md">
+            <div className="relative rounded-lg bg-primary/5 p-4 shadow-md">
               <h3 className="text-lg font-semibold">Payment Method</h3>
               <p className="text-base text-gray-600">{paymentMethod}</p>
               <p className="text-base text-gray-600">**** **** **** ****</p>
+              <EditButton onClick={() => navigate("/payment")} />
             </div>
           </div>
           <div className="rounded-lg bg-secondary/5 p-4 shadow-md">
