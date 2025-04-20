@@ -8,6 +8,7 @@ import { useEffect } from "react";
 
 const OrderDetailsPage = () => {
   const { id: orderId } = useParams();
+  const { userInfo } = useSelector((state) => state.user);
   const {
     data: order,
     isLoading,
@@ -65,7 +66,19 @@ const OrderDetailsPage = () => {
         </div>
         <div className="min-h-[200px] rounded-lg bg-primary/5 p-6 capitalize shadow-md">
           <h3 className="text-lg font-semibold">Order Status</h3>
-          <p className="mt-4 text-base text-gray-600">
+          <p className="mt-4 flex items-center gap-3 text-base text-gray-600">
+            <span className="relative flex h-3 w-3">
+              <span
+                className={`absolute inline-flex h-full w-full animate-ping rounded-full ${
+                  isDelivered ? "bg-green-400" : "bg-red-400"
+                } opacity-75`}
+              ></span>
+              <span
+                className={`relative inline-flex h-3 w-3 rounded-full ${
+                  isDelivered ? "bg-green-600" : "bg-red-600"
+                }`}
+              ></span>
+            </span>
             {isDelivered ? "Delivered" : "Pending"}
           </p>
         </div>
@@ -114,7 +127,9 @@ const OrderDetailsPage = () => {
         </div>
         <div className="flex flex-col items-center md:flex-row md:gap-4">
           <Button className="mt-4 w-full">Pay Now</Button>
-          <Button className="mt-4 w-full">Mark As Delivered</Button>
+          {userInfo.isAdmin && !order.isDelivered && (
+            <Button className="mt-4 w-full">Mark As Delivered</Button>
+          )}
         </div>
       </div>
     </div>
