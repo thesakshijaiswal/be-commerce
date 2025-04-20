@@ -29,6 +29,13 @@ const OrderDetailsPage = () => {
 
   const { shippingAddress, user, isDelivered, orderItems } = order || {};
 
+  const calculateTotal = (orderItems) => {
+    return orderItems.reduce(
+      (acc, item) => acc + item.price * item.quantity,
+      0,
+    );
+  };
+
   return (
     <div className="flex min-h-screen flex-col items-center justify-center p-4 text-secondary">
       <div className="mb-8 text-center">
@@ -77,7 +84,7 @@ const OrderDetailsPage = () => {
           <tbody>
             {orderItems?.map((item) => (
               <tr key={item._id} className="border-b">
-                <td className="flex max-w-40 items-center gap-4 truncate py-2 md:max-w-56 lg:max-w-96">
+                <td className="flex max-w-36 items-center gap-4 truncate py-2 sm:max-w-56 md:max-w-96 lg:max-w-2xl">
                   <img
                     src={item.image}
                     alt={item.name}
@@ -102,10 +109,13 @@ const OrderDetailsPage = () => {
           <span>Total:</span>
           <span className="flex items-center">
             <BsCurrencyRupee className="mr-1" />
-            {order?.totalPrice?.toFixed(2)}
+            {calculateTotal(orderItems).toFixed(2)}
           </span>
         </div>
-        <Button className="mt-4 w-full">Pay Now</Button>
+        <div className="flex flex-col items-center md:flex-row md:gap-4">
+          <Button className="mt-4 w-full">Pay Now</Button>
+          <Button className="mt-4 w-full">Mark As Delivered</Button>
+        </div>
       </div>
     </div>
   );
