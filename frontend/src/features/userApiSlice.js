@@ -8,7 +8,7 @@ export const userApiSlice = apiSlice.injectEndpoints({
         url: `${BASE_BACKEND_URL}${USERS_URL}/login`,
         method: "POST",
         body: data,
-        credentials: "include"
+        credentials: "include",
       }),
     }),
     logout: builder.mutation({
@@ -38,6 +38,13 @@ export const userApiSlice = apiSlice.injectEndpoints({
         body: data,
       }),
     }),
+    updateUserProfile: builder.mutation({
+      query: (data) => ({
+        url: `${USERS_URL}/update`,
+        method: "POST",
+        body: data,
+      }),
+    }),
   }),
 });
 export const {
@@ -46,4 +53,5 @@ export const {
   useForgotPasswordMutation,
   useResetPasswordMutation,
   useLogoutMutation,
+  useUpdateUserProfileMutation,
 } = userApiSlice;
