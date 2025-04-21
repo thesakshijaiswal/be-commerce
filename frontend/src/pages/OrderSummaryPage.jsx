@@ -13,13 +13,15 @@ const OrderSummaryPage = () => {
   const cart = useSelector((state) => state.cart);
   const {
     cartItems,
-    shippingAddress: { address, city, postalCode, country },
+    shippingAddress,
     paymentMethod,
     itemsPrice,
     shippingPrice,
     taxPrice,
     totalPrice,
   } = cart;
+
+  const { address, city, postalCode, country } = shippingAddress || {};
 
   const { userInfo } = useSelector((state) => state.user);
   const dispatch = useDispatch();

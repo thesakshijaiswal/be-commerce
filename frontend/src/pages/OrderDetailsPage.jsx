@@ -4,7 +4,6 @@ import { useGetOrderDetailsQuery } from "../features/orderApiSlice";
 import { BsCurrencyRupee } from "react-icons/bs";
 import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
-import { useEffect } from "react";
 
 const OrderDetailsPage = () => {
   const { id: orderId } = useParams();
@@ -17,11 +16,8 @@ const OrderDetailsPage = () => {
   } = useGetOrderDetailsQuery(orderId);
 
   if (error) {
-    return (
-      <div className="text-red-500">
-        Failed to load order details: {error?.data?.message || error?.error}
-      </div>
-    );
+    toast.error(error?.data?.message || "Failed to load order details");
+    return null;
   }
 
   if (isLoading) {
@@ -100,7 +96,7 @@ const OrderDetailsPage = () => {
                 <td className="flex max-w-36 items-center gap-4 truncate py-2 sm:max-w-56 md:max-w-96 lg:max-w-2xl">
                   <img
                     src={item.image}
-                    alt={item.name}
+                    alt={item.name || "Product Image"}
                     className="block h-16 w-16 rounded-lg"
                   />
                   <span className="truncate">{item.name}</span>
@@ -120,10 +116,12 @@ const OrderDetailsPage = () => {
         </table>
         <div className="mt-4 flex justify-between text-sm font-semibold sm:text-base">
           <span>Total:</span>
-          <span className="flex items-center">
-            <BsCurrencyRupee className="mr-1" />
-            {calculateTotal(orderItems).toFixed(2)}
-          </span>
+          {orderItems && (
+            <span className="flex items-center">
+              <BsCurrencyRupee className="mr-1" />
+              {calculateTotal(orderItems).toFixed(2)}
+            </span>
+          )}
         </div>
         <div className="flex flex-col items-center md:flex-row md:gap-4">
           <Button className="mt-4 w-full">Pay Now</Button>
