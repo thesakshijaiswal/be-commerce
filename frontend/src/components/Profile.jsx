@@ -3,7 +3,7 @@ import { HiOutlineUserCircle } from "react-icons/hi2";
 import { HiOutlineLogout } from "react-icons/hi";
 import { FaX } from "react-icons/fa6";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useLogoutMutation } from "../features/userApiSlice";
 import { logout } from "../features/userSlice";
@@ -38,6 +38,10 @@ const Profile = ({ onClose }) => {
         <HiOutlineUserCircle className="ml-1 mr-3 h-14 w-14" />
         <h2 className="mb-4 text-xl font-bold">Profile</h2>
         <p className="mb-4 text-base">{userInfo?.name}</p>
+        <Link to="/profile">
+          <Button className="mb-4 w-64 !bg-primary pl-1">View Profile</Button>
+        </Link>
+
         <Button
           className="w-64 pl-1"
           btnIcon={HiOutlineLogout}

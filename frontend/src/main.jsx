@@ -20,6 +20,7 @@ import {
   PaymentPage,
   OrderSummaryPage,
   OrderDetailsPage,
+  ProfilePage,
 } from "./pages";
 import { SecuredRoutes } from "./components";
 
@@ -40,6 +41,7 @@ const router = createBrowserRouter(
         <Route path="/checkout" element={<ShippingPage />} />
         <Route path="/place-order" element={<OrderSummaryPage />} />
         <Route path="/order/:id" element={<OrderDetailsPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
       </Route>
       ,
     </Route>,
