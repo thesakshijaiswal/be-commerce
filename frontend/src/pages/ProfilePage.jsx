@@ -22,13 +22,12 @@ const ProfilePage = () => {
   };
 
   return (
-    <div className="flex max-h-screen items-center justify-center font-ubuntu">
+    <div className="flex max-h-screen flex-col items-center justify-center font-ubuntu md:flex-row">
       <div className="w-full md:w-2/5">
-        <div className="mx-auto flex flex-col items-center justify-center px-2 py-8 md:h-screen lg:rounded-e-3xl lg:bg-primary/10 lg:py-0">
+        <div className="mx-auto flex flex-col items-center justify-center rounded-b-3xl bg-primary/10 px-2 py-8 md:h-screen md:rounded-b-none md:rounded-e-3xl lg:py-0">
           <div className="relative flex h-24 w-24 items-center justify-center overflow-hidden rounded-full bg-white">
             <AiOutlineUser className="h-full w-full text-secondary/20" />
           </div>
-
           <div className="w-full rounded-lg sm:max-w-md md:mt-0 xl:p-0">
             <div className="space-y-4 p-6 sm:p-8 md:space-y-6">
               <form onSubmit={handleUpdateProfile}>
@@ -85,7 +84,22 @@ const ProfilePage = () => {
           </div>
         </div>
       </div>
-      <div className="hidden w-full items-center justify-center md:flex md:w-3/5"></div>
+      <div className="w-full text-secondary md:w-3/5">
+        <div className="mt-8 w-full max-w-6xl p-4">
+          <h3 className="mb-4 text-2xl font-semibold">Order History</h3>
+          <table className="w-full table-auto text-left text-sm sm:text-base">
+            <thead>
+              <tr className="border-b">
+                <th className="px-1 py-2 sm:px-3">Order ID</th>
+                <th className="px-1 py-2 text-center sm:px-3">Date</th>
+                <th className="px-1 py-2 text-right sm:px-3">Total</th>
+                <th className="px-1 py-2 text-right sm:px-3">Order Status</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
     </div>
   );
 };
