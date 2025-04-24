@@ -1,28 +1,52 @@
-import { Button, InputField } from "../components";
+import { Button, InputField, OrderStatusBullet } from "../components";
 import { useState } from "react";
 import { AiOutlineMail, AiOutlineLock, AiOutlineUser } from "react-icons/ai";
 import toast from "react-hot-toast";
-import { HiOutlineUserCircle } from "react-icons/hi2";
+import { useDispatch, useSelector } from "react-redux";
+import { useGetUserOrdersQuery } from "../features/orderApiSlice";
+import { useUpdateUserProfileMutation } from "../features/userApiSlice";
+import { setCredentials } from "../features/userSlice";
 
 const ProfilePage = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  const dispatch = useDispatch();
+  const { userInfo } = useSelector((state) => state.user);
+  const [name, setName] = useState(userInfo.name);
+  const [email, setEmail] = useState(userInfo.email);
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const handleUpdateProfile = (e) => {
+  const { data: userOrders, isLoading, error } = useGetUserOrdersQuery();
+  const [updateUser, { isLoading: isUpdating }] =
+    useUpdateUserProfileMutation();
+
+  const handleUpdateProfile = async (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
       toast.error("Passwords do not match");
       return;
     }
+    const res = await updateUser({
+      _id: userInfo._id,
+      name,
+      email,
+      password,
+    }).unwrap();
+    dispatch(setCredentials({ ...res }));
     toast.success("Profile updated successfully!");
   };
 
+  if (error) {
+    return toast.error(error.message);
+  }
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
   return (
-    <div className="flex max-h-screen flex-col items-center justify-center font-ubuntu md:flex-row">
+    <div className="flex min-h-screen flex-col font-ubuntu md:flex-row">
       <div className="w-full md:w-2/5">
         <div className="mx-auto flex flex-col items-center justify-center rounded-b-3xl bg-primary/10 px-2 py-8 md:h-screen md:rounded-b-none md:rounded-e-3xl lg:py-0">
           <div className="relative flex h-24 w-24 items-center justify-center overflow-hidden rounded-full bg-white">
@@ -52,7 +76,7 @@ const ProfilePage = () => {
                 <InputField
                   type={showPassword ? "text" : "password"}
                   fieldName="password"
-                  placeholder="Enter your password"
+                  placeholder="••••••••"
                   label="Password"
                   icon={AiOutlineLock}
                   value={password}
@@ -63,7 +87,7 @@ const ProfilePage = () => {
                 <InputField
                   type={showConfirmPassword ? "text" : "password"}
                   fieldName="confirmPassword"
-                  placeholder="Confirm your password"
+                  placeholder="••••••••"
                   label="Confirm Password"
                   icon={AiOutlineLock}
                   value={confirmPassword}
@@ -75,6 +99,7 @@ const ProfilePage = () => {
                   <Button
                     className="mb-2 w-full text-sm font-medium"
                     type="submit"
+                    onClick={handleUpdateProfile}
                   >
                     Update Profile
                   </Button>
@@ -87,17 +112,54 @@ const ProfilePage = () => {
       <div className="w-full text-secondary md:w-3/5">
         <div className="mt-8 w-full max-w-6xl p-4">
           <h3 className="mb-4 text-2xl font-semibold">Order History</h3>
-          <table className="w-full table-auto text-left text-sm sm:text-base">
-            <thead>
-              <tr className="border-b">
-                <th className="px-1 py-2 sm:px-3">Order ID</th>
-                <th className="px-1 py-2 text-center sm:px-3">Date</th>
-                <th className="px-1 py-2 text-right sm:px-3">Total</th>
-                <th className="px-1 py-2 text-right sm:px-3">Order Status</th>
-              </tr>
-            </thead>
-            <tbody></tbody>
-          </table>
+          <div className="max-h-[calc(100vh-200px)] space-y-4 overflow-auto p-2 md:max-h-[84vh]">
+            {userOrders?.map((order) => (
+              <div
+                key={order._id}
+                className="w-full rounded-2xl border border-gray-200 bg-white p-4 shadow-sm transition hover:shadow-md"
+              >
+                <div className="mb-2 text-sm text-secondary/70">
+                  <div className="flex justify-between md:justify-between">
+                    <span className="font-medium">Order ID: {order._id}</span>
+                    <span className="hidden text-xs text-secondary/60 md:inline">
+                      Date: {order.createdAt.slice(0, 10)}
+                    </span>
+                  </div>
+                  <div className="mt-1 text-xs text-secondary/60 md:hidden">
+                    Date: {order.createdAt.slice(0, 10)}
+                  </div>
+                </div>
+
+                <div className="space-y-3">
+                  {order.orderItems.map((item, idx) => (
+                    <div key={idx} className="flex items-center gap-4">
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        className="h-16 w-16 rounded-lg"
+                      />
+                      <div className="flex flex-col">
+                        <h4 className="line-clamp-2 text-sm font-semibold text-secondary">
+                          {item.name}
+                        </h4>
+                        <span className="text-xs text-secondary/60">
+                          Qty: {item.quantity}
+                        </span>
+                        <span className="text-xs text-secondary/60">
+                          Price: ₹{item.price}
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="mt-4 flex justify-between text-sm font-medium">
+                  <span>Total: ₹{order.totalPrice}</span>
+                  <OrderStatusBullet isDelivered={order.isDelivered} />
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
