@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { Button } from "../components";
+import { Button, OrderStatusBullet } from "../components";
 import { useGetOrderDetailsQuery } from "../features/orderApiSlice";
 import { BsCurrencyRupee } from "react-icons/bs";
 import { useSelector } from "react-redux";
@@ -24,14 +24,10 @@ const OrderDetailsPage = () => {
     return <div>Loading...</div>;
   }
 
-  const { shippingAddress, user, isDelivered, orderItems } = order || {};
+  const { shippingAddress, user, isDelivered, orderItems, totalPrice } =
+    order || {};
 
-  const calculateTotal = (orderItems) => {
-    return orderItems.reduce(
-      (acc, item) => acc + item.price * item.quantity,
-      0,
-    );
-  };
+  console.log(order);
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center p-4 text-secondary">
@@ -62,21 +58,10 @@ const OrderDetailsPage = () => {
         </div>
         <div className="min-h-[200px] rounded-lg bg-primary/5 p-6 capitalize shadow-md">
           <h3 className="text-lg font-semibold">Order Status</h3>
-          <p className="mt-4 flex items-center gap-3 text-base text-gray-600">
-            <span className="relative flex h-3 w-3">
-              <span
-                className={`absolute inline-flex h-full w-full animate-ping rounded-full ${
-                  isDelivered ? "bg-green-400" : "bg-red-400"
-                } opacity-75`}
-              ></span>
-              <span
-                className={`relative inline-flex h-3 w-3 rounded-full ${
-                  isDelivered ? "bg-green-600" : "bg-red-600"
-                }`}
-              ></span>
-            </span>
-            {isDelivered ? "Delivered" : "Pending"}
-          </p>
+          <OrderStatusBullet
+            isDelivered={isDelivered}
+            className="text-base text-gray-600"
+          />
         </div>
       </div>
 
@@ -119,7 +104,7 @@ const OrderDetailsPage = () => {
           {orderItems && (
             <span className="flex items-center">
               <BsCurrencyRupee className="mr-1" />
-              {calculateTotal(orderItems).toFixed(2)}
+              {totalPrice.toFixed(2)}
             </span>
           )}
         </div>
