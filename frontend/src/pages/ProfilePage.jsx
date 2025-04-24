@@ -50,6 +50,7 @@ const ProfilePage = () => {
       <div className="w-full md:w-2/5">
         <div className="mx-auto flex flex-col items-center justify-center rounded-b-3xl bg-primary/10 px-2 py-8 md:h-screen md:rounded-b-none md:rounded-e-3xl lg:py-0">
           <div className="relative flex h-24 w-24 items-center justify-center overflow-hidden rounded-full bg-white">
+            <img src={userInfo.picture} />
             <AiOutlineUser className="h-full w-full text-secondary/20" />
           </div>
           <div className="w-full rounded-lg sm:max-w-md md:mt-0 xl:p-0">
