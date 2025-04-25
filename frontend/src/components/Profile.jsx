@@ -35,7 +35,15 @@ const Profile = ({ onClose }) => {
         >
           <FaX />
         </div>
-        <HiOutlineUserCircle className="ml-1 mr-3 h-14 w-14" />
+        {userInfo?.picture ? (
+          <img
+            src={userInfo.picture}
+            alt="Profile"
+            className="mb-2 ml-1 mr-3 h-14 w-14 rounded-full object-cover"
+          />
+        ) : (
+          <HiOutlineUserCircle className="ml-1 mr-3 h-14 w-14" />
+        )}
         <h2 className="mb-4 text-xl font-bold">Profile</h2>
         <p className="mb-4 text-base">{userInfo?.name}</p>
         <Link to="/profile">

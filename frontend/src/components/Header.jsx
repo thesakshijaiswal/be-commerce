@@ -49,7 +49,17 @@ const Header = () => {
     return (
       <NavItem
         to="#"
-        icon={HiOutlineUserCircle}
+        icon={() =>
+          userInfo?.picture ? (
+            <img
+              src={userInfo.picture}
+              alt="Profile"
+              className="mr-2 h-8 w-8 rounded-full object-cover"
+            />
+          ) : (
+            <HiOutlineUserCircle className="h-8 w-8" />
+          )
+        }
         label={userInfo?.name}
         onClick={toggleProfile}
       />
