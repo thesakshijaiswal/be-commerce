@@ -14,3 +14,4 @@ export { default as AuthForm } from "./AuthForm";
 export { default as AuthLayout } from "./AuthLayout";
 export { default as SecuredRoutes } from "./SecuredRoutes";
 export { default as OrderStatusBullet } from "./OrderStatusBullet";
+export { default as EmptyOrderHistory } from "./EmptyOrderHistory";

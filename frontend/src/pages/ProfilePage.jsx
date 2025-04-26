@@ -1,4 +1,5 @@
 import { Button, InputField, OrderStatusBullet } from "../components";
+import EmptyOrderHistory from "../components/EmptyOrderHistory";
 import { useState } from "react";
 import { AiOutlineMail, AiOutlineLock, AiOutlineUser } from "react-icons/ai";
 import toast from "react-hot-toast";
@@ -114,52 +115,56 @@ const ProfilePage = () => {
         <div className="mt-8 w-full max-w-6xl p-4">
           <h3 className="mb-4 text-2xl font-semibold">Order History</h3>
           <div className="max-h-[calc(100vh-200px)] space-y-4 overflow-auto p-2 md:max-h-[84vh]">
-            {userOrders?.map((order) => (
-              <div
-                key={order._id}
-                className="w-full rounded-2xl border border-gray-200 bg-white p-4 shadow-sm transition hover:shadow-md"
-              >
-                <div className="mb-2 text-sm text-secondary/70">
-                  <div className="flex justify-between md:justify-between">
-                    <span className="font-medium">Order ID: {order._id}</span>
-                    <span className="hidden text-xs text-secondary/60 md:inline">
-                      Date: {order.createdAt.slice(0, 10)}
-                    </span>
-                  </div>
-                  <div className="mt-1 text-xs text-secondary/60 md:hidden">
-                    Date: {order.createdAt.slice(0, 10)}
-                  </div>
-                </div>
-
-                <div className="space-y-3">
-                  {order.orderItems.map((item, idx) => (
-                    <div key={idx} className="flex items-center gap-4">
-                      <img
-                        src={item.image}
-                        alt={item.name}
-                        className="h-16 w-16 rounded-lg"
-                      />
-                      <div className="flex flex-col">
-                        <h4 className="line-clamp-2 text-sm font-semibold text-secondary">
-                          {item.name}
-                        </h4>
-                        <span className="text-xs text-secondary/60">
-                          Qty: {item.quantity}
-                        </span>
-                        <span className="text-xs text-secondary/60">
-                          Price: ₹{item.price}
-                        </span>
-                      </div>
+            {userOrders?.length > 0 ? (
+              userOrders.map((order) => (
+                <div
+                  key={order._id}
+                  className="w-full rounded-2xl border border-gray-200 bg-white p-4 shadow-sm transition hover:shadow-md"
+                >
+                  <div className="mb-2 text-sm text-secondary/70">
+                    <div className="flex justify-between md:justify-between">
+                      <span className="font-medium">Order ID: {order._id}</span>
+                      <span className="hidden text-xs text-secondary/60 md:inline">
+                        Date: {order.createdAt.slice(0, 10)}
+                      </span>
                     </div>
-                  ))}
-                </div>
+                    <div className="mt-1 text-xs text-secondary/60 md:hidden">
+                      Date: {order.createdAt.slice(0, 10)}
+                    </div>
+                  </div>
 
-                <div className="mt-4 flex justify-between text-sm font-medium">
-                  <span>Total: ₹{order.totalPrice}</span>
-                  <OrderStatusBullet isDelivered={order.isDelivered} />
+                  <div className="space-y-3">
+                    {order.orderItems.map((item, idx) => (
+                      <div key={idx} className="flex items-center gap-4">
+                        <img
+                          src={item.image}
+                          alt={item.name}
+                          className="h-16 w-16 rounded-lg"
+                        />
+                        <div className="flex flex-col">
+                          <h4 className="line-clamp-2 text-sm font-semibold text-secondary">
+                            {item.name}
+                          </h4>
+                          <span className="text-xs text-secondary/60">
+                            Qty: {item.quantity}
+                          </span>
+                          <span className="text-xs text-secondary/60">
+                            Price: ₹{item.price}
+                          </span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="mt-4 flex justify-between text-sm font-medium">
+                    <span>Total: ₹{order.totalPrice}</span>
+                    <OrderStatusBullet isDelivered={order.isDelivered} />
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))
+            ) : (
+              <EmptyOrderHistory />
+            )}
           </div>
         </div>
       </div>
