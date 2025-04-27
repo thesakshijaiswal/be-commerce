@@ -145,12 +145,15 @@ const ProfilePage = () => {
                           <h4 className="line-clamp-2 text-sm font-semibold text-secondary">
                             {item.name}
                           </h4>
-                          <span className="text-xs text-secondary/60">
-                            Qty: {item.quantity}
-                          </span>
-                          <span className="text-xs text-secondary/60">
-                            Price: ₹{item.price}
-                          </span>
+                          <div className="flex items-center gap-2">
+                            <span className="text-sm text-secondary/60">
+                              Quantity: {item.quantity}
+                            </span>
+                            |
+                            <span className="text-sm text-secondary/60">
+                              Price: ₹{item.price}
+                            </span>
+                          </div>
                         </div>
                       </div>
                     ))}
