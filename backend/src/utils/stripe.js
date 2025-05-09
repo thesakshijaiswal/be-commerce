@@ -17,7 +17,7 @@ const configureStripe = (app) => {
           },
           quantity: item.quantity || 1,
         })),
-        success_url: process.env.CLIENT_URL,
+        success_url: `${process.env.CLIENT_URL}/success`,
         cancel_url: `${process.env.CLIENT_URL}/place-order`,
       });
 

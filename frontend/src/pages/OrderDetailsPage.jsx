@@ -1,6 +1,9 @@
 import { useParams } from "react-router-dom";
 import { Button, OrderStatusBullet } from "../components";
-import { useGetOrderDetailsQuery } from "../features/orderApiSlice";
+import {
+  useGetOrderDetailsQuery,
+  usePayWithStripeMutation,
+} from "../features/orderApiSlice";
 import { BsCurrencyRupee } from "react-icons/bs";
 import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
@@ -15,6 +18,9 @@ const OrderDetailsPage = () => {
     refetch,
   } = useGetOrderDetailsQuery(orderId);
 
+  const [payWithStripe, { isLoading: loadingStripe }] =
+    usePayWithStripeMutation();
+
   if (error) {
     toast.error(error?.data?.message || "Failed to load order details");
     return null;
@@ -28,6 +34,15 @@ const OrderDetailsPage = () => {
     order || {};
 
   console.log(order);
+
+  const handleStripePayment = async (orderItems) => {
+    try {
+      const res = await payWithStripe(orderItems).unwrap();
+      window.location.href = res.url;
+    } catch (error) {
+      toast.error(error?.data?.message || error?.error);
+    }
+  };
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center p-4 text-secondary">
@@ -109,7 +124,12 @@ const OrderDetailsPage = () => {
           )}
         </div>
         <div className="flex flex-col items-center md:flex-row md:gap-4">
-          <Button className="mt-4 w-full">Pay Now</Button>
+          <Button
+            className="mt-4 w-full"
+            onClick={() => handleStripePayment(orderItems)}
+          >
+            Pay Now
+          </Button>
           {userInfo.isAdmin && !order.isDelivered && (
             <Button className="mt-4 w-full">Mark As Delivered</Button>
           )}
