@@ -12,6 +12,7 @@ import configurePassport from "./utils/passport.js";
 import authRoutes from "./routes/auth.route.js";
 import orderRoutes from "./routes/order.route.js";
 import path from "path";
+import configureStripe from "./utils/stripe.js";
 
 connectDB();
 const app = express();
@@ -28,6 +29,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 configurePassport(app);
+configureStripe(app);
 
 app.use("/api/products", productRoute);
 app.use("/api/users", userRoutes);
