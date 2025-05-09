@@ -1,0 +1,26 @@
+import { Button } from "../components";
+import paymentSuccessSVG from "../assets/payment-success.svg";
+import { FaLocationArrow } from "react-icons/fa6";
+import { IoCheckmarkDoneCircle } from "react-icons/io5";
+const SuccessPage = () => {
+  return (
+    <div className="-mt-14 flex h-screen flex-col items-center justify-center space-y-6 text-center">
+      <img src={paymentSuccessSVG} className="h-[500px]" alt="Empty cart" />
+      <div className="flex items-center gap-3">
+        <IoCheckmarkDoneCircle className="text-4xl text-green-500" />
+        <h3 className="text-2xl font-bold text-secondary">
+          Payment Successful
+        </h3>
+      </div>
+      <p className="w-11/12 text-gray-500 md:w-full">
+        Thank you for your purchase! We’re getting your order ready.
+      </p>
+      <Button className="z-20 whitespace-nowrap">
+        Continue Shopping
+        <FaLocationArrow />
+      </Button>
+    </div>
+  );
+};
+
+export default SuccessPage;
