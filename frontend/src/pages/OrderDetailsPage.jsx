@@ -30,14 +30,29 @@ const OrderDetailsPage = () => {
     return <div>Loading...</div>;
   }
 
-  const { shippingAddress, user, isDelivered, orderItems, totalPrice } =
-    order || {};
+  const {
+    shippingAddress,
+    user,
+    isDelivered,
+    orderItems,
+    totalPrice,
+    shippingPrice,
+    taxPrice,
+    paymentMethod,
+  } = order || {};
 
   console.log(order);
 
-  const handleStripePayment = async (orderItems) => {
+  const handleStripePayment = async () => {
     try {
-      const res = await payWithStripe(orderItems).unwrap();
+      // Send the whole order object to backend for Stripe session creation
+      const res = await payWithStripe({
+        orderItems,
+        totalPrice,
+        shippingPrice,
+        taxPrice,
+        paymentMethod,
+      }).unwrap();
       window.location.href = res.url;
     } catch (error) {
       toast.error(error?.data?.message || error?.error);
@@ -124,10 +139,7 @@ const OrderDetailsPage = () => {
           )}
         </div>
         <div className="flex flex-col items-center md:flex-row md:gap-4">
-          <Button
-            className="mt-4 w-full"
-            onClick={() => handleStripePayment(orderItems)}
-          >
+          <Button className="mt-4 w-full" onClick={handleStripePayment}>
             Pay Now
           </Button>
           {userInfo.isAdmin && !order.isDelivered && (

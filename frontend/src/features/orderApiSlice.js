@@ -21,10 +21,10 @@ export const orderApiSlice = apiSlice.injectEndpoints({
       keepUnusedDataFor: 5,
     }),
     payWithStripe: builder.mutation({
-      query: (orderItems) => ({
+      query: (order) => ({
         url: `${BASE_BACKEND_URL}/create-checkout-session`,
         method: "POST",
-        body: orderItems,
+        body: order,
       }),
     }),
   }),
@@ -34,5 +34,5 @@ export const {
   useCreateOrderMutation,
   useGetOrderDetailsQuery,
   useGetUserOrdersQuery,
-  usePayWithStripeMutation
+  usePayWithStripeMutation,
 } = orderApiSlice;
