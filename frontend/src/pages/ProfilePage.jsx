@@ -49,7 +49,7 @@ const ProfilePage = () => {
   return (
     <div className="flex min-h-screen flex-col font-ubuntu md:flex-row">
       <div className="w-full md:w-2/5">
-        <div className="mx-auto flex flex-col items-center justify-center rounded-b-3xl bg-primary/10 px-2 py-8 md:h-screen md:rounded-b-none md:rounded-e-3xl lg:py-0">
+        <div className="mx-auto flex h-full flex-col items-center justify-center rounded-b-3xl bg-primary/10 px-2 py-8 md:rounded-b-none md:rounded-e-3xl lg:py-0">
           <div className="relative flex h-24 w-24 items-center justify-center overflow-hidden rounded-full bg-white">
             <img src={userInfo.picture} />
             <AiOutlineUser className="h-full w-full text-secondary/20" />
@@ -114,7 +114,11 @@ const ProfilePage = () => {
       <div className="w-full text-secondary md:w-3/5">
         <div className="mt-8 w-full max-w-6xl p-4">
           <h3 className="mb-4 text-2xl font-semibold">Order History</h3>
-          <div className="max-h-[calc(100vh-200px)] space-y-4 overflow-auto p-2 md:max-h-[84vh]">
+          <div
+            className={`space-y-4 p-2 ${
+              userOrders?.length > 0 ? "md:max-h-[84vh] md:overflow-auto" : ""
+            }`}
+          >
             {userOrders?.length > 0 ? (
               userOrders.map((order) => (
                 <div

@@ -80,7 +80,7 @@ const Header = () => {
   };
 
   return (
-    <nav className="bg-primary p-2">
+    <nav className="bg-primary p-2 relative z-50">
       <div className="flex items-center justify-between">
         <Link
           to="/"

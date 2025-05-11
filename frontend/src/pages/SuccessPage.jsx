@@ -4,8 +4,8 @@ import { FaLocationArrow } from "react-icons/fa6";
 import { IoCheckmarkDoneCircle } from "react-icons/io5";
 const SuccessPage = () => {
   return (
-    <div className="-mt-14 flex h-screen flex-col items-center justify-center space-y-6 text-center">
-      <img src={paymentSuccessSVG} className="h-[500px]" alt="Empty cart" />
+    <div className="flex min-h-screen flex-col items-center justify-center space-y-6 text-center pb-20">
+      <img src={paymentSuccessSVG} className="h-60 md:h-96" alt="Empty cart" />
       <div className="flex items-center gap-3">
         <IoCheckmarkDoneCircle className="text-4xl text-green-500" />
         <h3 className="text-2xl font-bold text-secondary">

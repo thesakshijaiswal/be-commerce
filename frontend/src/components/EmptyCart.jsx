@@ -9,7 +9,7 @@ const EmptyCart = () => {
     navigate("/");
   };
   return (
-    <div className="-mt-14 flex h-screen flex-col items-center justify-center space-y-6 text-center">
+    <div className="flex min-h-screen flex-col items-center justify-center space-y-6 text-center">
       <img src={emptyCartSVG} className="h-60 md:h-96" alt="Empty cart" />
       <h3 className="text-2xl font-bold">Your cart is empty</h3>
       <p className="w-11/12 text-gray-500 md:w-full">
