@@ -15,3 +15,4 @@ export { default as AuthLayout } from "./AuthLayout";
 export { default as SecuredRoutes } from "./SecuredRoutes";
 export { default as OrderStatusBullet } from "./OrderStatusBullet";
 export { default as EmptyOrderHistory } from "./EmptyOrderHistory";
+export { default as AdminRoutes } from "./AdminRoutes";

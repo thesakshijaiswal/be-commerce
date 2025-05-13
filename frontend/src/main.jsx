@@ -22,12 +22,14 @@ import {
   OrderDetailsPage,
   ProfilePage,
   SuccessPage,
+  AdminDashboard,
 } from "./pages";
-import { SecuredRoutes } from "./components";
+import { AdminRoutes, SecuredRoutes } from "./components";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
+      {/* Public Routes */}
       <Route index={true} path="/" element={<HomePage />} />
       <Route path="/product-details/:id" element={<ProductDetailsPage />} />
       <Route path="/cart" element={<CartPage />} />
@@ -37,6 +39,7 @@ const router = createBrowserRouter(
         path="/reset-password/:resetToken"
         element={<PasswordResetPage />}
       />
+      {/* Authorized user Routes */}
       <Route path="" element={<SecuredRoutes />}>
         <Route path="/payment" element={<PaymentPage />} />
         <Route path="/checkout" element={<ShippingPage />} />
@@ -45,7 +48,10 @@ const router = createBrowserRouter(
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/success" element={<SuccessPage />} />
       </Route>
-      ,
+      {/* Admin Routes */}
+      <Route path="/" element={<AdminRoutes />}>
+        <Route path="/admin" element={<AdminDashboard />} />
+      </Route>
     </Route>,
   ),
 );

@@ -8,19 +8,20 @@ import Profile from "./Profile";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Branding from "./Branding";
+
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const { cartItems } = useSelector((state) => state.cart);
   const { userInfo } = useSelector((state) => state.user);
   const navigate = useNavigate();
+
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 1024) {
         setIsMenuOpen(false);
       }
     };
-
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
@@ -39,10 +40,11 @@ const Header = () => {
       className="flex cursor-pointer items-center"
       onClick={onClick}
     >
-      <Icon className="mr-2 h-8 w-8" />
+      {Icon && <Icon className="mr-2 h-8 w-8" />}
       {label}
     </Link>
   );
+
   const totalQuantity = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
   const renderProfile = () => {
@@ -80,14 +82,12 @@ const Header = () => {
   };
 
   return (
-    <nav className="bg-primary p-2 relative z-50">
+    <nav className="relative z-50 bg-primary p-2">
       <div className="flex items-center justify-between">
         <Link
           to="/"
           className="flex items-center font-playwrite text-xl font-bold"
         >
-          {/* <img src="../../logo.svg" alt="BE-commerce" className="w-14" />
-          BE Commerce */}
           <Branding />
         </Link>
 
@@ -101,7 +101,7 @@ const Header = () => {
         </div>
 
         <div className="hidden gap-5 lg:flex">
-          <ul className="flex gap-8">
+          <ul className="flex items-center gap-8">
             <li>
               <NavItem to="/cart" icon={IoCartOutline} label="Cart" />
               <span className="absolute top-2 ml-4 rounded-full bg-red-500 px-2 text-white">
@@ -109,6 +109,11 @@ const Header = () => {
               </span>
             </li>
             {userInfo && <li>{renderProfile()}</li>}
+            {userInfo?.isAdmin && (
+              <Button>
+                <NavItem to="/admin" label="Dashboard" />
+              </Button>
+            )}
           </ul>
           {!userInfo && renderLoginButton()}
         </div>
@@ -140,7 +145,7 @@ const Header = () => {
             <Button className="ml-2" btnIcon={IoSearch} />
           </div>
 
-          <ul className="flex flex-col gap-4">
+          <ul className="flex flex-col items-center justify-center gap-4">
             <li>
               <NavItem to="/cart" icon={IoCartOutline} label="Cart" />
               <span className="absolute top-[132px] ml-4 rounded-full bg-red-500 px-2 text-white md:top-[85px]">
@@ -148,6 +153,11 @@ const Header = () => {
               </span>
             </li>
             {userInfo && <li>{renderProfile()}</li>}
+            {userInfo?.isAdmin && (
+              <Button>
+                <NavItem to="/admin" label="Dashboard" />
+              </Button>
+            )}
           </ul>
           {!userInfo && renderLoginButton()}
         </div>
