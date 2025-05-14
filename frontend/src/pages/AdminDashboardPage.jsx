@@ -33,7 +33,7 @@ const AdminDashboardPage = () => {
             key={tab.path}
             ref={(el) => (tabRefs.current[tab.name] = el)}
             onClick={() => navigate(`/admin/${tab.path}`)}
-            className={`border-b-2 px-4 py-2 font-medium transition-all duration-300 ${
+            className={`border-b-2 select-none px-4 py-2 font-medium transition-all duration-300 ${
               currentTab === tab.name
                 ? "border-transparent text-primary"
                 : "border-transparent text-secondary hover:text-primary/90"
@@ -60,7 +60,7 @@ const AdminDashboardPage = () => {
         />
       </div>
 
-      <div className="mt-6 rounded-lg bg-white p-6 shadow-md">
+      <div className="mt-6 rounded-lg bg-white p-3 shadow-md sm:p-6">
         <Outlet />
       </div>
     </div>
