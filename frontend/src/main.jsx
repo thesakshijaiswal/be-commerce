@@ -4,6 +4,7 @@ import {
   createRoutesFromElements,
   Route,
   RouterProvider,
+  Navigate,
 } from "react-router-dom";
 import { Provider } from "react-redux";
 import App from "./App.jsx";
@@ -22,9 +23,15 @@ import {
   OrderDetailsPage,
   ProfilePage,
   SuccessPage,
-  AdminDashboard,
+  AdminDashboardPage,
 } from "./pages";
-import { AdminRoutes, SecuredRoutes } from "./components";
+import {
+  AdminRoutes,
+  SecuredRoutes,
+  UserList,
+  ProductList,
+  OrderList,
+} from "./components";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -50,7 +57,12 @@ const router = createBrowserRouter(
       </Route>
       {/* Admin Routes */}
       <Route path="/" element={<AdminRoutes />}>
-        <Route path="/admin" element={<AdminDashboard />} />
+        <Route path="/admin" element={<AdminDashboardPage />}>
+          <Route index element={<Navigate to="users" replace />} />
+          <Route path="users" element={<UserList />} />
+          <Route path="products" element={<ProductList />} />
+          <Route path="orders" element={<OrderList />} />
+        </Route>
       </Route>
     </Route>,
   ),

@@ -10,4 +10,4 @@ export { default as OrderSummaryPage } from "./OrderSummaryPage";
 export { default as OrderDetailsPage } from "./OrderDetailsPage";
 export { default as ProfilePage } from "./ProfilePage";
 export { default as SuccessPage } from "./SuccessPage";
-export { default as AdminDashboard } from "./AdminDashboard";
+export { default as AdminDashboardPage } from "./AdminDashboardPage";
