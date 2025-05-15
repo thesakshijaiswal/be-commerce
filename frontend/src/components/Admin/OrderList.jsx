@@ -1,5 +1,8 @@
 import { useGetOrdersQuery } from "../../features/orderApiSlice";
 import { toast } from "react-hot-toast";
+import { BsCurrencyRupee } from "react-icons/bs";
+import { Link } from "react-router-dom";
+
 const OrderList = () => {
   const { data: orders, isLoading, error } = useGetOrdersQuery();
   if (isLoading) {
@@ -44,10 +47,15 @@ const OrderList = () => {
                   {order.user?.name}
                 </td>
                 <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-500">
-                  {order.createdAt}
+                  {new Date(order.createdAt).toLocaleDateString("en-GB", {
+                    day: "2-digit",
+                    month: "2-digit",
+                    year: "2-digit",
+                  })}
                 </td>
-                <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-500">
-                  {order.totalPrice}
+                <td className="flex items-center whitespace-nowrap px-6 py-4 text-sm text-gray-500">
+                  <BsCurrencyRupee />
+                  <span>{order.totalPrice}</span>
                 </td>
                 <td className="whitespace-nowrap px-6 py-4">
                   <span
@@ -61,9 +69,11 @@ const OrderList = () => {
                   </span>
                 </td>
                 <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-500">
-                  <button className="rounded bg-primary px-3 py-1 text-white hover:bg-primary/90">
-                    View Details
-                  </button>
+                  <Link to={`/order/${order._id}`}>
+                    <button className="rounded bg-primary px-3 py-1 text-white hover:bg-primary/90">
+                      View Details
+                    </button>
+                  </Link>
                 </td>
               </tr>
             ))}
@@ -90,12 +100,23 @@ const OrderList = () => {
               </div>
             </div>
             <div className="text-sm text-secondary">{order.user?.name}</div>
-            <div className="text-sm text-gray-500">{order.createdAt}</div>
-            <div className="font-medium">{order.totalPrice}</div>
+            <div className="text-sm text-gray-500">
+              {new Date(order.createdAt).toLocaleDateString("en-GB", {
+                day: "2-digit",
+                month: "2-digit",
+                year: "2-digit",
+              })}
+            </div>
+            <div className="flex items-center font-medium">
+              <BsCurrencyRupee />
+              <span>{order.totalPrice}</span>
+            </div>
             <div className="flex justify-end pt-2">
-              <button className="rounded bg-primary px-3 py-1 text-sm text-white hover:bg-primary/90">
-                View Details
-              </button>
+              <Link to={`/order/${order._id}`}>
+                <button className="rounded bg-primary px-3 py-1 text-sm text-white hover:bg-primary/90">
+                  View Details
+                </button>
+              </Link>
             </div>
           </div>
         ))}
