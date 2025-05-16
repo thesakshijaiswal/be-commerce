@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { Button, OrderStatusBullet } from "../components";
 import {
+  useDeliverOrderMutation,
   useGetOrderDetailsQuery,
   usePayWithStripeMutation,
 } from "../features/orderApiSlice";
@@ -20,6 +21,9 @@ const OrderDetailsPage = () => {
 
   const [payWithStripe, { isLoading: loadingStripe }] =
     usePayWithStripeMutation();
+
+  const [deliverOrder, { isLoading: loadingDeliveryStatus }] =
+    useDeliverOrderMutation();
 
   if (error) {
     toast.error(error?.data?.message || "Failed to load order details");
@@ -57,6 +61,11 @@ const OrderDetailsPage = () => {
     } catch (error) {
       toast.error(error?.data?.message || error?.error);
     }
+  };
+
+  const handleOrderDelivery = async (orderId) => {
+    await deliverOrder(orderId);
+    refetch();
   };
 
   return (
@@ -143,7 +152,12 @@ const OrderDetailsPage = () => {
             Pay Now
           </Button>
           {userInfo.isAdmin && !order.isDelivered && (
-            <Button className="mt-4 w-full">Mark As Delivered</Button>
+            <Button
+              className="mt-4 w-full"
+              onClick={() => handleOrderDelivery(orderId)}
+            >
+              Mark As Delivered
+            </Button>
           )}
         </div>
       </div>

@@ -13,7 +13,7 @@ const OrderList = () => {
   }
   return (
     <div className="w-full p-2 sm:p-4">
-      <div className="overflow-x-auto rounded-lg bg-white shadow">
+      <div className="hidden overflow-x-auto rounded-lg bg-white shadow md:block">
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
             <tr>
@@ -65,7 +65,7 @@ const OrderList = () => {
                         : "bg-yellow-100 text-yellow-800"
                     }`}
                   >
-                    {order.delivered ? "Yes" : "No"}
+                    {order.isDelivered ? "Delivered" : "Pending"}
                   </span>
                 </td>
                 <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-500">

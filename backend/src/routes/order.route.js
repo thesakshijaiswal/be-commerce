@@ -4,6 +4,7 @@ import {
   getOrderById,
   getUserOrder,
   getOrders,
+  updateOrderToDelivered,
 } from "../controllers/order.controller.js";
 import {
   protectRoute,
@@ -18,5 +19,8 @@ router
   .get(protectRoute, protectAdminRoute, getOrders);
 router.route("/user-orders").get(protectRoute, getUserOrder);
 router.route("/:id").get(protectRoute, getOrderById);
+router
+  .route("/deliver/:id")
+  .patch(protectRoute, protectAdminRoute, updateOrderToDelivered);
 
 export default router;
