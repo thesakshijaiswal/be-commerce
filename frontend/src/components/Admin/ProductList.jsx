@@ -1,22 +1,42 @@
-import { useGetProductsQuery } from "../../features/productsApiSlice";
+import {
+  useCreateProductMutation,
+  useGetProductsQuery,
+} from "../../features/productsApiSlice";
 import { BsCurrencyRupee } from "react-icons/bs";
 import { RiDeleteBin2Line } from "react-icons/ri";
 import { FiEdit } from "react-icons/fi";
 import { Button } from "../../components";
+import { toast } from "react-hot-toast";
 
 const ProductList = () => {
-  const { data: products, isLoading, error } = useGetProductsQuery();
+  const { data: products, isLoading, error, refetch } = useGetProductsQuery();
+  const [createProduct, { isLoading: loadingCreateProduct }] =
+    useCreateProductMutation();
+
   if (isLoading) {
     console.log("Loading Products..");
   }
   if (error) {
     toast.error(error?.data?.message || error?.error);
   }
+
+  const handleCreateProduct = async () => {
+    if (window.confirm("Are you sure you want to create a new product?")) {
+      try {
+        await createProduct();
+        toast.success("Product Created");
+        refetch();
+      } catch (error) {
+        toast.error(error?.data?.message || error?.error);
+      }
+    }
+  };
+
   return (
     <div className="w-full p-2 sm:p-4">
       <div className="mb-3 flex flex-wrap justify-between gap-4">
         <h2 className="text-2xl font-bold text-secondary">Manage Inventory</h2>
-        <Button>Create Product</Button>
+        <Button onClick={handleCreateProduct}>Create Product</Button>
       </div>
       <div className="hidden overflow-x-auto rounded-lg bg-white shadow md:block">
         <table className="min-w-full divide-y divide-gray-200">
@@ -37,7 +57,7 @@ const ProductList = () => {
               <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
                 Category
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+              <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 whitespace-nowrap">
                 In Stock
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
@@ -61,7 +81,7 @@ const ProductList = () => {
                 <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-500">
                   {product.brand}
                 </td>
-                <td className="whitespace-nowrap px-6 py-4 text-gray-500">
+                <td className="whitespace-nowrap px-6 py-4 text-gray-500 text-sm">
                   {product.category}
                 </td>
                 <td className="whitespace-nowrap px-6 py-4 text-gray-500">
