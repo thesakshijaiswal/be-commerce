@@ -11,3 +11,4 @@ export { default as OrderDetailsPage } from "./OrderDetailsPage";
 export { default as ProfilePage } from "./ProfilePage";
 export { default as SuccessPage } from "./SuccessPage";
 export { default as AdminDashboardPage } from "./AdminDashboardPage";
+export { default as ProductEditPage } from "./ProductEditPage";

@@ -7,8 +7,10 @@ import { RiDeleteBin2Line } from "react-icons/ri";
 import { FiEdit } from "react-icons/fi";
 import { Button } from "../../components";
 import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const ProductList = () => {
+  const navigate = useNavigate();
   const { data: products, isLoading, error, refetch } = useGetProductsQuery();
   const [createProduct, { isLoading: loadingCreateProduct }] =
     useCreateProductMutation();
@@ -30,6 +32,10 @@ const ProductList = () => {
         toast.error(error?.data?.message || error?.error);
       }
     }
+  };
+
+  const handleEditProduct = (id) => {
+    navigate(`/admin/product/${id}/edit`);
   };
 
   return (
@@ -57,7 +63,7 @@ const ProductList = () => {
               <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
                 Category
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 whitespace-nowrap">
+              <th className="whitespace-nowrap px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
                 In Stock
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
@@ -81,18 +87,21 @@ const ProductList = () => {
                 <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-500">
                   {product.brand}
                 </td>
-                <td className="whitespace-nowrap px-6 py-4 text-gray-500 text-sm">
+                <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-500">
                   {product.category}
                 </td>
                 <td className="whitespace-nowrap px-6 py-4 text-gray-500">
                   {product.countInStock}
                 </td>
-                <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-500">
-                  <button className="pr-3 text-xl text-red-600">
-                    <RiDeleteBin2Line />
-                  </button>
-                  <button className="text-lg text-primary">
+                <td className="whitespace-nowrap px-6 py-4 text-sm">
+                  <button
+                    className="pr-2 text-lg text-primary"
+                    onClick={() => handleEditProduct(product._id)}
+                  >
                     <FiEdit />
+                  </button>
+                  <button className="text-xl text-red-600">
+                    <RiDeleteBin2Line />
                   </button>
                 </td>
               </tr>
@@ -131,12 +140,12 @@ const ProductList = () => {
               <BsCurrencyRupee />
               <span>{product.price}</span>
             </div>
-            <div className="flex justify-end pt-2">
+            <div className="flex justify-end gap-2">
+              <button className="text-lg text-primary">
+                <FiEdit onClick={() => handleEditProduct(product._id)} />
+              </button>
               <button className="pr-3 text-xl text-red-600">
                 <RiDeleteBin2Line />
-              </button>
-              <button className="text-lg text-primary">
-                <FiEdit />
               </button>
             </div>
           </div>
