@@ -11,7 +11,7 @@ const Footer = () => {
       <div className="flex w-full flex-grow flex-col p-2 text-center font-ubuntu md:flex-row md:gap-5 lg:gap-10 lg:p-5">
         <div className="flex flex-col items-center border-b border-gray-700 pb-10 font-playwrite text-2xl sm:text-3xl md:text-4xl">
           <img
-            src="../../logo.svg"
+            src="/logo.svg"
             alt="BE Commerce Logo"
             className="mb-5 w-28 pt-5 sm:w-32 lg:mb-10"
           />
