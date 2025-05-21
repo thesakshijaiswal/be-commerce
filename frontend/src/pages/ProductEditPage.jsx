@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import {
   useGetProductDetailsQuery,
   useUpdateProductMutation,
+  useUploadFileHandlerMutation,
 } from "../features/productsApiSlice";
 import { Button, InputField } from "../components";
 import { toast } from "react-hot-toast";
@@ -37,6 +38,8 @@ const ProductEditPage = () => {
   } = useGetProductDetailsQuery(productId);
   const [updateProduct, { isLoading: loadingUpdate }] =
     useUpdateProductMutation();
+  const [uploadProductImage, { isLoading: uploadLoading }] =
+    useUploadFileHandlerMutation();
 
   useEffect(() => {
     if (product) {
@@ -74,7 +77,23 @@ const ProductEditPage = () => {
     }));
   };
 
-  if (isLoading) return <div>Loading...</div>;
+  const uploadFileHandler = async (e) => {
+    const formData = new FormData();
+    formData.append("image", e.target.files[0]);
+    try {
+      const res = await uploadProductImage(formData).unwrap();
+      toast.success(res.message);
+      setProductData({
+        ...productData,
+        image: res.image,
+      });
+    } catch (error) {
+      toast.error(error?.data?.message || error?.error);
+    }
+  };
+
+  if (isLoading)
+    return <div className="text-center text-secondary">Loading...</div>;
   if (error) return toast.error(error?.data?.message || error.error);
 
   return (
@@ -103,15 +122,32 @@ const ProductEditPage = () => {
             onChange={handleInputChange}
           />
 
-          <InputField
-            type="text"
-            fieldName="image"
-            label="Image URL"
-            placeholder="Enter image URL"
-            icon={AiOutlineFileImage}
-            value={productData.image}
-            onChange={handleInputChange}
-          />
+          <div className="space-y-4">
+            <InputField
+              type="file"
+              fieldName="image"
+              label="Image URL"
+              placeholder="Enter image URL"
+              accept="image/*"
+              icon={AiOutlineFileImage}
+              onChange={uploadFileHandler}
+              disabled={uploadLoading}
+            />
+
+            {uploadLoading && (
+              <div className="text-sm text-gray-500">Uploading image...</div>
+            )}
+
+            {productData.image && (
+              <div className="relative mt-2">
+                <img
+                  src={productData.image}
+                  alt="Product Preview"
+                  className="h-32 w-32 rounded-lg object-cover"
+                />
+              </div>
+            )}
+          </div>
 
           <InputField
             type="text"
@@ -169,11 +205,14 @@ const ProductEditPage = () => {
             <Button
               type="button"
               className="bg-gray-500 hover:bg-gray-600"
-              onClick={() => navigate("/admin/products")}
+              onClick={(e) => {
+                e.preventDefault();
+                navigate("/admin/products");
+              }}
             >
               Cancel
             </Button>
-            <Button type="submit">
+            <Button type="submit" disabled={loadingUpdate}>
               {loadingUpdate ? "Updating..." : "Update Product"}
             </Button>
           </div>

@@ -11,6 +11,7 @@ import cookieParser from "cookie-parser";
 import configurePassport from "./utils/passport.js";
 import authRoutes from "./routes/auth.route.js";
 import orderRoutes from "./routes/order.route.js";
+import uploadRoutes from "./routes/upload.route.js";
 import path from "path";
 import configureStripe from "./utils/stripe.js";
 
@@ -35,6 +36,8 @@ app.use("/api/products", productRoute);
 app.use("/api/users", userRoutes);
 app.use("/auth", authRoutes);
 app.use("/api/orders", orderRoutes);
+app.use("/api/upload", uploadRoutes);
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 /*********PRODUCTION CODE**********/
 if (process.env.NODE_ENV === "production") {

@@ -15,9 +15,8 @@ const ProductList = () => {
   const [createProduct, { isLoading: loadingCreateProduct }] =
     useCreateProductMutation();
 
-  if (isLoading) {
-    console.log("Loading Products..");
-  }
+  if (isLoading)
+    return <div className="text-center text-secondary">Loading...</div>;
   if (error) {
     toast.error(error?.data?.message || error?.error);
   }
