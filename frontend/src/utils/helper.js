@@ -1,3 +1,5 @@
+import { BASE_BACKEND_URL } from "./constants";
+
 export const updateCart = (state) => {
   state.itemsPrice = state.cartItems.reduce(
     (acc, item) => acc + item.price * item.quantity,

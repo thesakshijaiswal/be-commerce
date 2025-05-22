@@ -123,7 +123,7 @@ const ProductEditPage = () => {
                 <div className="flex flex-col">
                   <label
                     htmlFor="description"
-                    className="mb-2 text-sm font-medium text-gray-900"
+                    className="select-none px-1 py-2 text-base text-gray-700"
                   >
                     Description
                   </label>
@@ -198,7 +198,7 @@ const ProductEditPage = () => {
               <div className="space-y-4 rounded-2xl border border-gray-200 bg-white p-5">
                 <h3 className="font-medium text-primary">Product Media</h3>
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                   <div className="relative">
                     <div className="rounded-lg border-2 border-dashed border-gray-300 p-8 text-center transition-colors hover:border-primary">
                       <div className="flex flex-col items-center space-y-2">
@@ -240,7 +240,7 @@ const ProductEditPage = () => {
                       <img
                         src={getImageSource(productData.image)}
                         alt="Product Preview"
-                        className="max-h-32 max-w-full rounded-lg object-contain text-secondary"
+                        className="max-h-32 max-w-full rounded-lg object-contain p-2 text-secondary"
                       />
                     ) : (
                       <div className="text-sm text-gray-400">
