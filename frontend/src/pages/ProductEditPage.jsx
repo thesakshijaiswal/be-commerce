@@ -16,7 +16,7 @@ import {
   AiOutlineFileText,
 } from "react-icons/ai";
 import { BsCurrencyRupee } from "react-icons/bs";
-import { BASE_BACKEND_URL } from "../utils/constants";
+import { getImageSource } from "../utils/helper";
 
 const ProductEditPage = () => {
   const { id: productId } = useParams();
@@ -86,7 +86,7 @@ const ProductEditPage = () => {
       toast.success(res.message);
       setProductData({
         ...productData,
-        image: `${BASE_BACKEND_URL}${res.image}`,
+        image: res.image,
       });
     } catch (error) {
       toast.error(error?.data?.message || error?.error);
@@ -238,7 +238,7 @@ const ProductEditPage = () => {
                   <div className="flex min-h-32 items-center justify-center rounded-lg bg-gray-100">
                     {productData.image ? (
                       <img
-                        src={productData.image}
+                        src={getImageSource(productData.image)}
                         alt="Product Preview"
                         className="max-h-32 max-w-full rounded-lg object-contain text-secondary"
                       />

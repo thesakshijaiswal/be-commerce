@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { addToCart } from "../features/shoppingCartSlice";
 import toast from "react-hot-toast";
-import { BASE_BACKEND_URL } from "../utils/constants";
+import { getImageSource } from "../utils/helper";
 
 const ProductCard = ({
   _id,
@@ -67,16 +67,6 @@ const ProductCard = ({
       toast.success(`Product added to cart!`);
     } else {
       toast.error("Product is out of stock!");
-    }
-  };
-
-  const getImageSource = (imagePath) => {
-    if (imagePath.startsWith("http")) {
-      return imagePath;
-    } else if (imagePath.startsWith("/uploads")) {
-      return `${BASE_BACKEND_URL}${imagePath}`;
-    } else {
-      return `${imagePath}`;
     }
   };
 
