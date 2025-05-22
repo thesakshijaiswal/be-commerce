@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { addToCart } from "../features/shoppingCartSlice";
 import toast from "react-hot-toast";
+import { BASE_BACKEND_URL } from "../utils/constants";
 
 const ProductCard = ({
   _id,
@@ -69,6 +70,16 @@ const ProductCard = ({
     }
   };
 
+  const getImageSource = (imagePath) => {
+    if (imagePath.startsWith("http")) {
+      return imagePath;
+    } else if (imagePath.startsWith("/uploads")) {
+      return `${BASE_BACKEND_URL}${imagePath}`;
+    } else {
+      return `${imagePath}`;
+    }
+  };
+
   return (
     <motion.div
       onMouseMove={handleMouseMove}
@@ -84,7 +95,11 @@ const ProductCard = ({
         }}
       >
         <div className="h-56 w-full overflow-hidden rounded-md">
-          <img className="h-full w-full" src={image} alt={name} />
+          <img
+            className="h-full w-full"
+            src={getImageSource(image)}
+            alt={name}
+          />
         </div>
         <h2 className="mt-3 truncate text-lg font-semibold leading-tight">
           {name}
