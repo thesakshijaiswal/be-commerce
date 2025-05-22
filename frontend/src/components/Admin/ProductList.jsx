@@ -79,9 +79,11 @@ const ProductList = () => {
                 <td className="w-3/12 px-6 py-4 text-sm text-gray-500">
                   {product.name}
                 </td>
-                <td className="flex items-center whitespace-nowrap px-6 py-4 text-sm text-gray-500">
-                  <BsCurrencyRupee />
-                  <span>{product.price}</span>
+                <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-500">
+                  <div className="flex items-center">
+                    <BsCurrencyRupee />
+                    <span>{product.price}</span>
+                  </div>
                 </td>
                 <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-500">
                   {product.brand}
