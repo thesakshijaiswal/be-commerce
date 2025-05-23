@@ -37,7 +37,6 @@ app.use("/api/users", userRoutes);
 app.use("/auth", authRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/upload", uploadRoutes);
-app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 /*********PRODUCTION CODE**********/
 if (process.env.NODE_ENV === "production") {

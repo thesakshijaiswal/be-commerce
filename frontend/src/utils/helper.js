@@ -26,11 +26,5 @@ export const truncateProductName = (name, maxLength) => {
 
 export const getImageSource = (imagePath) => {
   if (!imagePath) return "";
-  if (imagePath.startsWith("http")) {
-    return imagePath;
-  }
-  if (imagePath.startsWith("/uploads")) {
-    return `${BASE_BACKEND_URL}${imagePath}`;
-  }
   return imagePath;
 };

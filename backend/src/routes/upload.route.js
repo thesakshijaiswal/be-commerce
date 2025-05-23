@@ -1,49 +1,34 @@
-import path from "path";
 import express from "express";
-import multer from "multer";
+import cloudinary from "../lib/cloudinary.js";
+import asyncHandler from "../utils/helper.js";
 
 const router = express.Router();
 
-const storage = multer.diskStorage({
-  destination(req, file, cb) {
-    cb(null, "uploads/");
-  },
-  filename(req, file, cb) {
-    cb(
-      null,
-      `${file.fieldname}-${Date.now()}${path.extname(file.originalname)}`
-    );
-  },
-});
+router.post(
+  "/",
+  asyncHandler(async (req, res) => {
+    const fileStr = req.body.image;
 
-function fileFilter(req, file, cb) {
-  const filetypes = /jpe?g|png|webp/;
-  const mimetypes = /image\/jpe?g|image\/png|image\/webp/;
-
-  const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
-  const mimetype = mimetypes.test(file.mimetype);
-
-  if (extname && mimetype) {
-    cb(null, true);
-  } else {
-    cb(new Error("Images Only"), false);
-  }
-}
-
-const upload = multer({ storage, fileFilter });
-const uploadSingleImage = upload.single("image");
-
-router.post("/", (req, res) => {
-  uploadSingleImage(req, res, (err) => {
-    if (err) {
-      return res.status(400).send({ message: err.message });
+    if (!fileStr) {
+      res.status(400);
+      throw new Error("No image uploaded");
     }
 
-    res.status(200).send({
-      message: "Image Uploaded Successfully",
-      image: `/${req.file.path}`,
+    const uploadResponse = await cloudinary.uploader.upload(fileStr, {
+      folder: "be-commerce",
+      resource_type: "auto",
     });
-  });
-});
+
+    if (!uploadResponse?.secure_url) {
+      res.status(400);
+      throw new Error("Image upload failed");
+    }
+
+    res.status(200).json({
+      message: "Image Uploaded Successfully",
+      image: uploadResponse.secure_url,
+    });
+  })
+);
 
 export default router;

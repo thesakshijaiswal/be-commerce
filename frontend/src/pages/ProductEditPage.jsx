@@ -79,18 +79,33 @@ const ProductEditPage = () => {
   };
 
   const uploadFileHandler = async (e) => {
-    const formData = new FormData();
-    formData.append("image", e.target.files[0]);
-    try {
-      const res = await uploadProductImage(formData).unwrap();
-      toast.success(res.message);
-      setProductData({
-        ...productData,
-        image: res.image,
-      });
-    } catch (error) {
-      toast.error(error?.data?.message || error?.error);
+    const file = e.target.files[0];
+    if (!file) return;
+
+    if (!file.type.match(/image\/(jpeg|jpg|png|webp)/i)) {
+      toast.error("File type not supported. Please upload JPEG, PNG or WebP");
+      return;
     }
+
+    if (file.size > 5 * 1024 * 1024) {
+      toast.error("File too large. Maximum size is 5MB");
+      return;
+    }
+    const reader = new FileReader();
+
+    reader.readAsDataURL(file);
+    reader.onloadend = async () => {
+      try {
+        const res = await uploadProductImage({ image: reader.result }).unwrap();
+        toast.success(res.message);
+        setProductData({
+          ...productData,
+          image: res.image,
+        });
+      } catch (error) {
+        toast.error(error?.data?.message || error?.error);
+      }
+    };
   };
 
   if (isLoading)
