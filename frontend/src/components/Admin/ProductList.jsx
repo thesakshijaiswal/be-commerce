@@ -1,6 +1,7 @@
 import {
   useCreateProductMutation,
   useGetProductsQuery,
+  useDeleteProductMutation,
 } from "../../features/productsApiSlice";
 import { BsCurrencyRupee } from "react-icons/bs";
 import { RiDeleteBin2Line } from "react-icons/ri";
@@ -14,6 +15,8 @@ const ProductList = () => {
   const { data: products, isLoading, error, refetch } = useGetProductsQuery();
   const [createProduct, { isLoading: loadingCreateProduct }] =
     useCreateProductMutation();
+  const [deleteProduct, { isLoading: loadingDeleteProduct }] =
+    useDeleteProductMutation();
 
   if (isLoading)
     return <div className="text-center text-secondary">Loading...</div>;
@@ -35,6 +38,18 @@ const ProductList = () => {
 
   const handleEditProduct = (id) => {
     navigate(`/admin/product/${id}/edit`);
+  };
+
+  const handleDeleteProduct = async (id) => {
+    if (window.confirm("Are you sure you want to delete this product?")) {
+      try {
+        const res = await deleteProduct(id).unwrap();
+        refetch();
+        toast.success(res.message);
+      } catch (error) {
+        toast.error(error?.data?.message || error?.error);
+      }
+    }
   };
 
   return (
@@ -101,7 +116,10 @@ const ProductList = () => {
                   >
                     <FiEdit />
                   </button>
-                  <button className="text-xl text-red-600">
+                  <button
+                    className="text-xl text-red-600"
+                    onClick={() => handleDeleteProduct(product._id)}
+                  >
                     <RiDeleteBin2Line />
                   </button>
                 </td>
@@ -145,7 +163,10 @@ const ProductList = () => {
               <button className="text-lg text-primary">
                 <FiEdit onClick={() => handleEditProduct(product._id)} />
               </button>
-              <button className="pr-3 text-xl text-red-600">
+              <button
+                onClick={() => handleDeleteProduct(product._id)}
+                className="pr-3 text-xl text-red-600"
+              >
                 <RiDeleteBin2Line />
               </button>
             </div>

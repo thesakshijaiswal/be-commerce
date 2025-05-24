@@ -4,6 +4,7 @@ import {
   getProductsById,
   createProduct,
   updateProduct,
+  deleteProduct,
 } from "../controllers/product.controller.js";
 import {
   protectRoute,
@@ -18,6 +19,7 @@ router
 router
   .route("/:id")
   .get(getProductsById)
-  .put(protectRoute, protectAdminRoute, updateProduct);
+  .put(protectRoute, protectAdminRoute, updateProduct)
+  .delete(protectRoute, protectAdminRoute, deleteProduct);
 
 export default router;
