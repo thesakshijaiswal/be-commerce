@@ -92,7 +92,7 @@ const ProductDetailsPage = () => {
               </p>
 
               <div className="text-lg">
-                {product.countInStock > 1 ? (
+                {product.countInStock > 0 ? (
                   <p className="text-green-600">In Stock</p>
                 ) : (
                   <p className="text-red-600">Out of Stock</p>

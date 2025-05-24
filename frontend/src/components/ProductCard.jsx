@@ -108,7 +108,7 @@ const ProductCard = ({
           </div>
         </div>
         <div className="flex items-center justify-between">
-          {countInStock > 1 ? (
+          {countInStock > 0 ? (
             <p className="bg-transparent text-green-600">Available</p>
           ) : (
             <p className="bg-transparent text-red-600">Unavailable</p>
