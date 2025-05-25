@@ -93,7 +93,7 @@ const OrderList = () => {
             <div className="flex-col items-center justify-between sm:flex sm:flex-row">
               <div className="text-sm text-secondary/60">#{order._id}</div>
               <div
-                className={`inline-flex rounded-full px-2 text-xs font-semibold leading-5 ${
+                className={`mt-3 inline-flex rounded-full px-3 py-1 text-sm ${
                   order.isDelivered
                     ? "bg-green-100 text-green-800"
                     : "bg-yellow-100 text-yellow-800"

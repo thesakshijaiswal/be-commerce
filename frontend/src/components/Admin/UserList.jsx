@@ -42,17 +42,27 @@ const UserList = () => {
                 <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-500">
                   {user.email}
                 </td>
-                <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-500">
-                  {user.isAdmin ? "Yes" : "No"}
+                <td className="whitespace-nowrap px-6 py-4">
+                  <span
+                    className={`inline-flex rounded-full px-2 text-xs font-semibold leading-5 ${
+                      user.isAdmin
+                        ? "bg-green-200 text-green-700"
+                        : "bg-primary/10 text-primary"
+                    }`}
+                  >
+                    {user.isAdmin ? "Admin" : "User"}
+                  </span>
                 </td>
-                <td className="whitespace-nowrap px-6 py-4 text-sm">
-                  <button className="pr-2 text-lg text-primary">
-                    <FiEdit />
-                  </button>
-                  <button className="text-xl text-red-600">
-                    <RiDeleteBin2Line />
-                  </button>
-                </td>
+                {!user.isAdmin && (
+                  <td className="whitespace-nowrap px-6 py-4 text-sm">
+                    <button className="pr-2 text-lg text-primary">
+                      <FiEdit />
+                    </button>
+                    <button className="text-xl text-red-600">
+                      <RiDeleteBin2Line />
+                    </button>
+                  </td>
+                )}
               </tr>
             ))}
           </tbody>
@@ -79,14 +89,16 @@ const UserList = () => {
             <div className="flex items-center text-sm text-gray-500">
               {user.email}
             </div>
-            <div className="flex justify-end gap-2">
-              <button className="text-lg text-primary">
-                <FiEdit />
-              </button>
-              <button className="pr-3 text-xl text-red-600">
-                <RiDeleteBin2Line />
-              </button>
-            </div>
+            {!user.isAdmin && (
+              <div className="flex justify-end gap-2">
+                <button className="text-lg text-primary">
+                  <FiEdit />
+                </button>
+                <button className="pr-3 text-xl text-red-600">
+                  <RiDeleteBin2Line />
+                </button>
+              </div>
+            )}
           </div>
         ))}
       </div>
