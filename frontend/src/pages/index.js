@@ -12,3 +12,4 @@ export { default as ProfilePage } from "./ProfilePage";
 export { default as SuccessPage } from "./SuccessPage";
 export { default as AdminDashboardPage } from "./AdminDashboardPage";
 export { default as ProductEditPage } from "./ProductEditPage";
+export { default as UserEditPage } from "./UserEditPage";

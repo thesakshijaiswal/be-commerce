@@ -1,9 +1,18 @@
 import { useGetUsersQuery } from "../../features/userApiSlice";
 import { RiDeleteBin2Line } from "react-icons/ri";
 import { FiEdit } from "react-icons/fi";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const UserList = () => {
   const { data: users, isLoading, error, refetch } = useGetUsersQuery();
+  const navigate = useNavigate();
+
+  if (isLoading)
+    return <div className="text-center text-secondary">Loading...</div>;
+  if (error) {
+    toast.error(error?.data?.message || error?.error);
+  }
+
   return (
     <div className="w-full p-2 sm:p-4">
       <div className="mb-3 flex flex-wrap justify-between gap-4">
@@ -56,7 +65,11 @@ const UserList = () => {
                 {!user.isAdmin && (
                   <td className="whitespace-nowrap px-6 py-4 text-sm">
                     <button className="pr-2 text-lg text-primary">
-                      <FiEdit />
+                      <FiEdit
+                        onClick={() =>
+                          navigate(`/admin/users/${user._id}/edit`)
+                        }
+                      />
                     </button>
                     <button className="text-xl text-red-600">
                       <RiDeleteBin2Line />
@@ -92,7 +105,9 @@ const UserList = () => {
             {!user.isAdmin && (
               <div className="flex justify-end gap-2">
                 <button className="text-lg text-primary">
-                  <FiEdit />
+                  <FiEdit
+                    onClick={() => navigate(`/admin/users/${user._id}/edit`)}
+                  />
                 </button>
                 <button className="pr-3 text-xl text-red-600">
                   <RiDeleteBin2Line />

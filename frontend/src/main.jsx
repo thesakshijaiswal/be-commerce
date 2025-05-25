@@ -25,6 +25,7 @@ import {
   SuccessPage,
   AdminDashboardPage,
   ProductEditPage,
+  UserEditPage,
 } from "./pages";
 import {
   AdminRoutes,
@@ -69,6 +70,7 @@ const router = createBrowserRouter(
       {/* Standalone Admin Pages */}
       <Route path="/" element={<AdminRoutes />}>
         <Route path="/admin/product/:id/edit" element={<ProductEditPage />} />
+        <Route path="/admin/users/:id/edit" element={<UserEditPage />} />
       </Route>
     </Route>,
   ),

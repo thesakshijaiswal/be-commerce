@@ -5,12 +5,12 @@ import { Link } from "react-router-dom";
 
 const OrderList = () => {
   const { data: orders, isLoading, error } = useGetOrdersQuery();
-  if (isLoading) {
-    console.log("loading");
-  }
+  if (isLoading)
+    return <div className="text-center text-secondary">Loading...</div>;
   if (error) {
-    toast.error(error.message);
+    toast.error(error?.data?.message || error?.error);
   }
+
   return (
     <div className="w-full p-2 sm:p-4">
       <div className="mb-3 flex flex-wrap justify-between gap-4">

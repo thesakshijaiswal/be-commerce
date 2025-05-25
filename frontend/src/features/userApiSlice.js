@@ -51,6 +51,13 @@ export const userApiSlice = apiSlice.injectEndpoints({
       }),
       keepUnusedDataFor: 5,
     }),
+    updateUserAsAdmin: builder.mutation({
+      query: (user) => ({
+        url: `${USERS_URL}/${user.id}`,
+        method: "PUT",
+        body: user,
+      }),
+    }),
   }),
 });
 export const {
@@ -61,4 +68,5 @@ export const {
   useLogoutMutation,
   useUpdateUserProfileMutation,
   useGetUsersQuery,
+  useUpdateUserAsAdminMutation,
 } = userApiSlice;
