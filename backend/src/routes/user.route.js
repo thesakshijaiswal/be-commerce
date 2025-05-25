@@ -5,11 +5,17 @@ import {
   updateUserProfile,
   userLogout,
   forgotPassword,
-  resetPassword
+  resetPassword,
+  getUsers,
 } from "../controllers/user.controller.js";
+import {
+  protectRoute,
+  protectAdminRoute,
+} from "../middlewares/auth.middleware.js";
 
 const router = express.Router();
 
+router.route("/").get(protectRoute, protectAdminRoute, getUsers);
 router.route("/login").post(userLogin);
 router.route("/signup").post(userSignUp);
 router.route("/update").put(updateUserProfile);

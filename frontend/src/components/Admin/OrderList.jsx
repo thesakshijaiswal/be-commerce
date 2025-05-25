@@ -13,6 +13,9 @@ const OrderList = () => {
   }
   return (
     <div className="w-full p-2 sm:p-4">
+      <div className="mb-3 flex flex-wrap justify-between gap-4">
+        <h2 className="text-2xl font-bold text-secondary">Manage Orders</h2>
+      </div>
       <div className="hidden overflow-x-auto rounded-lg bg-white shadow md:block">
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
