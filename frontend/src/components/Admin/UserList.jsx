@@ -2,6 +2,7 @@ import { useGetUsersQuery } from "../../features/userApiSlice";
 import { RiDeleteBin2Line } from "react-icons/ri";
 import { FiEdit } from "react-icons/fi";
 import { Navigate, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const UserList = () => {
   const { data: users, isLoading, error, refetch } = useGetUsersQuery();
