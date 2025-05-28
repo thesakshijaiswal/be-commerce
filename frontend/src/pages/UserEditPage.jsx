@@ -7,6 +7,7 @@ import {
   useGetUserByIdQuery,
   useUpdateUserAsAdminMutation,
 } from "../features/userApiSlice";
+import { IoShieldOutline } from "react-icons/io5";
 
 const UserEditPage = () => {
   const navigate = useNavigate();
@@ -67,8 +68,8 @@ const UserEditPage = () => {
   }
 
   return (
-    <div className="min-h-screen p-4">
-      <div className="mx-auto max-w-3xl">
+    <div className="flex min-h-screen items-center justify-center p-4">
+      <div className="w-full max-w-3xl">
         <div className="rounded-lg bg-white p-4 shadow-md sm:p-6 lg:p-8">
           <h3 className="text-xl font-bold text-secondary sm:text-2xl">
             User Profile
@@ -132,22 +133,32 @@ const UserEditPage = () => {
               required
             />
 
-            <div className="flex items-center gap-3">
-              <input
-                type="checkbox"
-                id="isAdmin"
-                checked={formData.isAdmin}
-                onChange={(e) =>
-                  setFormData((prev) => ({
-                    ...prev,
-                    isAdmin: e.target.checked,
-                  }))
-                }
-                className="h-4 w-4 rounded border-gray-300 accent-primary"
-              />
-              <label htmlFor="isAdmin" className="text-sm text-gray-700">
-                Admin Access
+            <div className="flex flex-col">
+              <label
+                htmlFor="role"
+                className="flex select-none items-center justify-between gap-2 px-1 py-2 text-base text-gray-700"
+              >
+                Account Role
               </label>
+              <div className="relative">
+                <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">
+                  <IoShieldOutline className="size-5" />
+                </div>
+                <select
+                  id="role"
+                  value={formData.isAdmin}
+                  onChange={(e) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      isAdmin: e.target.value === "true",
+                    }))
+                  }
+                  className="h-12 w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 p-2.5 px-4 pl-10 text-sm text-gray-700 shadow-sm focus:border-secondary focus:outline-none focus:ring-1 focus:ring-secondary"
+                >
+                  <option value="false">Regular User</option>
+                  <option value="true">Administrator</option>
+                </select>
+              </div>
             </div>
 
             <div className="rounded-lg bg-gray-50 p-4">
