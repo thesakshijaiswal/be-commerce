@@ -108,8 +108,13 @@ const ProductEditPage = () => {
     };
   };
 
-  if (isLoading)
-    return <div className="text-center text-secondary">Loading...</div>;
+  if (isLoading) {
+    return (
+      <div className="grid min-h-screen place-items-center">
+        <p className="text-lg text-gray-600">Loading user data...</p>
+      </div>
+    );
+  }
   if (error) return toast.error(error?.data?.message || error.error);
 
   return (
@@ -269,6 +274,9 @@ const ProductEditPage = () => {
           </div>
 
           <div className="flex justify-end gap-4 pt-4">
+            <Button type="submit" disabled={loadingUpdate}>
+              {loadingUpdate ? "Updating..." : "Update Product"}
+            </Button>
             <Button
               type="button"
               className="bg-gray-500 hover:bg-gray-600"
@@ -278,9 +286,6 @@ const ProductEditPage = () => {
               }}
             >
               Cancel
-            </Button>
-            <Button type="submit" disabled={loadingUpdate}>
-              {loadingUpdate ? "Updating..." : "Update Product"}
             </Button>
           </div>
         </form>

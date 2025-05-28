@@ -1,12 +1,28 @@
-import { useGetUsersQuery } from "../../features/userApiSlice";
+import {
+  useGetUsersQuery,
+  useDeleteUserMutation,
+} from "../../features/userApiSlice";
 import { RiDeleteBin2Line } from "react-icons/ri";
 import { FiEdit } from "react-icons/fi";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
 const UserList = () => {
   const { data: users, isLoading, error, refetch } = useGetUsersQuery();
+  const [deleteUser] = useDeleteUserMutation();
   const navigate = useNavigate();
+
+  const handleDeleteUser = async (id) => {
+    if (window.confirm("Are you sure you want to delete this user?")) {
+      try {
+        const res = await deleteUser(id).unwrap();
+        toast.success(res.message);
+        refetch();
+      } catch (error) {
+        toast.error(error?.data?.message || error?.error);
+      }
+    }
+  };
 
   if (isLoading)
     return <div className="text-center text-secondary">Loading...</div>;
@@ -73,7 +89,9 @@ const UserList = () => {
                       />
                     </button>
                     <button className="text-xl text-red-600">
-                      <RiDeleteBin2Line />
+                      <RiDeleteBin2Line
+                        onClick={() => handleDeleteUser(user._id)}
+                      />
                     </button>
                   </td>
                 )}
@@ -111,7 +129,9 @@ const UserList = () => {
                   />
                 </button>
                 <button className="pr-3 text-xl text-red-600">
-                  <RiDeleteBin2Line />
+                  <RiDeleteBin2Line
+                    onClick={() => handleDeleteUser(user._id)}
+                  />
                 </button>
               </div>
             )}

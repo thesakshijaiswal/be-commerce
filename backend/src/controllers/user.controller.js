@@ -187,6 +187,18 @@ const getUserById = asyncHandler(async (req, res) => {
   }
 });
 
+const deleteUser = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id);
+
+  if (user) {
+    await User.deleteOne({ _id: req.params.id });
+    res.status(200).json({ message: "User Deleted Successfully" });
+  } else {
+    res.status(404);
+    throw new Error("User Not Found");
+  }
+});
+
 export {
   userLogin,
   userSignUp,
@@ -197,4 +209,5 @@ export {
   getUsers,
   updateUserAsAdmin,
   getUserById,
+  deleteUser,
 };

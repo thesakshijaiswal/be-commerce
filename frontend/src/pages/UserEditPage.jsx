@@ -208,7 +208,10 @@ const UserEditPage = () => {
               <Button
                 type="button"
                 className="w-full bg-gray-500 hover:bg-gray-600"
-                onClick={() => navigate("/admin/users")}
+                onClick={(e) => {
+                  e.preventDefault();
+                  navigate("/admin/users");
+                }}
               >
                 Cancel
               </Button>

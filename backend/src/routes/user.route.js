@@ -8,7 +8,8 @@ import {
   resetPassword,
   getUsers,
   updateUserAsAdmin,
-  getUserById
+  getUserById,
+  deleteUser,
 } from "../controllers/user.controller.js";
 import {
   protectRoute,
@@ -26,6 +27,8 @@ router.route("/forgot-password").post(forgotPassword);
 router
   .route("/:id")
   .put(protectRoute, protectAdminRoute, updateUserAsAdmin)
-  .get(protectRoute, protectAdminRoute, getUserById);
+  .get(protectRoute, protectAdminRoute, getUserById)
+  .delete(protectRoute, protectAdminRoute, deleteUser);
 router.route("/reset-password/:resetToken").patch(resetPassword);
+
 export default router;
