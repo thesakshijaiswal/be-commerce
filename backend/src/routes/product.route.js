@@ -5,6 +5,7 @@ import {
   createProduct,
   updateProduct,
   deleteProduct,
+  createProductReview,
 } from "../controllers/product.controller.js";
 import {
   protectRoute,
@@ -21,5 +22,7 @@ router
   .get(getProductsById)
   .put(protectRoute, protectAdminRoute, updateProduct)
   .delete(protectRoute, protectAdminRoute, deleteProduct);
+
+router.route("/:id/review").post(protectRoute, createProductReview);
 
 export default router;
