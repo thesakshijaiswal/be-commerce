@@ -16,6 +16,7 @@ export { default as SecuredRoutes } from "./SecuredRoutes";
 export { default as OrderStatusBullet } from "./OrderStatusBullet";
 export { default as EmptyOrderHistory } from "./EmptyOrderHistory";
 export { default as AdminRoutes } from "./AdminRoutes";
+export { default as ProductReview } from "./ProductReview";
 export { default as UserList } from "./Admin/UserList";
 export { default as ProductList } from "./Admin/ProductList";
 export { default as OrderList } from "./Admin/OrderList";
