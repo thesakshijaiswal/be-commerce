@@ -106,10 +106,7 @@ const ProductDetailsPage = () => {
             </p>
 
             <div className="flex items-center gap-2">
-              <StarRating
-                starRating={product.starRating || product.rating?.toFixed(1)}
-              />
-              |
+              <StarRating rating={product.rating} />|
               <p className="font-medium text-primary">
                 {product.numReviews || 0} reviews
               </p>

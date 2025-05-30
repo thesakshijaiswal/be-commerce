@@ -8,8 +8,7 @@ const products = [
     category: "Home & Kitchen",
     price: 497,
     countInStock: 20,
-    starRating: 4.6,
-    rating: 50,
+    rating: 4.6,
     numReviews: 0,
   },
   {
@@ -21,8 +20,7 @@ const products = [
     category: "Electronics",
     price: 449,
     countInStock: 0,
-    starRating: 4.8,
-    rating: 3000,
+    rating: 4.8,
     numReviews: 0,
   },
   {
@@ -34,8 +32,7 @@ const products = [
     category: "Electronics",
     price: 59990,
     countInStock: 26,
-    starRating: 4.8,
-    rating: 400,
+    rating: 4.8,
     numReviews: 2,
   },
   {
@@ -46,8 +43,7 @@ const products = [
     category: "Electronics",
     price: 121999,
     countInStock: 23,
-    starRating: 4.5,
-    rating: 200,
+    rating: 4.5,
     numReviews: 20,
   },
   {
@@ -58,8 +54,7 @@ const products = [
     category: "Electronics",
     price: 5999,
     countInStock: 23,
-    starRating: 3.5,
-    rating: 200,
+    rating: 3.5,
     numReviews: 20,
   },
   {
@@ -70,8 +65,7 @@ const products = [
     category: "Electronics",
     price: 24900,
     countInStock: 50,
-    starRating: 4.5,
-    rating: 1000,
+    rating: 4.5,
     numReviews: 450,
   },
   {
@@ -82,8 +76,7 @@ const products = [
     category: "Electronics",
     price: 10999,
     countInStock: 15,
-    starRating: 4.1,
-    rating: 300,
+    rating: 4.1,
     numReviews: 150,
   },
   {
@@ -94,8 +87,7 @@ const products = [
     category: "Musical Instruments",
     price: 24999,
     countInStock: 0,
-    starRating: 3.2,
-    rating: 40,
+    rating: 3.2,
     numReviews: 26,
   },
   {
@@ -106,8 +98,7 @@ const products = [
     category: "Musical Instruments",
     price: 12999,
     countInStock: 26,
-    starRating: 3.8,
-    rating: 70,
+    rating: 3.8,
     numReviews: 45,
   },
   {
@@ -118,8 +109,7 @@ const products = [
     category: "Health & Personal Care",
     price: 3499,
     countInStock: 44,
-    starRating: 4.6,
-    rating: 167,
+    rating: 4.6,
     numReviews: 4,
   },
 ];

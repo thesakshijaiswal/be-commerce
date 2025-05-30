@@ -353,10 +353,7 @@ const ProductReview = () => {
                   Be the first to share your thoughts about this product
                 </p>
                 {userInfo ? (
-                  <Button
-                    onClick={() => setShowReviewForm(true)}
-                    className="rounded-lg bg-yellow-400 px-6 py-2 font-medium text-gray-900 hover:bg-yellow-500"
-                  >
+                  <Button onClick={() => setShowReviewForm(true)}>
                     Write the First Review
                   </Button>
                 ) : (

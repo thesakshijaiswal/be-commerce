@@ -66,11 +66,6 @@ const productSchema = new mongoose.Schema(
       required: true,
       default: 0,
     },
-    starRating: {
-      type: Number,
-      required: true,
-      default: 0,
-    },
   },
   {
     timestamps: true,

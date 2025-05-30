@@ -12,10 +12,10 @@ const ProductCard = ({
   _id,
   image,
   name,
-  starRating,
   rating,
   price,
   countInStock,
+  numReviews,
 }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -98,9 +98,9 @@ const ProductCard = ({
           <div className="flex items-center">
             <IoIosStar className="absolute left-4 text-rating" />
             <div className="w-1/5 rounded-md bg-black/5 px-7 py-1">
-              {starRating}
+              {rating.toFixed(1)}
             </div>
-            <span> , ({rating})</span>
+            <span>, ({numReviews})</span>
           </div>
           <div className="flex items-center font-medium">
             <BsCurrencyRupee />
