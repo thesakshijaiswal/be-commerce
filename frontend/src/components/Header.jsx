@@ -5,13 +5,15 @@ import { FaX } from "react-icons/fa6";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import Button from "./Button";
 import Profile from "./Profile";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Branding from "./Branding";
 
 const Header = () => {
+  const { keyword: urlKeyword } = useParams();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [keyword, setKeyword] = useState(urlKeyword || "");
   const { cartItems } = useSelector((state) => state.cart);
   const { userInfo } = useSelector((state) => state.user);
   const navigate = useNavigate();
@@ -81,6 +83,15 @@ const Header = () => {
     );
   };
 
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (keyword) {
+      navigate(`/search/${keyword.trim()}`);
+      setKeyword("");
+    } else {
+      navigate("/");
+    }
+  };
   return (
     <nav className="relative z-50 bg-primary p-2">
       <div className="flex items-center justify-between">
@@ -96,8 +107,10 @@ const Header = () => {
             type="text"
             placeholder="Search"
             className="w-96 rounded-md p-1 pl-5 font-normal text-black outline-none"
+            value={keyword}
+            onChange={(e) => setKeyword(e.target.value)}
           />
-          <Button className="ml-2" btnIcon={IoSearch} />
+          <Button className="ml-2" btnIcon={IoSearch} onClick={handleSearch} />
         </div>
 
         <div className="hidden gap-5 lg:flex">
@@ -141,8 +154,14 @@ const Header = () => {
               type="text"
               placeholder="Search"
               className="rounded-md p-1 font-medium text-black"
+              value={keyword}
+              onChange={(e) => setKeyword(e.target.value)}
             />
-            <Button className="ml-2" btnIcon={IoSearch} />
+            <Button
+              className="ml-2"
+              btnIcon={IoSearch}
+              onClick={handleSearch}
+            />
           </div>
 
           <ul className="flex flex-col items-center justify-center gap-4">

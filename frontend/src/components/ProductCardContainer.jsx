@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import ProductCard from "./ProductCard";
 import { useGetProductsQuery } from "../features/productsApiSlice";
 import { HomeShimmerUI } from "../shimmers";
@@ -10,7 +10,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { setCredentials } from "../features/userSlice";
 
 const ProductCardContainer = () => {
-  const { data: products, isLoading, error } = useGetProductsQuery();
+  const { keyword } = useParams();
+  const { data: products, isLoading, error } = useGetProductsQuery(keyword);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
 
@@ -63,7 +64,7 @@ const ProductCardContainer = () => {
       ) : (
         <div className="flex flex-wrap justify-center gap-x-5 gap-y-8">
           {products.map((product) => (
-            <Link to={`product-details/${product?._id}`} key={product?._id}>
+            <Link to={`/product-details/${product?._id}`} key={product?._id}>
               <ProductCard {...product} />
             </Link>
           ))}
