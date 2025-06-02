@@ -8,10 +8,11 @@ import axios from "axios";
 import { BASE_BACKEND_URL } from "../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { setCredentials } from "../features/userSlice";
+import Pagination from "./Pagination";
 
 const ProductCardContainer = () => {
-  const { keyword } = useParams();
-  const { data: products, isLoading, error } = useGetProductsQuery(keyword);
+  const { keyword, pageNumber } = useParams();
+  const { data, isLoading, error } = useGetProductsQuery({keyword, pageNumber});
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
 
@@ -62,13 +63,22 @@ const ProductCardContainer = () => {
           </div>,
         )
       ) : (
-        <div className="flex flex-wrap justify-center gap-x-5 gap-y-8">
-          {products.map((product) => (
-            <Link to={`/product-details/${product?._id}`} key={product?._id}>
-              <ProductCard {...product} />
-            </Link>
-          ))}
-        </div>
+        <>
+          <div className="flex flex-wrap justify-center gap-x-5 gap-y-8">
+            {data?.products?.map((product) => (
+              <Link to={`/product-details/${product?._id}`} key={product?._id}>
+                <ProductCard {...product} />
+              </Link>
+            ))}
+          </div>
+          <div className="flex justify-center items-center mt-12">
+            <Pagination
+              pages={data.pages}
+              pageNum={data.pageNumber}
+              keyword={keyword ? keyword : ""}
+            />
+          </div>
+        </>
       )}
     </>
   );

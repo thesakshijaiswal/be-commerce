@@ -2,6 +2,8 @@ import Products from "../models/product.model.js";
 import asyncHandler from "../utils/helper.js";
 
 const getProducts = asyncHandler(async (req, res) => {
+  const pageNumber = +req.query.pageNumber || 1;
+  const pageSize = process.env.PAGINATION_LIMIT;
   const keyword = req.query.keyword
     ? {
         name: {
@@ -10,8 +12,11 @@ const getProducts = asyncHandler(async (req, res) => {
         },
       }
     : {};
-  const products = await Products.find({ ...keyword });
-  res.json(products);
+  const count = await Products.countDocuments({ ...keyword });
+  const products = await Products.find({ ...keyword })
+    .limit(pageSize)
+    .skip(pageSize * (pageNumber - 1));
+  res.json({ products, pageNumber, pages: Math.ceil(count / pageSize) });
 });
 
 const getProductsById = asyncHandler(async (req, res) => {
