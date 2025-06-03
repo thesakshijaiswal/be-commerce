@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 
 const ProductList = () => {
   const navigate = useNavigate();
-  const { data: products, isLoading, error, refetch } = useGetProductsQuery();
+  const { data, isLoading, error, refetch } = useGetProductsQuery();
   const [createProduct, { isLoading: loadingCreateProduct }] =
     useCreateProductMutation();
   const [deleteProduct, { isLoading: loadingDeleteProduct }] =
@@ -86,7 +86,7 @@ const ProductList = () => {
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200 bg-white">
-            {products?.map((product) => (
+            {data?.products?.map((product) => (
               <tr key={product._id} className="hover:bg-gray-50">
                 <td className="whitespace-nowrap px-6 py-4 text-sm font-medium text-gray-900">
                   #{product._id}
@@ -130,7 +130,7 @@ const ProductList = () => {
       </div>
 
       <div className="mt-4 grid grid-cols-1 gap-4 md:hidden">
-        {products?.map((product) => (
+        {data?.products?.map((product) => (
           <div
             key={product._id}
             className="space-y-3 rounded-lg bg-white p-4 shadow"

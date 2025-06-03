@@ -12,7 +12,10 @@ import Pagination from "./Pagination";
 
 const ProductCardContainer = () => {
   const { keyword, pageNumber } = useParams();
-  const { data, isLoading, error } = useGetProductsQuery({keyword, pageNumber});
+  const { data, isLoading, error } = useGetProductsQuery({
+    keyword,
+    pageNumber,
+  });
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
 
@@ -71,7 +74,7 @@ const ProductCardContainer = () => {
               </Link>
             ))}
           </div>
-          <div className="flex justify-center items-center mt-12">
+          <div className="mt-12 flex items-center justify-center">
             <Pagination
               pages={data.pages}
               pageNum={data.pageNumber}

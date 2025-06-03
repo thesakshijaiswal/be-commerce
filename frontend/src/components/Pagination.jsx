@@ -12,7 +12,7 @@ const Pagination = ({ pages, pageNum, keyword = "" }) => {
               : `/page/${pageNumber}`
           }
           key={pageNumber}
-          className={`rounded-md border px-3 py-2 ${pageNum === pageNumber? "bg-secondary text-white" : "border-gray-300 text-secondary hover:bg-gray-100"}`}
+          className={`rounded-md border px-3 py-2 ${pageNum === pageNumber ? "bg-secondary text-white" : "border-gray-300 text-secondary hover:bg-gray-100"}`}
         >
           {pageNumber}
         </Link>
