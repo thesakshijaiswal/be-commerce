@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams, Link } from "react-router-dom";
 import toast from "react-hot-toast";
@@ -20,36 +20,43 @@ const ProductReview = () => {
   const [createReview, { isLoading: isSubmittingReview }] =
     useCreateReviewMutation();
 
-  const submitReviewHandler = async ({ rating, comment }) => {
-    if (!userInfo) {
-      toast.error("Please login to write a review");
-      return;
-    }
+  const toggleReviewForm = useCallback(() => {
+    setShowReviewForm((prev) => !prev);
+  }, []);
 
-    try {
-      const res = await createReview({
-        productId,
-        rating,
-        comment: comment.trim(),
-      }).unwrap();
+  const submitReviewHandler = useCallback(
+    async ({ rating, comment }) => {
+      if (!userInfo) {
+        toast.error("Please login to write a review");
+        return;
+      }
 
-      toast.success(res.message || "Review submitted successfully!");
-      setShowReviewForm(false);
-      refetch();
-    } catch (error) {
-      toast.error(error?.data?.message || "Failed to submit review");
-    }
-  };
+      try {
+        const res = await createReview({
+          productId,
+          rating,
+          comment: comment.trim(),
+        }).unwrap();
 
-  const formatDate = (dateString) => {
+        toast.success(res.message || "Review submitted successfully!");
+        setShowReviewForm(false);
+        refetch();
+      } catch (error) {
+        toast.error(error?.data?.message || "Failed to submit review");
+      }
+    },
+    [createReview, productId, refetch, userInfo],
+  );
+
+  const formatDate = useCallback((dateString) => {
     return new Date(dateString).toLocaleDateString("en-US", {
       year: "numeric",
       month: "long",
       day: "numeric",
     });
-  };
+  }, []);
 
-  const getTimeAgo = (dateString) => {
+  const getTimeAgo = useCallback((dateString) => {
     const now = new Date();
     const reviewDate = new Date(dateString);
     const diffInDays = Math.floor((now - reviewDate) / (1000 * 60 * 60 * 24));
@@ -59,24 +66,35 @@ const ProductReview = () => {
     if (diffInDays < 30) return `${diffInDays} days ago`;
     if (diffInDays < 365) return `${Math.floor(diffInDays / 30)} months ago`;
     return `${Math.floor(diffInDays / 365)} years ago`;
-  };
+  }, []);
+
+  const averageRating = product?.rating || 0;
+  const totalReviews = product?.numReviews || 0;
+
+  const reviews = useMemo(() => product?.reviews || [], [product]);
 
   if (!product) return null;
 
-  const averageRating = product.rating || 0;
-  const totalReviews = product.numReviews || 0;
-
   return (
-    <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
+    <section
+      className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8"
+      aria-labelledby="customer-reviews-heading"
+    >
       <div className="overflow-hidden rounded-xl border border-gray-100 bg-white shadow-sm">
         <div className="px-6 py-8">
-          <h2 className="mb-6 text-2xl font-bold text-gray-900">
+          <h2
+            id="customer-reviews-heading"
+            className="mb-6 text-2xl font-bold text-gray-900"
+          >
             Customer Reviews
           </h2>
 
           <div className="mb-8 grid grid-cols-1 gap-8 lg:grid-cols-2">
             <div className="flex flex-col items-center lg:items-start">
-              <div className="mb-4 flex items-center gap-4">
+              <div
+                className="mb-4 flex items-center gap-4"
+                aria-label={`Average rating ${averageRating.toFixed(1)}`}
+              >
                 <div className="text-5xl font-bold text-gray-900">
                   {averageRating.toFixed(1)}
                 </div>
@@ -95,8 +113,10 @@ const ProductReview = () => {
 
               {userInfo ? (
                 <Button
-                  onClick={() => setShowReviewForm(!showReviewForm)}
+                  onClick={toggleReviewForm}
                   className="px-6 py-2 font-medium"
+                  aria-expanded={showReviewForm}
+                  aria-controls="review-form"
                 >
                   {showReviewForm ? "Cancel Review" : "Write a Review"}
                 </Button>
@@ -107,15 +127,17 @@ const ProductReview = () => {
               )}
             </div>
 
-            <RatingDistribution reviews={product.reviews} />
+            <RatingDistribution reviews={reviews} />
           </div>
 
           {showReviewForm && userInfo && (
-            <ReviewForm
-              onSubmit={submitReviewHandler}
-              onCancel={() => setShowReviewForm(false)}
-              isSubmitting={isSubmittingReview}
-            />
+            <div id="review-form">
+              <ReviewForm
+                onSubmit={submitReviewHandler}
+                onCancel={() => setShowReviewForm(false)}
+                isSubmitting={isSubmittingReview}
+              />
+            </div>
           )}
 
           <div className="mt-6">
@@ -124,25 +146,37 @@ const ProductReview = () => {
                 Top Reviews
               </h3>
               {totalReviews > 0 && (
-                <select className="rounded-md border border-gray-300 px-3 py-1 text-sm text-secondary focus:border-transparent focus:ring-2 focus:ring-secondary">
-                  <option>Most Recent</option>
-                  <option>Most Helpful</option>
-                  <option>Highest Rated</option>
-                  <option>Lowest Rated</option>
-                </select>
+                <>
+                  <label className="sr-only" htmlFor="sort-reviews">
+                    Sort Reviews
+                  </label>
+                  <select
+                    id="sort-reviews"
+                    className="rounded-md border border-gray-300 px-3 py-1 text-sm text-secondary focus:ring-2 focus:ring-secondary"
+                  >
+                    <option>Most Recent</option>
+                    <option>Most Helpful</option>
+                    <option>Highest Rated</option>
+                    <option>Lowest Rated</option>
+                  </select>
+                </>
               )}
             </div>
 
-            {product.reviews && product.reviews.length > 0 ? (
-              <div className="space-y-6">
-                {product.reviews.map((review, index) => (
-                  <div
+            {reviews.length > 0 ? (
+              <ul className="space-y-6" role="list">
+                {reviews.map((review, index) => (
+                  <li
                     key={review._id || index}
                     className="border-b border-gray-100 pb-6 last:border-b-0"
+                    aria-label={`Review by ${review.name}`}
                   >
                     <div className="flex items-start gap-4">
                       <div className="flex-shrink-0">
-                        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-secondary/70 text-sm font-medium text-white">
+                        <div
+                          className="flex h-10 w-10 items-center justify-center rounded-full bg-secondary/70 text-sm font-medium text-white"
+                          aria-hidden="true"
+                        >
                           {review.name.charAt(0).toUpperCase()}
                         </div>
                       </div>
@@ -152,7 +186,10 @@ const ProductReview = () => {
                           <h4 className="font-medium text-gray-900">
                             {review.name}
                           </h4>
-                          <BsCheckCircleFill className="text-xs text-green-500" />
+                          <BsCheckCircleFill
+                            className="text-xs text-green-500"
+                            aria-hidden="true"
+                          />
                           <span className="text-xs text-gray-500">
                             Verified Purchase
                           </span>
@@ -174,13 +211,16 @@ const ProductReview = () => {
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </li>
                 ))}
-              </div>
+              </ul>
             ) : (
-              <div className="py-12 text-center">
+              <div className="py-12 text-center" role="status">
                 <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-gray-100">
-                  <FaStar className="text-xl text-gray-400" />
+                  <FaStar
+                    className="text-xl text-gray-400"
+                    aria-hidden="true"
+                  />
                 </div>
                 <h3 className="mb-2 text-lg font-medium text-gray-900">
                   No reviews yet
@@ -202,7 +242,7 @@ const ProductReview = () => {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
