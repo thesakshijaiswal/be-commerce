@@ -4,8 +4,13 @@ import { useParams, Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import { BsCheckCircleFill } from "react-icons/bs";
 import { FaStar } from "react-icons/fa";
-import { Button, StarRating, RatingDistribution } from "../components";
-import ReviewForm from "../components/ReviewForm";
+import {
+  Button,
+  StarRating,
+  RatingDistribution,
+  ReviewForm,
+  ReviewFilter,
+} from "../components";
 import {
   useCreateReviewMutation,
   useGetProductDetailsQuery,
@@ -15,6 +20,7 @@ const ProductReview = () => {
   const { id: productId } = useParams();
   const { userInfo } = useSelector((state) => state.user);
   const [showReviewForm, setShowReviewForm] = useState(false);
+  const [sortedReviews, setSortedReviews] = useState([]);
 
   const { data: product, refetch } = useGetProductDetailsQuery(productId);
   const [createReview, { isLoading: isSubmittingReview }] =
@@ -146,26 +152,13 @@ const ProductReview = () => {
                 Top Reviews
               </h3>
               {totalReviews > 0 && (
-                <>
-                  <label className="sr-only" htmlFor="sort-reviews">
-                    Sort Reviews
-                  </label>
-                  <select
-                    id="sort-reviews"
-                    className="rounded-md border border-gray-300 px-3 py-1 text-sm text-secondary focus:ring-2 focus:ring-secondary"
-                  >
-                    <option>Most Recent</option>
-                    <option>Most Helpful</option>
-                    <option>Highest Rated</option>
-                    <option>Lowest Rated</option>
-                  </select>
-                </>
+                <ReviewFilter reviews={reviews} onSort={setSortedReviews} />
               )}
             </div>
 
-            {reviews.length > 0 ? (
+            {sortedReviews.length > 0 ? (
               <ul className="space-y-6" role="list">
-                {reviews.map((review, index) => (
+                {sortedReviews.map((review, index) => (
                   <li
                     key={review._id || index}
                     className="border-b border-gray-100 pb-6 last:border-b-0"
