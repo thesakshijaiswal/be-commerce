@@ -57,11 +57,11 @@ const Header = () => {
           userInfo?.picture ? (
             <img
               src={userInfo.picture}
-              alt="Profile"
+              alt={`${userInfo.name}'s profile`}
               className="mr-2 h-8 w-8 rounded-full object-cover"
             />
           ) : (
-            <HiOutlineUserCircle className="h-8 w-8" />
+            <HiOutlineUserCircle className="h-8 w-8" aria-hidden="true" />
           )
         }
         label={userInfo?.name}
@@ -73,10 +73,11 @@ const Header = () => {
   const renderLoginButton = () => {
     return (
       <Button
-        className="sm:w-72 md:w-full"
+        className="w-64 lg:w-full"
         onClick={() => {
           navigate("/login");
         }}
+        ariaLabel="Login"
       >
         Login
       </Button>
@@ -92,38 +93,55 @@ const Header = () => {
       navigate("/");
     }
   };
+
   return (
-    <nav className="relative z-50 bg-primary p-2">
+    <nav
+      className="relative z-50 bg-primary p-2"
+      role="navigation"
+      aria-label="Main Navigation"
+    >
       <div className="flex items-center justify-between">
         <Link
           to="/"
           className="flex items-center font-playwrite text-xl font-bold"
+          aria-label="Home"
         >
           <Branding />
         </Link>
 
-        <div className="hidden items-center md:flex">
+        <form
+          onSubmit={handleSearch}
+          className="hidden items-center md:flex"
+          role="search"
+        >
           <input
+            name="Search"
             type="text"
-            placeholder="Search"
-            className="w-96 rounded-md p-1 pl-5 font-normal text-black outline-none"
+            aria-label="Search"
+            placeholder="Search products, brands or categories..."
+            className="w-96 rounded-md p-1.5 pl-5 text-sm text-black outline-none"
             value={keyword}
             onChange={(e) => setKeyword(e.target.value)}
           />
-          <Button className="ml-2" btnIcon={IoSearch} onClick={handleSearch} />
-        </div>
+          <Button
+            ariaLabel="Search"
+            type="submit"
+            className="ml-2"
+            btnIcon={IoSearch}
+          />
+        </form>
 
         <div className="hidden gap-5 lg:flex">
           <ul className="flex items-center gap-8">
-            <li>
+            <li className="relative">
               <NavItem to="/cart" icon={IoCartOutline} label="Cart" />
-              <span className="absolute top-2 ml-4 rounded-full bg-red-500 px-2 text-white">
+              <span className="absolute -top-2 ml-4 rounded-full bg-red-500 px-2 text-white">
                 {totalQuantity}
               </span>
             </li>
             {userInfo && <li>{renderProfile()}</li>}
             {userInfo?.isAdmin && (
-              <Button>
+              <Button ariaLabel="Dashboard">
                 <NavItem to="/admin" label="Dashboard" />
               </Button>
             )}
@@ -137,6 +155,8 @@ const Header = () => {
             className={`transform text-2xl transition-transform duration-300 ease-in-out ${
               isMenuOpen ? "rotate-180" : ""
             }`}
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isMenuOpen}
           >
             {isMenuOpen ? <FaX /> : <BsThreeDotsVertical />}
           </button>
@@ -149,25 +169,27 @@ const Header = () => {
         } mt-4 rounded-md bg-primary p-4 transition-all duration-500`}
       >
         <div className="flex flex-col items-center justify-center gap-4">
-          <div className="flex items-center gap-2 md:hidden">
+          <form
+            onSubmit={handleSearch}
+            className="flex items-center gap-2 md:hidden"
+            role="search"
+          >
             <input
+              name="search"
               type="text"
-              placeholder="Search"
-              className="rounded-md p-1 font-medium text-black"
+              aria-label="Search"
+              placeholder="Search for products..."
+              className="rounded-md p-1.5 text-sm text-black"
               value={keyword}
               onChange={(e) => setKeyword(e.target.value)}
             />
-            <Button
-              className="ml-2"
-              btnIcon={IoSearch}
-              onClick={handleSearch}
-            />
-          </div>
+            <Button ariaLabel="Search" type="submit" btnIcon={IoSearch} />
+          </form>
 
           <ul className="flex flex-col items-center justify-center gap-4">
-            <li>
+            <li className="relative">
               <NavItem to="/cart" icon={IoCartOutline} label="Cart" />
-              <span className="absolute top-[132px] ml-4 rounded-full bg-red-500 px-2 text-white md:top-[85px]">
+              <span className="absolute -top-2 ml-4 rounded-full bg-red-500 px-2 text-white">
                 {totalQuantity}
               </span>
             </li>
