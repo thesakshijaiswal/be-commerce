@@ -23,7 +23,7 @@ const CartItem = ({ _id, image, name, price, quantity }) => {
       </div>
       <div className="flex flex-col overflow-hidden">
         <h3 className="text-base">{truncateProductName(name, 50)}</h3>
-        <div className="flex items-center pt-2 text-sm font-medium flex-wrap">
+        <div className="flex flex-wrap items-center pt-2 text-sm font-medium">
           <BsCurrencyRupee />
           <p className="font-medium text-tertiary">{price.toFixed(2)}</p>{" "}
           <span className="mx-1 h-5 w-0.5 bg-gray-600"></span>
@@ -36,6 +36,7 @@ const CartItem = ({ _id, image, name, price, quantity }) => {
         className="h-24 w-10 !px-2 !py-0"
         onClick={() => handleRemoveItem(_id)}
         btnIcon={RiDeleteBin2Line}
+        ariaLabel="Remove Product"
       />
     </div>
   );

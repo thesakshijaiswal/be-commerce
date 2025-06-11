@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 const Pagination = ({ pages, pageNum, keyword = "" }) => {
   const pageNumbers = Array.from({ length: pages }, (_, i) => i + 1);
   return pages > 1 ? (
-    <ul className="flex space-x-2">
+    <div className="flex space-x-2">
       {pageNumbers?.map((pageNumber) => (
         <Link
           to={
@@ -17,7 +17,7 @@ const Pagination = ({ pages, pageNum, keyword = "" }) => {
           {pageNumber}
         </Link>
       ))}
-    </ul>
+    </div>
   ) : null;
 };
 

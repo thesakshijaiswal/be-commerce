@@ -135,7 +135,7 @@ const ProductDetailsPage = () => {
                 : `${product.description?.slice(0, 200)}... `}
               <button
                 onClick={handleToggleRead}
-                className="font-semibold text-primary/75 focus:outline-none"
+                className="font-medium text-primary focus:outline-none"
                 aria-expanded={isExpanded}
                 aria-controls="product-description"
               >
@@ -145,7 +145,7 @@ const ProductDetailsPage = () => {
 
             <div className="text-lg" aria-live="polite">
               {product.countInStock > 0 ? (
-                <p className="text-green-600">In Stock</p>
+                <p className="text-green-700">In Stock</p>
               ) : (
                 <p className="text-red-600">Out of Stock</p>
               )}
@@ -153,7 +153,7 @@ const ProductDetailsPage = () => {
 
             <div className="flex items-center text-xl font-bold">
               <BsCurrencyRupee aria-hidden="true" />
-              <h3>{product.price}</h3>
+              <p>{product.price}</p>
             </div>
 
             <StockCounter

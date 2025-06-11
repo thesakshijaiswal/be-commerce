@@ -43,6 +43,7 @@ const StockCounter = ({
         max={countInStock}
         onChange={(e) => handleInputChange(e.target.value)}
         disabled={countInStock === 0}
+        aria-label="Quantity"
       />
       <Button
         onClick={handleIncrement}
