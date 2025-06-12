@@ -9,7 +9,7 @@ import { BASE_BACKEND_URL } from "../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { setCredentials } from "../features/userSlice";
 import Pagination from "./Pagination";
-
+import EmptySearch from "./EmptySearch";
 const ProductCardContainer = () => {
   const { keyword, pageNumber } = useParams();
   const { data, isLoading, error } = useGetProductsQuery({
@@ -55,34 +55,39 @@ const ProductCardContainer = () => {
     }
   }, [user.userInfo, dispatch]);
 
+  if (isLoading) {
+    return <HomeShimmerUI />;
+  }
+
+  if (error) {
+    toast.error(
+      <div className="w-52 md:w-64">
+        {error?.data?.message || error?.error}
+      </div>,
+    );
+    return null;
+  }
+
+  if (!data?.products?.length) {
+    return <EmptySearch searchTerm={keyword} />;
+  }
+
   return (
     <>
-      {isLoading ? (
-        <HomeShimmerUI />
-      ) : error ? (
-        toast.error(
-          <div className="w-52 md:w-64">
-            {error?.data?.message || error?.error}
-          </div>,
-        )
-      ) : (
-        <>
-          <div className="flex flex-wrap justify-center gap-x-5 gap-y-8">
-            {data?.products?.map((product) => (
-              <Link to={`/product-details/${product?._id}`} key={product?._id}>
-                <ProductCard {...product} />
-              </Link>
-            ))}
-          </div>
-          <div className="mt-12 flex items-center justify-center">
-            <Pagination
-              pages={data.pages}
-              pageNum={data.pageNumber}
-              keyword={keyword ? keyword : ""}
-            />
-          </div>
-        </>
-      )}
+      <div className="flex flex-wrap justify-center gap-x-5 gap-y-8">
+        {data?.products?.map((product) => (
+          <Link to={`/product-details/${product?._id}`} key={product?._id}>
+            <ProductCard {...product} />
+          </Link>
+        ))}
+      </div>
+      <div className="mt-12 flex items-center justify-center">
+        <Pagination
+          pages={data.pages}
+          pageNum={data.pageNumber}
+          keyword={keyword ? keyword : ""}
+        />
+      </div>
     </>
   );
 };
