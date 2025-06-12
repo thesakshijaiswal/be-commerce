@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 
 const ReviewFilter = ({ reviews, onSort }) => {
   const [sortOption, setSortOption] = useState("Most Recent");
@@ -20,7 +20,9 @@ const ReviewFilter = ({ reviews, onSort }) => {
     }
   }, [reviews, sortOption]);
 
-  onSort(sortedReviews);
+  useEffect(() => {
+    onSort(sortedReviews);
+  }, [sortedReviews, onSort]);
 
   return (
     <div className="flex items-center gap-2">
