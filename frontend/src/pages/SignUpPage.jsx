@@ -18,13 +18,23 @@ const SignUpPage = () => {
 
   const handleSignUp = async (e) => {
     e.preventDefault();
+
+    if (!name || !email || !password) {
+      toast.error("All fields are required!");
+      return;
+    }
+
     try {
       const res = await signUp({ name, email, password }).unwrap();
       dispatch(setCredentials({ ...res }));
       navigate("/");
       toast.success("Signed up successfully");
     } catch (error) {
-      toast.error(error?.data?.message || error?.error);
+      toast.error(
+        error?.data?.message ||
+          error?.error ||
+          "Something went wrong. Please try again.",
+      );
     }
   };
 

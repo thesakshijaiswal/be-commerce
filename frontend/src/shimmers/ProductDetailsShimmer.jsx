@@ -45,6 +45,10 @@ const ProductDetailsShimmer = () => {
           </div>
         </div>
       </div>
+
+      <div className="mt-24 w-full max-w-6xl">
+        <div className="h-56 rounded-md bg-slate-300 p-4 shadow-sm"></div>
+      </div>
     </div>
   );
 };

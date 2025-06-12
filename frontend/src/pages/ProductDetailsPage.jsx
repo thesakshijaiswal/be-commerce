@@ -51,15 +51,14 @@ const ProductDetailsPage = () => {
 
   if (error) {
     return (
-      <section
-        className="flex min-h-screen items-center justify-center"
-        role="alert"
-      >
-        <div className="text-center">
-          <h2 className="mb-4 text-xl font-semibold text-red-600">
+      <section className="flex min-h-screen justify-center" role="alert">
+        <div className="flex flex-col items-center justify-center">
+          <h2 className="mb-4 text-2xl font-semibold text-secondary">
             Error Loading Product
           </h2>
-          <p className="mb-4 text-gray-600">{errorMessage}</p>
+          <p className="mb-4 text-center text-sm text-gray-600">
+            No internet connection. Unable to load product details.
+          </p>
           <Link to="/">
             <Button btnIcon={TiArrowBackOutline}>Back to Home</Button>
           </Link>
@@ -166,13 +165,19 @@ const ProductDetailsPage = () => {
               <Button
                 className="w-2/4 whitespace-nowrap"
                 onClick={handleAddToCart}
-                aria-label="Add to cart"
+                ariaLabel="Add to cart"
               >
                 Add to Cart{" "}
                 <BsCartPlus className="text-xl" aria-hidden="true" />
               </Button>
 
-              <Button className="w-2/4 whitespace-nowrap" aria-label="Buy now">
+              <Button
+                className="w-2/4 whitespace-nowrap"
+                ariaLabel="Buy Now"
+                onClick={() => {
+                  navigate("/checkout");
+                }}
+              >
                 Buy Now <GrMoney className="text-xl" aria-hidden="true" />
               </Button>
             </div>

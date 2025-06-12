@@ -23,7 +23,7 @@ const ShippingPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(saveShippingAddress({ address, city, postalCode, country }));
-    navigate("/payment")
+    navigate("/payment");
   };
 
   return (
@@ -41,6 +41,7 @@ const ShippingPage = () => {
           icon={FaRegAddressCard}
           value={address}
           onChange={(e) => setAddress(e.target.value)}
+          autoComplete="Address"
         />
         <InputField
           type="text"
@@ -68,6 +69,7 @@ const ShippingPage = () => {
           icon={SlLocationPin}
           value={country}
           onChange={(e) => setCountry(e.target.value)}
+          autoComplete="Country"
         />
         <div className="pt-4">
           <Button
