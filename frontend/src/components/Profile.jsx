@@ -54,6 +54,7 @@ const Profile = ({ onClose }) => {
           className="w-64 pl-1"
           btnIcon={HiOutlineLogout}
           onClick={handleLogout}
+          ariaLabel="Logout"
         >
           Logout
         </Button>

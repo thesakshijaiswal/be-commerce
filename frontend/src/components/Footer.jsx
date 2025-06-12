@@ -13,7 +13,7 @@ const Footer = () => {
           <img
             src="/logo.svg"
             alt="BE Commerce Logo"
-            className="mb-5 w-28 pt-5 sm:w-32 lg:mb-10"
+            className="mb-5 h-full w-28 pt-5 sm:w-32 lg:mb-10"
           />
           BE Commerce.
         </div>

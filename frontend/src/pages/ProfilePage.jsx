@@ -68,6 +68,7 @@ const ProfilePage = () => {
                   icon={AiOutlineUser}
                   value={name}
                   onChange={(e) => setName(e.target.value)}
+                  autoComplete="Name"
                 />
                 <InputField
                   type="email"
@@ -77,6 +78,7 @@ const ProfilePage = () => {
                   icon={AiOutlineMail}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  autoComplete="Email"
                 />
                 <InputField
                   type={showPassword ? "text" : "password"}
@@ -131,7 +133,7 @@ const ProfilePage = () => {
                   <div className="mb-2 text-sm text-secondary/70">
                     <div className="flex justify-between md:justify-between">
                       <span className="font-medium">Order ID: {order._id}</span>
-                      <span className="hidden text-xs text-secondary/60 md:inline">
+                      <span className="hidden text-xs text-secondary md:inline">
                         Date: {order.createdAt.slice(0, 10)}
                       </span>
                     </div>
@@ -153,11 +155,11 @@ const ProfilePage = () => {
                             {item.name}
                           </h4>
                           <div className="flex items-center gap-2">
-                            <span className="text-sm text-secondary/60">
+                            <span className="text-sm text-secondary">
                               Quantity: {item.quantity}
                             </span>
                             |
-                            <span className="text-sm text-secondary/60">
+                            <span className="text-sm text-secondary">
                               Price: ₹{item.price}
                             </span>
                           </div>

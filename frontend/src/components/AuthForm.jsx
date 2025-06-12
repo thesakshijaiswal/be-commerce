@@ -56,6 +56,7 @@ const AuthForm = ({
             icon={AiOutlineMail}
             value={name}
             onChange={(e) => setName(e.target.value)}
+            autoComplete="Name"
           />
         )}
         {showEmailField && (
@@ -67,6 +68,7 @@ const AuthForm = ({
             icon={AiOutlineMail}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            autoComplete="Email"
           />
         )}
 
@@ -134,7 +136,7 @@ const AuthForm = ({
             <div>
               <div className="flex items-center justify-center gap-6">
                 <div className="h-0.5 w-1/2 bg-secondary/15"></div>
-                <span className="text-lg font-medium text-secondary/25">
+                <span className="text-lg font-medium text-secondary/70">
                   or
                 </span>
                 <div className="h-0.5 w-1/2 bg-secondary/15"></div>
@@ -150,12 +152,9 @@ const AuthForm = ({
             </div>
           )}
 
-          <p className="mt-2 text-sm font-light text-gray-500">
+          <p className="mt-2 text-sm font-light text-gray-700">
             {altText}{" "}
-            <Link
-              to={altLink}
-              className="text-primary-600 font-medium hover:underline"
-            >
+            <Link to={altLink} className="font-medium hover:underline">
               {altLinkText}
             </Link>
           </p>

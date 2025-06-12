@@ -10,6 +10,7 @@ const InputField = ({
   onChange,
   showPassword,
   setShowPassword,
+  autoComplete,
 }) => {
   const isPasswordField = label === "Password" || label === "Confirm Password";
   const inputType = isPasswordField && showPassword ? "text" : type;
@@ -36,6 +37,7 @@ const InputField = ({
           className="focus:ring-primary-600 focus:border-primary-600 h-12 w-full flex-shrink rounded-lg border border-gray-300 bg-gray-50 p-2.5 px-4 pl-10 text-sm text-gray-900"
           autoCapitalize={fieldName === "email" ? "none" : undefined}
           aria-label={label}
+          autoComplete={autoComplete}
         />
         {isPasswordField && (
           <button

@@ -35,6 +35,7 @@ const PaymentPage = () => {
             <div>
               <label className="custom-radio">
                 <input
+                  id="stripe"
                   type="radio"
                   name="payment"
                   value="Stripe"
@@ -43,7 +44,10 @@ const PaymentPage = () => {
                 />
                 <span className="checkmark"></span>
               </label>
-              <label className="text-base font-semibold text-secondary md:text-lg">
+              <label
+                htmlFor="stripe"
+                className="text-base font-semibold text-secondary md:text-lg"
+              >
                 Pay with Stripe
               </label>
             </div>
@@ -55,6 +59,7 @@ const PaymentPage = () => {
             <div>
               <label className="custom-radio">
                 <input
+                  id="credit_card"
                   type="radio"
                   name="payment"
                   value="Credit Card"
@@ -63,7 +68,10 @@ const PaymentPage = () => {
                 />
                 <span className="checkmark"></span>
               </label>
-              <label className="text-base font-semibold text-secondary md:text-lg">
+              <label
+                htmlFor="credit_card"
+                className="text-base font-semibold text-secondary md:text-lg"
+              >
                 Pay with Credit Card
               </label>
             </div>
