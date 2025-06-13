@@ -65,6 +65,7 @@ const router = createBrowserRouter(
           <Route index element={<Navigate to="users" replace />} />
           <Route path="users" element={<UserList />} />
           <Route path="products" element={<ProductList />} />
+          <Route path="products/page/:pageNumber" element={<ProductList />} />
           <Route path="orders" element={<OrderList />} />
         </Route>
         <Route path="/admin/product/:id/edit" element={<ProductEditPage />} />

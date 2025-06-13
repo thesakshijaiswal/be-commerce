@@ -6,17 +6,23 @@ import {
 import { BsCurrencyRupee } from "react-icons/bs";
 import { RiDeleteBin2Line } from "react-icons/ri";
 import { FiEdit } from "react-icons/fi";
-import { Button } from "../../components";
+import { Button, Pagination } from "../../components";
 import { toast } from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const ProductList = () => {
+  const { pageNumber } = useParams();
   const navigate = useNavigate();
-  const { data, isLoading, error, refetch } = useGetProductsQuery();
+  const { data, isLoading, error, refetch } = useGetProductsQuery({
+    pageNumber,
+  });
   const [createProduct, { isLoading: loadingCreateProduct }] =
     useCreateProductMutation();
   const [deleteProduct, { isLoading: loadingDeleteProduct }] =
     useDeleteProductMutation();
+
+  const { userInfo } = useSelector((state) => state.user);
 
   if (isLoading)
     return <div className="text-center text-secondary">Loading...</div>;
@@ -172,6 +178,14 @@ const ProductList = () => {
             </div>
           </div>
         ))}
+      </div>
+
+      <div className="mt-12 flex items-center justify-center">
+        <Pagination
+          pages={data?.pages}
+          pageNum={data?.pageNumber}
+          isAdmin={userInfo.isAdmin}
+        />
       </div>
     </div>
   );
