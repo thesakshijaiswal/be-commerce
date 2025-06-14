@@ -14,11 +14,18 @@ const userSchema = new mongoose.Schema(
     },
     password: {
       type: String,
-      required: true,
+      required: function () {
+        return !this.isGoogleUser;
+      },
     },
+
     isAdmin: {
       type: Boolean,
       required: true,
+      default: false,
+    },
+    isGoogleUser: {
+      type: Boolean,
       default: false,
     },
     passwordResetToken: String,

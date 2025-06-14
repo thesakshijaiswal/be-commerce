@@ -14,6 +14,7 @@ const userLogin = asyncHandler(async (req, res) => {
       name: user.name,
       email: user.email,
       isAdmin: user.isAdmin,
+      isGoogleUser: user.isGoogleUser,
     });
   } else {
     res.status(401);
@@ -37,6 +38,7 @@ const userSignUp = asyncHandler(async (req, res) => {
       name: user.name,
       email: user.email,
       isAdmin: user.isAdmin,
+      isGoogleUser: user.isGoogleUser,
     });
   } else {
     res.status(400);
@@ -46,22 +48,23 @@ const userSignUp = asyncHandler(async (req, res) => {
 
 const updateUserProfile = asyncHandler(async (req, res) => {
   const user = await User.findById(req.body._id);
-  if (user) {
+  if (!user) {
+    res.status(404);
+    throw new Error("User not found!");
+  }
+  if (!user.isGoogleUser) {
     user.name = req.body.name || user.name;
     user.email = req.body.email || user.email;
     if (req.body.password) {
       user.password = req.body.password;
     }
-    await user.save();
-    res.status(200).json({
-      _id: user._id,
-      name: user.name,
-      email: user.email,
-    });
-  } else {
-    res.status(404);
-    throw new Error("User not found!");
   }
+  await user.save();
+  res.status(200).json({
+    _id: user._id,
+    name: user.name,
+    email: user.email,
+  });
 });
 
 const userLogout = asyncHandler(async (req, res) => {
@@ -152,6 +155,7 @@ const resetPassword = asyncHandler(async (req, res) => {
     name: user.name,
     email: user.email,
     isAdmin: user.isAdmin,
+    isGoogleUser: user.isGoogleUser,
   });
 });
 

@@ -11,6 +11,7 @@ import { setCredentials } from "../features/userSlice";
 const ProfilePage = () => {
   const dispatch = useDispatch();
   const { userInfo } = useSelector((state) => state.user);
+  const isGoogleUser = userInfo?.isGoogleUser;
   const [name, setName] = useState(userInfo.name);
   const [email, setEmail] = useState(userInfo.email);
   const [password, setPassword] = useState("");
@@ -27,6 +28,11 @@ const ProfilePage = () => {
     const isNameUnchanged = name.trim() === userInfo.name;
     const isEmailUnchanged = email.trim() === userInfo.email;
     const isPasswordEmpty = password.trim() === "";
+
+    if (isGoogleUser) {
+      toast.error("Please log in with email and password to use this feature.");
+      return;
+    }
 
     if (isNameUnchanged && isEmailUnchanged && isPasswordEmpty) {
       toast.error("You haven’t changed anything yet");
@@ -84,6 +90,7 @@ const ProfilePage = () => {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   autoComplete="Name"
+                  disabled={isGoogleUser}
                 />
                 <InputField
                   type="email"
@@ -94,29 +101,35 @@ const ProfilePage = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   autoComplete="Email"
+                  disabled={isGoogleUser}
                 />
-                <InputField
-                  type={showPassword ? "text" : "password"}
-                  fieldName="password"
-                  placeholder="••••••••"
-                  label="Password"
-                  icon={AiOutlineLock}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  showPassword={showPassword}
-                  setShowPassword={setShowPassword}
-                />
-                <InputField
-                  type={showConfirmPassword ? "text" : "password"}
-                  fieldName="confirmPassword"
-                  placeholder="••••••••"
-                  label="Confirm Password"
-                  icon={AiOutlineLock}
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                  showPassword={showConfirmPassword}
-                  setShowPassword={setShowConfirmPassword}
-                />
+                {!isGoogleUser && (
+                  <>
+                    <InputField
+                      type={showPassword ? "text" : "password"}
+                      fieldName="password"
+                      placeholder="••••••••"
+                      label="Password"
+                      icon={AiOutlineLock}
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      showPassword={showPassword}
+                      setShowPassword={setShowPassword}
+                    />
+                    <InputField
+                      type={showConfirmPassword ? "text" : "password"}
+                      fieldName="confirmPassword"
+                      placeholder="••••••••"
+                      label="Confirm Password"
+                      icon={AiOutlineLock}
+                      value={confirmPassword}
+                      onChange={(e) => setConfirmPassword(e.target.value)}
+                      showPassword={showConfirmPassword}
+                      setShowPassword={setShowConfirmPassword}
+                    />
+                  </>
+                )}
+
                 <div className="pt-4">
                   <Button
                     className="mb-2 w-full text-sm font-medium"

@@ -27,13 +27,7 @@ const ProductCardContainer = () => {
         });
         if (res.data.user) {
           console.log("User authenticated:", res.data.user);
-          dispatch(
-            setCredentials({
-              ...res.data.user._json,
-              _id: res.data._id,
-              isAdmin: res.data.user.isAdmin,
-            }),
-          );
+          dispatch(setCredentials(res.data.user));
         } else {
           console.log("User not authenticated");
         }

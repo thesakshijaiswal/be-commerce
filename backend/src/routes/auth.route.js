@@ -34,30 +34,28 @@ router.get("/google", async (req, res) => {
 
 //register or login user to database
 router.get("/login/success", async (req, res) => {
-  console.log("Login Success Route Called: log from auth route");
-  console.log("req.session.passport:", req.session.passport);
-  console.log("req.user:", req.user);
-  console.log("req.session:", req.session);
-  console.log("req.cookies:", req.cookies);
   if (req.user) {
-    console.log(req.user);
-    const isUserExists = await User.findOne({ email: req.user._json.email });
-    let newUser;
-    if (!isUserExists) {
-      newUser = new User({
+    let user = await User.findOne({ email: req.user._json.email });
+    if (!user) {
+      user = new User({
         name: req.user._json.name,
         email: req.user._json.email,
-        password: Date.now(),
+        isGoogleUser: true,
+        password: crypto.randomBytes(20).toString("hex"),
       });
-      await newUser.save();
+      await user.save();
     }
-    tokenGenerator(res, isUserExists ? isUserExists._id : newUser._id);
+
+    tokenGenerator(res, user._id);
+
     res.status(200).json({
       user: {
-        ...req.user,
-        isAdmin: isUserExists ? isUserExists.isAdmin : false,
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        isAdmin: user.isAdmin,
+        isGoogleUser: user.isGoogleUser,
         message: "Successfully Logged In",
-        _id: isUserExists ? isUserExists._id : newUser._id,
       },
     });
   } else {

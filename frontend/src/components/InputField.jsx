@@ -11,6 +11,7 @@ const InputField = ({
   showPassword,
   setShowPassword,
   autoComplete,
+  disabled,
 }) => {
   const isPasswordField = label === "Password" || label === "Confirm Password";
   const inputType = isPasswordField && showPassword ? "text" : type;
@@ -38,6 +39,7 @@ const InputField = ({
           autoCapitalize={fieldName === "email" ? "none" : undefined}
           aria-label={label}
           autoComplete={autoComplete}
+          disabled={disabled}
         />
         {isPasswordField && (
           <button
