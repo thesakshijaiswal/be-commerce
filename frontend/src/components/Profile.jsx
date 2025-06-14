@@ -3,7 +3,7 @@ import { HiOutlineUserCircle } from "react-icons/hi2";
 import { HiOutlineLogout } from "react-icons/hi";
 import { FaX } from "react-icons/fa6";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useLogoutMutation } from "../features/userApiSlice";
 import { logout } from "../features/userSlice";
@@ -12,13 +12,14 @@ const Profile = ({ onClose }) => {
   const { userInfo } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const location = useLocation();
   const [logoutApi] = useLogoutMutation();
 
   const handleLogout = async () => {
     try {
       await logoutApi().unwrap();
       dispatch(logout());
-      onClose(); //close profile popup when user is logged out
+      onClose();
       navigate("/login");
       toast.success("Logged Out Successfully");
     } catch (error) {
@@ -46,9 +47,18 @@ const Profile = ({ onClose }) => {
         )}
         <h2 className="mb-4 text-xl font-bold">Profile</h2>
         <p className="mb-4 text-base">{userInfo?.name}</p>
-        <Link to="/profile">
-          <Button className="mb-4 w-64 !bg-primary pl-1">View Profile</Button>
-        </Link>
+        {location.pathname !== "/profile" && (
+          <Button
+            onClick={() => {
+              onClose();
+              navigate("/profile");
+            }}
+            className="mb-4 w-64 !bg-primary pl-1"
+            ariaLabel="View Profile"
+          >
+            View Profile
+          </Button>
+        )}
 
         <Button
           className="w-64 pl-1"

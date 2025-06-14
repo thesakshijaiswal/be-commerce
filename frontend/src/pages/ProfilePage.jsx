@@ -24,18 +24,33 @@ const ProfilePage = () => {
 
   const handleUpdateProfile = async (e) => {
     e.preventDefault();
+    const isNameUnchanged = name.trim() === userInfo.name;
+    const isEmailUnchanged = email.trim() === userInfo.email;
+    const isPasswordEmpty = password.trim() === "";
+
+    if (isNameUnchanged && isEmailUnchanged && isPasswordEmpty) {
+      toast.error("You haven’t changed anything yet");
+      return;
+    }
+
     if (password !== confirmPassword) {
       toast.error("Passwords do not match");
       return;
     }
-    const res = await updateUser({
-      _id: userInfo._id,
-      name,
-      email,
-      password,
-    }).unwrap();
-    dispatch(setCredentials({ ...res }));
-    toast.success("Profile updated successfully!");
+
+    try {
+      const res = await updateUser({
+        _id: userInfo._id,
+        name,
+        email,
+        password: isPasswordEmpty ? undefined : password,
+      }).unwrap();
+
+      dispatch(setCredentials({ ...res }));
+      toast.success("Profile updated successfully!");
+    } catch (err) {
+      toast.error(err?.data?.message || "Update failed");
+    }
   };
 
   if (error) {
@@ -107,6 +122,7 @@ const ProfilePage = () => {
                     className="mb-2 w-full text-sm font-medium"
                     type="submit"
                     onClick={handleUpdateProfile}
+                    ariaLabel="Update Profile"
                   >
                     Update Profile
                   </Button>
