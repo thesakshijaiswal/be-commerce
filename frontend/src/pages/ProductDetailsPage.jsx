@@ -32,10 +32,6 @@ const ProductDetailsPage = () => {
       dispatch(addToCart({ ...product, quantity }));
       navigate("/cart");
       toast.success("Product added to cart!");
-    } else {
-      toast.error(
-        <span className="w-52 md:w-64">Product is out of stock!</span>,
-      );
     }
   };
 
@@ -49,7 +45,7 @@ const ProductDetailsPage = () => {
 
   if (isLoading) return <ProductDetailsShimmer />;
 
-  if (error) {
+  if (error || !product) {
     return (
       <section className="flex min-h-screen justify-center" role="alert">
         <div className="flex flex-col items-center justify-center">
@@ -67,34 +63,18 @@ const ProductDetailsPage = () => {
     );
   }
 
-  if (!product) {
-    return (
-      <section className="flex min-h-screen items-center justify-center">
-        <div className="text-center">
-          <h2 className="mb-4 text-xl font-semibold text-gray-600">
-            Product Not Found
-          </h2>
-          <Link to="/">
-            <Button btnIcon={TiArrowBackOutline}>Back to Home</Button>
-          </Link>
-        </div>
-      </section>
-    );
-  }
-
   return (
     <>
       <main className="my-5 flex flex-col items-center p-4 sm:px-10 md:px-3 lg:px-16">
         <div className="flex w-full max-w-6xl flex-col gap-6 md:flex-row lg:items-start">
           <div className="relative z-10 md:left-auto md:top-auto">
-            <Link to="/">
-              <Button
-                btnIcon={TiArrowBackOutline}
-                aria-label="Go back to product list"
-              >
-                Back
-              </Button>
-            </Link>
+            <Button
+              btnIcon={TiArrowBackOutline}
+              ariaLabel="Go back to product list"
+              onClick={() => navigate(-1)}
+            >
+              Back
+            </Button>
           </div>
 
           <div className="flex w-full items-center justify-center lg:w-1/2">
@@ -128,6 +108,11 @@ const ProductDetailsPage = () => {
               </p>
             </div>
 
+            <div className="flex items-center text-xl font-bold">
+              <BsCurrencyRupee aria-hidden="true" />
+              <p>{product.price}</p>
+            </div>
+
             <p className="text-base">
               {isExpanded
                 ? product.description
@@ -150,37 +135,37 @@ const ProductDetailsPage = () => {
               )}
             </div>
 
-            <div className="flex items-center text-xl font-bold">
-              <BsCurrencyRupee aria-hidden="true" />
-              <p>{product.price}</p>
-            </div>
+            {product.countInStock > 0 && (
+              <>
+                <StockCounter
+                  countInStock={product.countInStock}
+                  initialQuantity={1}
+                  onQuantityChange={setQuantity}
+                />
 
-            <StockCounter
-              countInStock={product.countInStock}
-              initialQuantity={1}
-              onQuantityChange={setQuantity}
-            />
+                <div className="flex gap-4 pt-3">
+                  <Button
+                    className="w-2/4 whitespace-nowrap"
+                    onClick={handleAddToCart}
+                    ariaLabel="Add to cart"
+                  >
+                    Add to Cart{" "}
+                    <BsCartPlus className="text-xl" aria-hidden="true" />
+                  </Button>
 
-            <div className="flex gap-4 pt-3">
-              <Button
-                className="w-2/4 whitespace-nowrap"
-                onClick={handleAddToCart}
-                ariaLabel="Add to cart"
-              >
-                Add to Cart{" "}
-                <BsCartPlus className="text-xl" aria-hidden="true" />
-              </Button>
-
-              <Button
-                className="w-2/4 whitespace-nowrap"
-                ariaLabel="Buy Now"
-                onClick={() => {
-                  navigate("/checkout");
-                }}
-              >
-                Buy Now <GrMoney className="text-xl" aria-hidden="true" />
-              </Button>
-            </div>
+                  <Button
+                    className="w-2/4 whitespace-nowrap"
+                    ariaLabel="Buy Now"
+                    onClick={() => {
+                      dispatch(addToCart({ ...product, quantity }));
+                      navigate("/checkout");
+                    }}
+                  >
+                    Buy Now <GrMoney className="text-xl" aria-hidden="true" />
+                  </Button>
+                </div>
+              </>
+            )}
           </section>
         </div>
       </main>

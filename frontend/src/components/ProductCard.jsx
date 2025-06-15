@@ -65,8 +65,6 @@ const ProductCard = ({
       );
       navigate("/cart");
       toast.success(`Product added to cart!`);
-    } else {
-      toast.error("Product is out of stock!");
     }
   };
 
@@ -113,12 +111,14 @@ const ProductCard = ({
           ) : (
             <p className="bg-transparent text-red-600">Unavailable</p>
           )}
-          <Button
-            className="flex items-center gap-2 font-medium"
-            onClick={handleAddToCartClick}
-          >
-            Add To Cart <BsCartPlus className="text-xl" />
-          </Button>
+          {countInStock > 0 && (
+            <Button
+              className="flex items-center gap-2 font-medium"
+              onClick={handleAddToCartClick}
+            >
+              Add To Cart <BsCartPlus className="text-xl" />
+            </Button>
+          )}
         </div>
       </div>
     </motion.div>
