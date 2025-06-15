@@ -65,7 +65,11 @@ const ProductReview = () => {
   const getTimeAgo = useCallback((dateString) => {
     const now = new Date();
     const reviewDate = new Date(dateString);
-    const diffInDays = Math.floor((now - reviewDate) / (1000 * 60 * 60 * 24));
+    const diffInMs = now - reviewDate;
+    const diffInDays = Math.max(
+      0,
+      Math.floor(diffInMs / (1000 * 60 * 60 * 24)),
+    );
 
     if (diffInDays === 0) return "Today";
     if (diffInDays === 1) return "Yesterday";

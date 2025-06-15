@@ -139,6 +139,13 @@ const OrderDetailsPage = () => {
           </tbody>
         </table>
         <div className="mt-4 flex justify-between text-sm font-semibold sm:text-base">
+          <span>Total Tax:</span>
+          <span className="flex items-center">
+            <BsCurrencyRupee className="mr-1" />
+            {taxPrice}
+          </span>
+        </div>
+        <div className="mt-4 flex justify-between text-sm font-semibold sm:text-base">
           <span>Total:</span>
           {orderItems && (
             <span className="flex items-center">
