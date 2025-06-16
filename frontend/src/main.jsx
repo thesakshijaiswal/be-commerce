@@ -9,6 +9,7 @@ import {
 import { Provider } from "react-redux";
 import App from "./App.jsx";
 import "./index.css";
+import "./index.js";
 import store from "./store.js";
 import {
   HomePage,

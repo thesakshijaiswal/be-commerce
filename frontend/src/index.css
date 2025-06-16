@@ -73,3 +73,20 @@
 }
 
 /********* Custom Radio in Payment Page - end *********/
+
+input[type="number"]:hover:not(:focus)::-webkit-inner-spin-button,
+input[type="number"]:hover:not(:focus)::-webkit-outer-spin-button {
+  pointer-events: none;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+  -webkit-appearance: textfield;
+  appearance: textfield;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
