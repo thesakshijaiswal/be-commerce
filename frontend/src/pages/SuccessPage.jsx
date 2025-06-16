@@ -1,12 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import { Button } from "../components";
 import paymentSuccessSVG from "../assets/payment-success.svg";
-import { FaLocationArrow } from "react-icons/fa6";
+import { FaReceipt } from "react-icons/fa6";
 import { IoCheckmarkDoneCircle } from "react-icons/io5";
 const SuccessPage = () => {
   const navigate = useNavigate();
-  const handleContinueShopping = () => {
-    navigate("/");
+  const handleViewOrderHistory = () => {
+    navigate("/profile");
   };
   return (
     <div className="flex min-h-screen flex-col items-center justify-center space-y-6 pb-20 text-center">
@@ -22,10 +22,10 @@ const SuccessPage = () => {
       </p>
       <Button
         className="z-20 whitespace-nowrap"
-        onClick={handleContinueShopping}
+        onClick={handleViewOrderHistory}
       >
-        Continue Shopping
-        <FaLocationArrow />
+        View Order History
+        <FaReceipt />
       </Button>
     </div>
   );

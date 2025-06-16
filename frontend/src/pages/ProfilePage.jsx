@@ -7,9 +7,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { useGetUserOrdersQuery } from "../features/orderApiSlice";
 import { useUpdateUserProfileMutation } from "../features/userApiSlice";
 import { setCredentials } from "../features/userSlice";
+import { useNavigate } from "react-router-dom";
 
 const ProfilePage = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { userInfo } = useSelector((state) => state.user);
   const isGoogleUser = userInfo?.isGoogleUser;
   const [name, setName] = useState(userInfo.name);
@@ -57,6 +59,10 @@ const ProfilePage = () => {
     } catch (err) {
       toast.error(err?.data?.message || "Update failed");
     }
+  };
+
+  const handleOrderCardClick = (orderId) => {
+    navigate(`/order/${orderId}`);
   };
 
   if (error) {
@@ -157,7 +163,10 @@ const ProfilePage = () => {
               userOrders.map((order) => (
                 <div
                   key={order._id}
-                  className="w-full rounded-2xl border border-gray-200 bg-white p-4 shadow-sm transition hover:shadow-md"
+                  className="w-full cursor-pointer rounded-2xl border border-gray-200 bg-white p-4 shadow-sm transition hover:shadow-md"
+                  onClick={() => handleOrderCardClick(order._id)}
+                  role="button"
+                  tabIndex={0}
                 >
                   <div className="mb-2 text-sm text-secondary/70">
                     <div className="flex justify-between md:justify-between">

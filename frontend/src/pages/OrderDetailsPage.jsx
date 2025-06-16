@@ -43,6 +43,7 @@ const OrderDetailsPage = () => {
     shippingPrice,
     taxPrice,
     paymentMethod,
+    paymentResult,
   } = order || {};
 
   console.log(order);
