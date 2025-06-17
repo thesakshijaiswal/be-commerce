@@ -45,6 +45,13 @@ export const userApiSlice = apiSlice.injectEndpoints({
         body: data,
       }),
     }),
+    uploadImage: builder.mutation({
+      query: (data) => ({
+        url: `${BASE_BACKEND_URL}/api/upload`,
+        method: "POST",
+        body: data,
+      }),
+    }),
     getUsers: builder.query({
       query: () => ({
         url: USERS_URL,
@@ -72,6 +79,7 @@ export const userApiSlice = apiSlice.injectEndpoints({
     }),
   }),
 });
+
 export const {
   useLoginMutation,
   useSignUpMutation,
@@ -79,6 +87,7 @@ export const {
   useResetPasswordMutation,
   useLogoutMutation,
   useUpdateUserProfileMutation,
+  useUploadImageMutation,
   useGetUsersQuery,
   useGetUserByIdQuery,
   useUpdateUserAsAdminMutation,

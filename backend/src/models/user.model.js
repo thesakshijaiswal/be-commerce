@@ -18,7 +18,10 @@ const userSchema = new mongoose.Schema(
         return !this.isGoogleUser;
       },
     },
-
+    picture: {
+      type: String,
+      default: null,
+    },
     isAdmin: {
       type: Boolean,
       required: true,

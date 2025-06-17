@@ -13,6 +13,7 @@ const userLogin = asyncHandler(async (req, res) => {
       _id: user._id,
       name: user.name,
       email: user.email,
+      picture: user.picture,
       isAdmin: user.isAdmin,
       isGoogleUser: user.isGoogleUser,
     });
@@ -37,6 +38,7 @@ const userSignUp = asyncHandler(async (req, res) => {
       _id: user._id,
       name: user.name,
       email: user.email,
+      picture: user.picture,
       isAdmin: user.isAdmin,
       isGoogleUser: user.isGoogleUser,
     });
@@ -52,6 +54,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
     res.status(404);
     throw new Error("User not found!");
   }
+
   if (!user.isGoogleUser) {
     user.name = req.body.name || user.name;
     user.email = req.body.email || user.email;
@@ -59,11 +62,17 @@ const updateUserProfile = asyncHandler(async (req, res) => {
       user.password = req.body.password;
     }
   }
+
+  if (req.body.picture !== undefined) {
+    user.picture = req.body.picture;
+  }
+
   await user.save();
   res.status(200).json({
     _id: user._id,
     name: user.name,
     email: user.email,
+    picture: user.picture,
     isAdmin: user.isAdmin,
     isGoogleUser: user.isGoogleUser,
   });
@@ -156,6 +165,7 @@ const resetPassword = asyncHandler(async (req, res) => {
     _id: user._id,
     name: user.name,
     email: user.email,
+    picture: user.picture,
     isAdmin: user.isAdmin,
     isGoogleUser: user.isGoogleUser,
   });
