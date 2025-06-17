@@ -119,7 +119,7 @@ const ProductEditPage = () => {
 
   return (
     <div className="flex min-h-screen items-center justify-center p-4">
-      <div className="w-full rounded-lg bg-white p-8 shadow-md">
+      <div className="w-full rounded-lg bg-white p-3 shadow-md sm:p-8">
         <h1 className="mb-6 text-2xl font-bold text-gray-900">Edit Product</h1>
 
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -156,9 +156,10 @@ const ProductEditPage = () => {
                       rows="6"
                       value={productData.description}
                       onChange={handleInputChange}
-                      className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 pl-10 text-sm text-gray-900 focus:border-primary focus:ring-primary"
+                      className="block w-full rounded-lg bg-gray-50 p-2.5 pl-10 text-sm text-gray-900 ring-1 ring-gray-200 focus:ring focus:ring-secondary"
                       placeholder="Enter product description"
                     />
+                    <div className="pointer-events-none sticky bottom-0 -mt-8 flex h-8 rounded-md bg-gray-100 [mask-image:linear-gradient(transparent,#6b7280)]"></div>
                   </div>
                 </div>
               </div>

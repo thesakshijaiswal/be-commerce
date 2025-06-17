@@ -155,7 +155,7 @@ const ProfilePage = () => {
         <div className="mt-8 w-full max-w-6xl p-4">
           <h3 className="mb-4 text-2xl font-semibold">Order History</h3>
           <div
-            className={`space-y-4 p-2 ${
+            className={`space-y-4 ${
               userOrders?.length > 0 ? "md:max-h-[84vh] md:overflow-auto" : ""
             }`}
           >
@@ -216,6 +216,7 @@ const ProfilePage = () => {
               <EmptyOrderHistory />
             )}
           </div>
+          <div className="pointer-events-none sticky bottom-0 -mt-16 flex h-16 bg-gray-100 [mask-image:linear-gradient(transparent,#000000)]"></div>
         </div>
       </div>
     </div>

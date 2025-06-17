@@ -153,7 +153,7 @@ const UserEditPage = () => {
                       isAdmin: e.target.value === "true",
                     }))
                   }
-                  className="h-12 w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 p-2.5 px-4 pl-10 text-sm text-gray-700 shadow-sm focus:border-secondary focus:outline-none focus:ring-1 focus:ring-secondary"
+                  className="h-12 w-full cursor-pointer rounded-lg bg-gray-50 p-2.5 px-4 pl-10 text-sm text-gray-700 shadow-sm ring-1 ring-gray-200 focus:ring focus:ring-secondary"
                 >
                   <option value="false">Regular User</option>
                   <option value="true">Administrator</option>
