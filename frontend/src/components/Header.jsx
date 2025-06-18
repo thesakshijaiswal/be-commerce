@@ -40,7 +40,10 @@ const Header = () => {
     <Link
       to={to}
       className="flex cursor-pointer items-center"
-      onClick={onClick}
+      onClick={() => {
+        setIsMenuOpen(false);
+        if (onClick) onClick();
+      }}
     >
       {Icon && <Icon className="mr-2 h-8 w-8" />}
       {label}
@@ -89,8 +92,6 @@ const Header = () => {
     if (keyword) {
       navigate(`/search/${keyword.trim()}`);
       setKeyword("");
-    } else {
-      navigate("/");
     }
   };
 
