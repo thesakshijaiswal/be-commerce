@@ -18,14 +18,32 @@ const SignUpPage = () => {
 
   const handleSignUp = async (e) => {
     e.preventDefault();
+    const normalizedEmail = email.trim().toLowerCase();
 
-    if (!name || !email || !password) {
+    if (!name || !normalizedEmail || !password) {
       toast.error("All fields are required!");
       return;
     }
 
+    const emailRegex =
+      /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9-]+\.(com|net|org|edu|gov|co|in|io|me|dev|tech|ai)$/i;
+
+    if (!emailRegex.test(normalizedEmail)) {
+      toast.error("Please enter a valid email address.");
+      return;
+    }
+
+    if (password.length < 8) {
+      toast.error("Password must be at least 8 characters long.");
+      return;
+    }
+
     try {
-      const res = await signUp({ name, email, password }).unwrap();
+      const res = await signUp({
+        name,
+        email: normalizedEmail,
+        password,
+      }).unwrap();
       dispatch(setCredentials({ ...res }));
       navigate("/");
       toast.success("Signed up successfully");

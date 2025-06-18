@@ -5,7 +5,8 @@ import tokenGenerator from "../utils/tokenGenerator.js";
 import crypto from "crypto";
 
 const userLogin = asyncHandler(async (req, res) => {
-  const { email, password } = req.body;
+  const email = req.body.email?.trim().toLowerCase();
+  const password = req.body.password;
   const user = await User.findOne({ email });
   if (user && (await user.matchPassword(password))) {
     tokenGenerator(res, user._id);
@@ -24,7 +25,28 @@ const userLogin = asyncHandler(async (req, res) => {
 });
 
 const userSignUp = asyncHandler(async (req, res) => {
-  const { name, email, password } = req.body;
+  const name = req.body.name?.trim();
+  const email = req.body.email?.trim().toLowerCase();
+  const password = req.body.password;
+
+  if (!name || !email || !password) {
+    res.status(400);
+    throw new Error("All fields are required.");
+  }
+
+  const emailRegex =
+    /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9-]+\.(com|net|org|edu|gov|co|in|io|me|dev|tech|ai)$/i;
+
+  if (!emailRegex.test(email)) {
+    res.status(400);
+    throw new Error("Invalid email format");
+  }
+
+  if (password.length < 8) {
+    res.status(400);
+    throw new Error("Password must be at least 8 characters long");
+  }
+
   const isUserExist = await User.findOne({ email });
   if (isUserExist) {
     res.status(400);
@@ -57,9 +79,13 @@ const updateUserProfile = asyncHandler(async (req, res) => {
 
   if (!user.isGoogleUser) {
     user.name = req.body.name || user.name;
-    user.email = req.body.email || user.email;
     if (req.body.password) {
-      user.password = req.body.password;
+      const password = req.body.password.trim();
+      if (password.length < 8) {
+        res.status(400);
+        throw new Error("Password must be at least 8 characters long.");
+      }
+      user.password = password;
     }
   }
 

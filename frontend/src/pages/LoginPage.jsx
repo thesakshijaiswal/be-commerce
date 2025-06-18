@@ -34,14 +34,15 @@ const LoginPage = () => {
   }, [navigate, userInfo, redirect]);
   const handleLogin = async (e) => {
     e.preventDefault();
+    const normalizedEmail = email.trim().toLowerCase();
 
-    if (!email.trim() || !password.trim()) {
+    if (!normalizedEmail.trim() || !password.trim()) {
       toast.error("All fields are required");
       return;
     }
 
     try {
-      const res = await login({ email, password }).unwrap();
+      const res = await login({ email: normalizedEmail, password }).unwrap();
       dispatch(setCredentials({ ...res }));
       navigate("/");
       toast.success("Logged in successfully");

@@ -225,7 +225,7 @@ const ProfilePage = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   autoComplete="Email"
-                  disabled={isGoogleUser}
+                  disabled
                 />
                 {!isGoogleUser && (
                   <>
