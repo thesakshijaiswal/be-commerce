@@ -35,16 +35,7 @@ router.get("/google", async (req, res) => {
 //register or login user to database
 router.get("/login/success", async (req, res) => {
   if (req.user) {
-    let user = await User.findOne({ email: req.user._json.email });
-    if (!user) {
-      user = new User({
-        name: req.user._json.name,
-        email: req.user._json.email,
-        isGoogleUser: true,
-        password: crypto.randomBytes(20).toString("hex"),
-      });
-      await user.save();
-    }
+    const user = req.user;
 
     tokenGenerator(res, user._id);
 
@@ -53,6 +44,7 @@ router.get("/login/success", async (req, res) => {
         _id: user._id,
         name: user.name,
         email: user.email,
+        picture: user.picture,
         isAdmin: user.isAdmin,
         isGoogleUser: user.isGoogleUser,
         message: "Successfully Logged In",
