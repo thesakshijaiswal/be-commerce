@@ -11,6 +11,7 @@ const secureHeaders = (req, res, next) => {
       "font-src 'self' https://fonts.gstatic.com",
       "frame-src https://js.stripe.com",
       "object-src 'none'",
+      "base-uri 'none'",
     ].join("; ")
   );
 
@@ -20,10 +21,11 @@ const secureHeaders = (req, res, next) => {
       "max-age=31536000; includeSubDomains"
     );
   }
+  res.setHeader("X-Frame-Options", "SAMEORIGIN");
 
   res.setHeader("Cross-Origin-Opener-Policy", "same-origin");
-  res.setHeader("X-Frame-Options", "SAMEORIGIN");
   res.setHeader("Referrer-Policy", "no-referrer");
+
   res.setHeader(
     "Permissions-Policy",
     "camera=(), microphone=(), geolocation=()"
