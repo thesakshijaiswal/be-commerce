@@ -78,7 +78,7 @@ const ProductDetailsPage = () => {
           </div>
 
           <div className="flex w-full items-center justify-center lg:w-1/2">
-            <figure className="w-80 rounded-lg bg-white p-2 shadow-md lg:w-96">
+            <figure className="md:h-96 w-80 rounded-lg bg-white p-2 shadow-md lg:w-96">
               <img
                 className="h-full w-full rounded-md object-cover"
                 src={product.image}

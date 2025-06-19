@@ -84,7 +84,7 @@ const ProductCard = ({
       >
         <div className="h-56 w-full overflow-hidden rounded-md">
           <img
-            className="h-full w-full"
+            className="h-full w-full object-cover"
             src={getImageSource(image)}
             alt={name}
           />

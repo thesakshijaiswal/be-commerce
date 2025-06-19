@@ -39,14 +39,17 @@ const Header = () => {
   const NavItem = ({ to, icon: Icon, label, onClick }) => (
     <Link
       to={to}
-      className="flex cursor-pointer items-center"
+      className="group relative flex w-full items-center"
       onClick={() => {
         setIsMenuOpen(false);
         if (onClick) onClick();
       }}
     >
-      {Icon && <Icon className="mr-2 h-8 w-8" />}
-      {label}
+      <span className="absolute inset-0 min-h-[48px] min-w-[48px]"></span>
+      <div className="relative flex items-center">
+        {Icon && <Icon className="mr-2 h-8 w-8" />}
+        {label && <span className="text-base">{label}</span>}
+      </div>
     </Link>
   );
 
@@ -142,9 +145,11 @@ const Header = () => {
             </li>
             {userInfo && <li>{renderProfile()}</li>}
             {userInfo?.isAdmin && (
-              <Button ariaLabel="Dashboard">
-                <NavItem to="/admin" label="Dashboard" />
-              </Button>
+              <li>
+                <Button ariaLabel="Dashboard">
+                  <NavItem to="/admin" label="Dashboard" />
+                </Button>
+              </li>
             )}
           </ul>
           {!userInfo && renderLoginButton()}
@@ -196,9 +201,11 @@ const Header = () => {
             </li>
             {userInfo && <li>{renderProfile()}</li>}
             {userInfo?.isAdmin && (
-              <Button>
-                <NavItem to="/admin" label="Dashboard" />
-              </Button>
+              <li>
+                <Button>
+                  <NavItem to="/admin" label="Dashboard" />
+                </Button>
+              </li>
             )}
           </ul>
           {!userInfo && renderLoginButton()}
