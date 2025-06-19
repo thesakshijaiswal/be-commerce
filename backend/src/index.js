@@ -6,6 +6,7 @@ import {
   errorHandler,
   pathNotFound,
 } from "./middlewares/errorHandler.middleware.js";
+import secureHeaders from "./middlewares/secureHeaders.middleware.js";
 import userRoutes from "./routes/user.route.js";
 import cookieParser from "cookie-parser";
 import configurePassport from "./utils/passport.js";
@@ -33,6 +34,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 configurePassport(app);
 configureStripe(app);
+
+app.use(secureHeaders);
 
 app.use("/api/products", productRoute);
 app.use("/api/users", userRoutes);
