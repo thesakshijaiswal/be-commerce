@@ -1,6 +1,4 @@
 const secureHeaders = (req, res, next) => {
-  const isProd = process.env.NODE_ENV === "production";
-
   res.setHeader(
     "Content-Security-Policy",
     [
@@ -15,17 +13,15 @@ const secureHeaders = (req, res, next) => {
     ].join("; ")
   );
 
-  if (isProd) {
+  if (process.env.NODE_ENV === "production") {
     res.setHeader(
       "Strict-Transport-Security",
-      "max-age=31536000; includeSubDomains"
+      "max-age=31536000; includeSubDomains; preload"
     );
   }
   res.setHeader("X-Frame-Options", "SAMEORIGIN");
-
   res.setHeader("Cross-Origin-Opener-Policy", "same-origin");
   res.setHeader("Referrer-Policy", "no-referrer");
-
   res.setHeader(
     "Permissions-Policy",
     "camera=(), microphone=(), geolocation=()"

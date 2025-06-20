@@ -10,6 +10,7 @@ import { Button, Pagination } from "../../components";
 import { toast } from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import LoadingAnimation from "../LoadingAnimation";
 
 const ProductList = () => {
   const { pageNumber } = useParams();
@@ -24,8 +25,7 @@ const ProductList = () => {
 
   const { userInfo } = useSelector((state) => state.user);
 
-  if (isLoading)
-    return <div className="text-center text-secondary">Loading...</div>;
+  if (isLoading) return <LoadingAnimation />;
   if (error) {
     toast.error(error?.data?.message || error?.error);
   }

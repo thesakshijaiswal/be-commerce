@@ -2,11 +2,11 @@ import { useGetOrdersQuery } from "../../features/orderApiSlice";
 import { toast } from "react-hot-toast";
 import { BsCurrencyRupee } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import LoadingAnimation from "../LoadingAnimation";
 
 const OrderList = () => {
   const { data: orders, isLoading, error } = useGetOrdersQuery();
-  if (isLoading)
-    return <div className="text-center text-secondary">Loading...</div>;
+  if (isLoading) return <LoadingAnimation />;
   if (error) {
     toast.error(error?.data?.message || error?.error);
   }

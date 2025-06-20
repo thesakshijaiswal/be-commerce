@@ -22,6 +22,7 @@ export { default as ReviewForm } from "./ReviewForm";
 export { default as ReviewFilter } from "./ReviewFilter";
 export { default as EmptySearch } from "./EmptySearch";
 export { default as Pagination } from "./Pagination";
+export { default as LoadingAnimation } from "./LoadingAnimation";
 export { default as UserList } from "./Admin/UserList";
 export { default as ProductList } from "./Admin/ProductList";
 export { default as OrderList } from "./Admin/OrderList";

@@ -6,6 +6,7 @@ import { RiDeleteBin2Line } from "react-icons/ri";
 import { FiEdit } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import LoadingAnimation from "../LoadingAnimation";
 
 const UserList = () => {
   const { data: users, isLoading, error, refetch } = useGetUsersQuery();
@@ -24,8 +25,7 @@ const UserList = () => {
     }
   };
 
-  if (isLoading)
-    return <div className="text-center text-secondary">Loading...</div>;
+  if (isLoading) return <LoadingAnimation />;
   if (error) {
     toast.error(error?.data?.message || error?.error);
   }
