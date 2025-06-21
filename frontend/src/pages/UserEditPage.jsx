@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { AiOutlineMail, AiOutlineUser } from "react-icons/ai";
-import { InputField, Button } from "../components";
+import { InputField, Button, ButtonSpinner } from "../components";
 import {
   useGetUserByIdQuery,
   useUpdateUserAsAdminMutation,
@@ -203,7 +203,14 @@ const UserEditPage = () => {
 
             <div className="flex flex-col gap-4 sm:flex-row">
               <Button type="submit" className="w-full" disabled={isUpdating}>
-                {isUpdating ? "Updating..." : "Update User"}
+                {isUpdating ? (
+                  <>
+                    <ButtonSpinner />
+                    <span>Updating...</span>
+                  </>
+                ) : (
+                  "Update User"
+                )}
               </Button>
               <Button
                 type="button"

@@ -61,6 +61,7 @@ const SignUpPage = () => {
       title="Create an Account"
       submitButtonText="Sign Up"
       altText="Already have an account?"
+      loadingText="Signing Up..."
       altLink="/login"
       altLinkText="Sign In"
       onSubmit={handleSignUp}

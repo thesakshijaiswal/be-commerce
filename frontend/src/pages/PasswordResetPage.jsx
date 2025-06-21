@@ -40,6 +40,7 @@ const PasswordResetPage = () => {
     <AuthForm
       title="Reset your Password"
       submitButtonText="Reset Password"
+      loadingText="Resetting..."
       onSubmit={handleResetPassword}
       isLoading={false}
       password={password}

@@ -1,5 +1,10 @@
-import { Button, InputField, OrderStatusBullet } from "../components";
-import EmptyOrderHistory from "../components/EmptyOrderHistory";
+import {
+  Button,
+  InputField,
+  OrderStatusBullet,
+  EmptyOrderHistory,
+  ButtonSpinner,
+} from "../components";
 import { useState, useRef } from "react";
 import {
   AiOutlineMail,
@@ -261,9 +266,14 @@ const ProfilePage = () => {
                     disabled={isUpdating || isUploading}
                     ariaLabel="Update Profile"
                   >
-                    {isUpdating || isUploading
-                      ? "Updating..."
-                      : "Update Profile"}
+                    {isUpdating || isUploading ? (
+                      <>
+                        <ButtonSpinner />
+                        <span>Updating...</span>
+                      </>
+                    ) : (
+                      "Update Profile"
+                    )}
                   </Button>
                 </div>
               </form>

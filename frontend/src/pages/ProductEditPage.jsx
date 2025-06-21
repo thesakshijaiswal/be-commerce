@@ -5,7 +5,7 @@ import {
   useUpdateProductMutation,
   useUploadFileHandlerMutation,
 } from "../features/productsApiSlice";
-import { Button, InputField } from "../components";
+import { Button, InputField, ButtonSpinner } from "../components";
 import { toast } from "react-hot-toast";
 import {
   AiOutlineShoppingCart,
@@ -276,7 +276,14 @@ const ProductEditPage = () => {
 
           <div className="flex justify-end gap-4 pt-4">
             <Button type="submit" disabled={loadingUpdate}>
-              {loadingUpdate ? "Updating..." : "Update Product"}
+              {loadingUpdate ? (
+                <>
+                  <ButtonSpinner />
+                  <span>Updating...</span>
+                </>
+              ) : (
+                "Update Product"
+              )}
             </Button>
             <Button
               type="button"

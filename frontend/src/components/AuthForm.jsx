@@ -1,4 +1,4 @@
-import { Button, InputField, AuthLayout } from "../components";
+import { Button, InputField, AuthLayout, ButtonSpinner } from "../components";
 import googleLogo from "../assets/google_signIn.svg";
 import { AiOutlineMail, AiOutlineLock } from "react-icons/ai";
 import { Link } from "react-router-dom";
@@ -8,6 +8,7 @@ import { BASE_BACKEND_URL } from "../utils/constants";
 const AuthForm = ({
   title,
   submitButtonText,
+  loadingText,
   altText,
   altLink,
   altLinkText,
@@ -43,6 +44,8 @@ const AuthForm = ({
       toast.error(error?.data?.message || error?.error);
     }
   };
+
+  const displayLoadingText = loadingText || "Processing...";
 
   return (
     <AuthLayout title={title} banner={banner} bannerAlt={bannerAlt}>
@@ -130,7 +133,10 @@ const AuthForm = ({
             type="submit"
             disabled={isLoading}
           >
-            {submitButtonText}
+            <div className="flex items-center justify-center gap-2">
+              {isLoading && <ButtonSpinner />}
+              {isLoading ? displayLoadingText : submitButtonText}
+            </div>
           </Button>
           {showGoogleOption && (
             <div>
