@@ -18,7 +18,7 @@ import configureStripe from "./utils/stripe.js";
 
 connectDB();
 const app = express();
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 5000;
 const __dirname = path.resolve();
 
 app.use(express.json({ limit: "10mb" }));
@@ -29,8 +29,6 @@ app.use(
     credentials: true,
   })
 );
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 configurePassport(app);
 configureStripe(app);
@@ -45,10 +43,20 @@ app.use("/api/upload", uploadRoutes);
 
 /*********PRODUCTION CODE**********/
 if (process.env.NODE_ENV === "production") {
+  const publicPath = path.join(__dirname, "..", "frontend", "public");
+
   app.use(express.static(path.join(__dirname, "../frontend/dist")));
 
   app.use("*", (req, res) => {
     res.sendFile(path.resolve(__dirname, "../frontend", "dist", "index.html"));
+  });
+
+  app.get("/robots.txt", (req, res) => {
+    res.sendFile(path.join(publicPath, "robots.txt"));
+  });
+
+  app.get("/sitemap.xml", (req, res) => {
+    res.sendFile(path.join(publicPath, "sitemap.xml"));
   });
 }
 /*********PRODUCTION CODE**********/
