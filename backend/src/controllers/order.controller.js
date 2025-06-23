@@ -69,9 +69,30 @@ const updateOrderToDelivered = asyncHandler(async (req, res) => {
     const updatedOrder = await order.save();
 
     res.json(updatedOrder);
+  } else {
+    res.status(404);
+    throw new Error("Order Not Found");
   }
-  res.status(404);
-  throw new Error("Order Not Found");
+});
+
+const updateOrderToPaid = asyncHandler(async (req, res) => {
+  const order = await Order.findById(req.params.id);
+
+  if (order) {
+    order.paidAt = Date.now();
+    order.paymentResult = {
+      id: req.body.id || req.body.session_id,
+      status: req.body.status || "completed",
+      updateTime: req.body.update_time || Date.now(),
+      emailAddress: req.body.email,
+    };
+
+    const updatedOrder = await order.save();
+    res.json(updatedOrder);
+  } else {
+    res.status(404);
+    throw new Error("Order Not Found");
+  }
 });
 
 export {
@@ -80,4 +101,5 @@ export {
   getUserOrder,
   getOrders,
   updateOrderToDelivered,
+  updateOrderToPaid,
 };

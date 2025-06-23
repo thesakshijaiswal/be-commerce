@@ -21,6 +21,8 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const __dirname = path.resolve();
 
+configureStripe(app);
+
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 app.use(
@@ -31,8 +33,6 @@ app.use(
 );
 app.use(cookieParser());
 configurePassport(app);
-configureStripe(app);
-
 app.use(secureHeaders);
 
 app.use("/api/products", productRoute);
