@@ -26,7 +26,9 @@ const configureStripe = (app) => {
             quantity: 1,
           },
         ],
-        success_url: `${process.env.CLIENT_URL}/success?session_id={CHECKOUT_SESSION_ID}&order_id=${orderId}`,
+        success_url: `${
+          process.env.CLIENT_URL
+        }/success?session_id=${"{CHECKOUT_SESSION_ID}"}&order_id=${orderId}`,
         cancel_url: `${process.env.CLIENT_URL}/order/${orderId}`,
         metadata: {
           orderId: orderId,

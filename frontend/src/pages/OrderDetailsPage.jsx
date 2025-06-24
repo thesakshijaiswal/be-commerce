@@ -43,20 +43,20 @@ const OrderDetailsPage = () => {
     shippingPrice,
     taxPrice,
     paymentMethod,
-    paymentResult,
   } = order || {};
 
   console.log(order);
 
   const handleStripePayment = async () => {
     try {
-      // Send the whole order object to backend for Stripe session creation
       const res = await payWithStripe({
+        orderId,
         orderItems,
         totalPrice,
         shippingPrice,
         taxPrice,
         paymentMethod,
+        paymentResult,
       }).unwrap();
       window.location.href = res.url;
     } catch (error) {
@@ -167,9 +167,11 @@ const OrderDetailsPage = () => {
           )}
         </div>
         <div className="flex flex-col items-center md:flex-row md:gap-4">
-          <Button className="mt-4 w-full" onClick={handleStripePayment}>
-            Pay Now
-          </Button>
+          {order?.paymentResult?.status !== "completed" && (
+            <Button className="mt-4 w-full" onClick={handleStripePayment}>
+              Pay Now
+            </Button>
+          )}
           {userInfo.isAdmin && !order.isDelivered && (
             <Button
               className="mt-4 w-full"
