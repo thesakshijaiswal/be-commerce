@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setCredentials } from "../features/userSlice";
 import Pagination from "./Pagination";
 import EmptySearch from "./EmptySearch";
+
 const ProductCardContainer = () => {
   const { keyword, pageNumber } = useParams();
   const { data, isLoading, error } = useGetProductsQuery({
@@ -26,26 +27,19 @@ const ProductCardContainer = () => {
           withCredentials: true,
         });
         if (res.data.user) {
-          console.log("User authenticated:", res.data.user);
           dispatch(setCredentials(res.data.user));
-        } else {
-          console.log("User not authenticated");
         }
       } catch (error) {
-        if (error.response?.status === 403 || error.response?.status === 401) {
-          console.log(
-            "User is not logged in. This is expected for unauthenticated users.",
-          );
-        } else {
-          console.error("Unexpected error fetching user:", error);
+        const status = error.response?.status;
+        if (status !== 401 && status !== 403) {
+          if (import.meta.env.DEV) {
+            console.error("Unexpected error fetching user:", error);
+          }
         }
       }
     };
     if (!user.userInfo) {
-      console.log("Attempting to fetch user info...");
       getUser();
-    } else {
-      console.log("User already logged in:", user.userInfo);
     }
   }, [user.userInfo, dispatch]);
 

@@ -33,8 +33,7 @@ const stages = [
 const OrderTimeline = ({ order }) => {
   const getCurrentStep = () => {
     if (order.isDelivered) return 4;
-    if (order.outForDelivery) return 3;
-    if (order.paidAt) return 2;
+    if (order.paidAt) return 3;
     return 1;
   };
 
