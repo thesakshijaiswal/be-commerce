@@ -25,14 +25,18 @@ app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin:
+      process.env.NODE_ENV === "production"
+        ? "https://be-commerce-q7nw.onrender.com"
+        : "http://localhost:3000",
     credentials: true,
   })
 );
 app.use(cookieParser());
 configurePassport(app);
-app.use(secureHeaders);
 configureStripe(app);
+
+app.use(secureHeaders);
 
 app.use("/api/products", productRoute);
 app.use("/api/users", userRoutes);

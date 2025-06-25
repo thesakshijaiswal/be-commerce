@@ -1,10 +1,10 @@
 import {
   Button,
   InputField,
-  OrderStatusBullet,
   EmptyOrderHistory,
   ButtonSpinner,
   OrderTimeline,
+  LoadingAnimation,
 } from "../components";
 import { useState, useRef } from "react";
 import {
@@ -172,7 +172,7 @@ const ProfilePage = () => {
   }
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <LoadingAnimation />;
   }
 
   return (
@@ -339,7 +339,6 @@ const ProfilePage = () => {
 
                   <div className="mt-4 flex justify-between text-sm font-medium">
                     <span>Total: ₹{order.totalPrice}</span>
-                    <OrderStatusBullet isDelivered={order.isDelivered} />
                   </div>
                   <div className="mt-2 rounded-lg border bg-primary/5 p-3">
                     <OrderTimeline order={order} />

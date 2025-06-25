@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { motion } from "framer-motion";
 import {
   FaShoppingCart,
@@ -32,8 +31,6 @@ const stages = [
 ];
 
 const OrderTimeline = ({ order }) => {
-  const [hoveredStep, setHoveredStep] = useState(null);
-
   const getCurrentStep = () => {
     if (order.isDelivered) return 4;
     if (order.outForDelivery) return 3;
@@ -45,9 +42,9 @@ const OrderTimeline = ({ order }) => {
 
   return (
     <div className="mx-auto w-full max-w-4xl p-2">
-      <div className="hidden md:block">
+      <div className="hidden lg:block">
         <div className="relative">
-          <div className="absolute top-5 h-1 w-full rounded-full bg-gray-200">
+          <div className="absolute left-[5%] right-[5%] top-5 h-1 rounded-full bg-gray-200">
             <motion.div
               className="h-full rounded-full bg-primary"
               initial={{ width: 0 }}
@@ -66,9 +63,7 @@ const OrderTimeline = ({ order }) => {
               return (
                 <motion.div
                   key={idx}
-                  className="relative flex cursor-pointer flex-col items-center"
-                  onHoverStart={() => setHoveredStep(idx)}
-                  onHoverEnd={() => setHoveredStep(null)}
+                  className="relative flex flex-col items-center"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: idx * 0.1, duration: 0.4 }}
@@ -87,7 +82,7 @@ const OrderTimeline = ({ order }) => {
 
                   <div className="mt-2 max-w-20 text-center sm:max-w-none">
                     <span
-                      className={`text-xs font-medium transition-colors duration-300 sm:text-sm ${
+                      className={`text-xs font-medium transition-colors duration-300 ${
                         isActive ? "text-gray-900" : "text-gray-500"
                       }`}
                     >
@@ -101,7 +96,7 @@ const OrderTimeline = ({ order }) => {
         </div>
       </div>
 
-      <div className="md:hidden">
+      <div className="lg:hidden">
         <div className="relative">
           <div className="absolute left-5 top-0 h-full w-0.5 rounded-full bg-gray-200">
             <motion.div

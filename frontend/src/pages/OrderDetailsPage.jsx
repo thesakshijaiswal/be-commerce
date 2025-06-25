@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { Button, OrderStatusBullet } from "../components";
+import { Button, OrderStatusBullet, LoadingAnimation } from "../components";
 import {
   useDeliverOrderMutation,
   useGetOrderDetailsQuery,
@@ -31,7 +31,7 @@ const OrderDetailsPage = () => {
   }
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <LoadingAnimation />;
   }
 
   const {
@@ -43,6 +43,7 @@ const OrderDetailsPage = () => {
     shippingPrice,
     taxPrice,
     paymentMethod,
+    paymentResult,
   } = order || {};
 
   console.log(order);
@@ -56,7 +57,6 @@ const OrderDetailsPage = () => {
         shippingPrice,
         taxPrice,
         paymentMethod,
-        paymentResult,
       }).unwrap();
       window.location.href = res.url;
     } catch (error) {
@@ -167,7 +167,7 @@ const OrderDetailsPage = () => {
           )}
         </div>
         <div className="flex flex-col items-center md:flex-row md:gap-4">
-          {order?.paymentResult?.status !== "completed" && (
+          {paymentResult?.status !== "completed" && (
             <Button className="mt-4 w-full" onClick={handleStripePayment}>
               Pay Now
             </Button>
