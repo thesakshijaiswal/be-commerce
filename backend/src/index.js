@@ -14,12 +14,14 @@ import authRoutes from "./routes/auth.route.js";
 import orderRoutes from "./routes/order.route.js";
 import uploadRoutes from "./routes/upload.route.js";
 import path from "path";
-import configureStripe from "./utils/stripe.js";
+import { configureStripe, stripeWebhookRoute } from "./utils/stripe.js";
 
 connectDB();
 const app = express();
 const PORT = process.env.PORT || 5000;
 const __dirname = path.resolve();
+
+app.use("/webhook", stripeWebhookRoute);
 
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true, limit: "10mb" }));
