@@ -25,6 +25,7 @@ export { default as Pagination } from "./Pagination";
 export { default as LoadingAnimation } from "./LoadingAnimation";
 export { default as ButtonSpinner } from "./ButtonSpinner";
 export { default as OrderTimeline } from "./OrderTimeline";
+export { default as OrderHistory } from "./OrderHistory";
 export { default as UserList } from "./Admin/UserList";
 export { default as ProductList } from "./Admin/ProductList";
 export { default as OrderList } from "./Admin/OrderList";
