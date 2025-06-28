@@ -1,11 +1,14 @@
 import { useGetOrdersQuery } from "../../features/orderApiSlice";
 import { toast } from "react-hot-toast";
 import { BsCurrencyRupee } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { Pagination } from "../../components";
 import LoadingAnimation from "../LoadingAnimation";
 
 const OrderList = () => {
-  const { data: orders, isLoading, error } = useGetOrdersQuery();
+  const { pageNumber } = useParams();
+  const { data, isLoading, error } = useGetOrdersQuery({ pageNumber });
+
   if (isLoading) return <LoadingAnimation />;
   if (error) {
     toast.error(error?.data?.message || error?.error);
@@ -41,7 +44,7 @@ const OrderList = () => {
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200 bg-white">
-            {orders?.map((order) => (
+            {data?.orders?.map((order) => (
               <tr key={order._id} className="hover:bg-gray-50">
                 <td className="whitespace-nowrap px-6 py-4 text-sm font-medium text-gray-900">
                   #{order._id}
@@ -85,7 +88,7 @@ const OrderList = () => {
       </div>
 
       <div className="mt-4 grid grid-cols-1 gap-4 md:hidden">
-        {orders?.map((order) => (
+        {data?.orders?.map((order) => (
           <div
             key={order._id}
             className="space-y-2 rounded-lg bg-white p-4 shadow"
@@ -123,6 +126,13 @@ const OrderList = () => {
             </div>
           </div>
         ))}
+      </div>
+      <div className="mt-12 flex items-center justify-center">
+        <Pagination
+          pages={data?.pages}
+          pageNum={data?.pageNumber}
+          isAdmin={true}
+        />
       </div>
     </div>
   );

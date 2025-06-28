@@ -1,10 +1,17 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const Pagination = ({ pages, pageNum, isAdmin = false, keyword = "" }) => {
+  const location = useLocation();
   const pageNumbers = Array.from({ length: pages }, (_, i) => i + 1);
 
   const getPagePath = (pageNumber) => {
     if (isAdmin) {
+      if (location.pathname.includes("/admin/orders")) {
+        return `/admin/orders/page/${pageNumber}`;
+      }
+      if (location.pathname.includes("/admin/products")) {
+        return `/admin/products/page/${pageNumber}`;
+      }
       return `/admin/products/page/${pageNumber}`;
     }
     if (keyword) {

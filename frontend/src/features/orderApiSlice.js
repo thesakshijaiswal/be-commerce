@@ -21,9 +21,15 @@ export const orderApiSlice = apiSlice.injectEndpoints({
       keepUnusedDataFor: 5,
     }),
     getOrders: builder.query({
-      query: () => ({
-        url: ORDERS_URL,
-      }),
+      query: (params = {}) => {
+        const { pageNumber = 1 } = params;
+        return {
+          url: ORDERS_URL,
+          params: {
+            pageNumber,
+          },
+        };
+      },
       keepUnusedDataFor: 5,
     }),
     payWithStripe: builder.mutation({

@@ -56,8 +56,21 @@ const getUserOrder = asyncHandler(async (req, res) => {
 });
 
 const getOrders = asyncHandler(async (req, res) => {
-  const orders = await Order.find().populate("user", "id name");
-  res.send(orders);
+  const pageNumber = +req.query.pageNumber || 1;
+  const pageSize = process.env.PAGINATION_LIMIT || 10;
+
+  const count = await Order.countDocuments({});
+  const orders = await Order.find({})
+    .populate("user", "id name")
+    .limit(pageSize)
+    .skip(pageSize * (pageNumber - 1))
+    .sort({ createdAt: -1 });
+
+  res.json({
+    orders,
+    pageNumber,
+    pages: Math.ceil(count / pageSize),
+  });
 });
 
 const updateOrderToDelivered = asyncHandler(async (req, res) => {
